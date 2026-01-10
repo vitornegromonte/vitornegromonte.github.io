@@ -1,14 +1,6 @@
-# John Doe - Portfolio Website
+# vitornegromonte.github.io
 
-A single-page, responsive portfolio website for a data scientist/researcher built with Gatsby and Tailwind CSS.
-
-## Features
-
-- **Ultra-minimalist design**: Clean, professional academic aesthetic
-- **Monochrome color palette**: Off-white background with charcoal text
-- **Custom typography**: Bricolage Grotesque for headings, Rethink Sans for body text
-- **Responsive layout**: Mobile-first design that works on all screen sizes
-- **Smooth scrolling**: Navigation links smoothly scroll to sections
+A single-page, responsive portfolio website built with Gatsby and Tailwind CSS.
 
 ## Sections
 
