@@ -23,7 +23,7 @@ const Hero = () => {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href="mailto:john@doe.com"
+            href="mailto:contato.vnco@gmail.com"
             className="text-medium-gray hover:text-charcoal transition-colors"
             aria-label="Email"
           >
@@ -39,7 +39,7 @@ const Hero = () => {
             <Github className="w-5 h-5" />
           </a>
           <a
-            href="https://scholar.google.com/johndoe"
+            href="https://scholar.google.com/citations?user=r4FGCH0AAAAJ"
             target="_blank"
             rel="noopener noreferrer"
             className="text-medium-gray hover:text-charcoal transition-colors"
