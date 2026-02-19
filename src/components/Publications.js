@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Quote, Github } from "lucide-react"
+import { Code } from "lucide-react"
 
 const PdfIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -12,32 +12,32 @@ const PublicationCard = ({ publication }) => {
   const { frontmatter, html } = publication
   
   return (
-    <article className="py-5 border-b border-light-gray last:border-0">
-      <p className="metadata mb-2">
-        {frontmatter.year} — {frontmatter.venue}
+    <article className="py-6 border-b-2 border-dashed border-light-gray last:border-0">
+      <p className="metadata mb-1">
+        {frontmatter.year} · {frontmatter.venue}
       </p>
-      <h3 className="font-display font-semibold text-base md:text-lg text-charcoal mb-2">
+      <h3 className="font-display text-base md:text-lg text-charcoal mb-2 leading-snug">
         {frontmatter.title}
       </h3>
-      <p className="text-medium-gray leading-relaxed text-sm mb-2">
+      <p className="text-medium-gray leading-relaxed text-sm mb-1">
         {html.replace(/<[^>]*>/g, '')}
       </p>
-      <p className="text-xs text-medium-gray mb-3 italic">
+      <p className="text-sm text-medium-gray mb-4 italic font-body">
         {frontmatter.venueDetails}
       </p>
-      <div className="flex items-center gap-3">
-        <a href={frontmatter.pdfUrl} className="btn-secondary">
-          <PdfIcon />
-          PDF
-        </a>
-        <a href={frontmatter.codeUrl} className="btn-secondary">
-          <Github className="w-4 h-4" />
-          Code
-        </a>
-        <a href={frontmatter.citeUrl} className="btn-secondary">
-          <Quote className="w-4 h-4" />
-          Cite
-        </a>
+      <div className="flex items-center gap-2">
+        {frontmatter.pdfUrl && frontmatter.pdfUrl !== "#" && (
+          <a href={frontmatter.pdfUrl} className="btn-secondary">
+            <PdfIcon />
+            PDF
+          </a>
+        )}
+        {frontmatter.codeUrl && frontmatter.codeUrl !== "#" && (
+          <a href={frontmatter.codeUrl} className="btn-secondary">
+            <Code className="w-4 h-4" />
+            Code
+          </a>
+        )}
       </div>
     </article>
   )
@@ -72,7 +72,7 @@ const Publications = () => {
   const publications = data.allMarkdownRemark.nodes
 
   return (
-    <section id="publications" className="py-20 border-t border-light-gray">
+    <section id="publications" className="py-20">
       <div className="section-container">
         <h2 className="section-title">Publications</h2>
         <div className="max-w-3xl">
@@ -82,7 +82,7 @@ const Publications = () => {
         </div>
         <div className="mt-8">
           <a href="/publications" className="btn-secondary">
-            All Publications
+            All Publications →
           </a>
         </div>
       </div>

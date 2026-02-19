@@ -64,24 +64,24 @@ const extracurricular = [
 
 const Misc = () => {
   return (
-    <section id="misc" className="py-20 border-t border-light-gray">
+    <section id="misc" className="py-20">
       <div className="section-container">
         <h2 className="section-title">Miscellaneous</h2>
         <div className="max-w-3xl space-y-12">
           {/* Teaching */}
           <div>
-            <h3 className="font-display font-semibold text-lg text-charcoal mb-6 pb-2 border-b border-light-gray">
-              Teaching
+            <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-dashed border-light-gray">
+              {">"}  Teaching
             </h3>
             <div className="space-y-4">
               {teaching.map((item, index) => (
                 <div key={index} className="grid grid-cols-[1fr_100px] gap-6">
                   <div>
-                    <p className="font-medium text-charcoal">{item.role}</p>
+                    <p className="font-body font-medium text-charcoal text-base">{item.role}</p>
                     <p className="text-medium-gray text-sm">{item.course}</p>
                     <p className="text-sm text-medium-gray">{item.institution}</p>
                   </div>
-                  <span className="text-sm text-medium-gray text-right">{item.period}</span>
+                  <span className="text-sm text-medium-gray text-right font-body">{item.period}</span>
                 </div>
               ))}
             </div>
@@ -89,17 +89,17 @@ const Misc = () => {
 
           {/* Awards */}
           <div>
-            <h3 className="font-display font-semibold text-lg text-charcoal mb-6 pb-2 border-b border-light-gray">
-              Awards
+            <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-dashed border-light-gray">
+              {">"}  Awards
             </h3>
             <div className="space-y-4">
               {awards.map((item, index) => (
                 <div key={index} className="grid grid-cols-[1fr_80px] gap-6">
                   <div>
-                    <p className="font-medium text-charcoal">{item.title}</p>
+                    <p className="font-body font-medium text-charcoal text-base">{item.title}</p>
                     <p className="text-sm text-medium-gray">{item.venue}</p>
                   </div>
-                  <span className="text-sm text-medium-gray text-right">{item.year}</span>
+                  <span className="text-sm text-medium-gray text-right font-body">{item.year}</span>
                 </div>
               ))}
             </div>
@@ -107,13 +107,13 @@ const Misc = () => {
 
           {/* Extracurricular */}
           <div>
-            <h3 className="font-display font-semibold text-lg text-charcoal mb-6 pb-2 border-b border-light-gray">
-              Extracurricular
+            <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-dashed border-light-gray">
+              {">"}  Extracurricular
             </h3>
             <div className="space-y-4">
               {extracurricular.map((item, index) => (
                 <div key={index}>
-                  <p className="font-medium text-charcoal">{item.role} — {item.activity}</p>
+                  <p className="font-body font-medium text-charcoal text-base">{item.role} — {item.activity}</p>
                   <p className="text-sm text-medium-gray">{item.description}</p>
                 </div>
               ))}

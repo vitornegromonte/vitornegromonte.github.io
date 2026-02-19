@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Quote, Github } from "lucide-react"
+import { ArrowLeft, Code } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 
@@ -14,32 +14,32 @@ const PublicationCard = ({ publication }) => {
   const { frontmatter, html } = publication
   
   return (
-    <article className="py-5 border-b border-light-gray last:border-0">
-      <p className="metadata mb-2">
-        {frontmatter.year} — {frontmatter.venue}
+    <article className="py-6 border-b-2 border-dashed border-light-gray last:border-0">
+      <p className="metadata mb-1">
+        {frontmatter.year} · {frontmatter.venue}
       </p>
-      <h3 className="font-display font-semibold text-base md:text-lg text-charcoal mb-2">
+      <h3 className="font-display text-base md:text-lg text-charcoal mb-2 leading-snug">
         {frontmatter.title}
       </h3>
-      <p className="text-medium-gray leading-relaxed text-sm mb-2">
+      <p className="text-medium-gray leading-relaxed text-sm mb-1">
         {html.replace(/<[^>]*>/g, '')}
       </p>
-      <p className="text-xs text-medium-gray mb-3 italic">
+      <p className="text-sm text-medium-gray mb-4 italic font-body">
         {frontmatter.venueDetails}
       </p>
-      <div className="flex items-center gap-3">
-        <a href={frontmatter.pdfUrl} className="btn-secondary">
-          <PdfIcon />
-          PDF
-        </a>
-        <a href={frontmatter.codeUrl} className="btn-secondary">
-          <Github className="w-4 h-4" />
-          Code
-        </a>
-        <a href={frontmatter.citeUrl} className="btn-secondary">
-          <Quote className="w-4 h-4" />
-          Cite
-        </a>
+      <div className="flex items-center gap-2">
+        {frontmatter.pdfUrl && frontmatter.pdfUrl !== "#" && (
+          <a href={frontmatter.pdfUrl} className="btn-secondary">
+            <PdfIcon />
+            PDF
+          </a>
+        )}
+        {frontmatter.codeUrl && frontmatter.codeUrl !== "#" && (
+          <a href={frontmatter.codeUrl} className="btn-secondary">
+            <Code className="w-4 h-4" />
+            Code
+          </a>
+        )}
       </div>
     </article>
   )
@@ -53,10 +53,21 @@ const PublicationsPage = ({ data }) => {
       <Header />
       <section className="py-20">
         <div className="section-container">
-          <h1 className="font-display font-bold text-4xl md:text-5xl text-charcoal mb-4">
+          <div className="mb-6">
+            <button
+              type="button"
+              onClick={() => window.history.back()}
+              className="btn-secondary inline-flex items-center gap-2"
+              aria-label="Go back to previous page"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to previous page
+            </button>
+          </div>
+          <h1 className="font-display text-xl md:text-2xl text-charcoal mb-4 leading-relaxed">
             Publications
           </h1>
-          <p className="text-medium-gray max-w-2xl mb-12">
+          <p className="text-medium-gray max-w-2xl mb-12 text-sm font-body">
             Selected peer-reviewed publications and pre-prints.
           </p>
           <div className="max-w-3xl">

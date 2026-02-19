@@ -3,13 +3,13 @@ import { Download } from "lucide-react"
 
 const experience = [
   {
-    period: "2024–Present",
+    period: "2024 - Today",
     role: "Co-founder & Outreach Director",
     institution: "Ligia - UFPE's Academic League of Artificial Intelligence",
     location: "Recife, PE",
   },
   {
-    period: "2025-2025",
+    period: "2025",
     role: "Machine Learning Engineer",
     institution: "Freelancer",
     location: "Recife, PE",
@@ -30,7 +30,7 @@ const experience = [
 
 const education = [
   {
-    period: "2025–Today",
+    period: "2025 – Today",
     degree: "B.Sc. in Information Systems",
     institution: "Federal University of Pernambuco",
     location: "Recife, PE",
@@ -45,22 +45,19 @@ const education = [
 
 const teaching = [
   {
-    period: "2025",
-    role: "Head Teaching Assistant",
     course: "Introduction to Deep Learning",
     institution: "UFPE",
+    roles: [
+      { period: "2025", role: "Head Teaching Assistant" },
+      { period: "2024", role: "Teaching Assistant" },
+    ],
   },
   {
-    period: "2024",
-    role: "Teaching Assistant",
-    course: "Introduction to Deep Learning",
-    institution: "UFPE",
-  },
-  {
-    period: "2024-2025",
-    role: "Teaching Assistant",
     course: "Computational Creativity",
     institution: "UFPE",
+    roles: [
+      { period: "2024–2025", role: "Teaching Assistant" },
+    ],
   },
 ]
 
@@ -92,8 +89,8 @@ const extracurricular = [
 
 const skills = {
   "Programming Languages": ["Python", "R", "C++", "SQL"],
-  "ML & Data Science": ["NumPy", "Pandas", "Polars", "Matplotlib", "Seaborn", "PyTorch", "JAX","Scikit-Learn", "Keras", "Lightining", "PowerBI", "OpenCV"],
-  
+  "ML & Data Science": ["PyTorch", "JAX", "Scikit-Learn", "Keras", "Lightning", "NumPy", "Pandas", "Polars", "OpenCV"],
+  "Data Visualization": ["Matplotlib", "Seaborn", "PowerBI"],
   "SWE & MLOps": ["FastAPI", "Django", "PostgreSQL", "Redis", "MLflow", "Weights & Biases"],
   "Tools & Platforms": ["AWS", "Docker", "Git", "Linux"],
 }
@@ -101,19 +98,19 @@ const skills = {
 const CVSection = ({ title, items, type }) => {
   return (
     <div className="mb-12 last:mb-0">
-      <h3 className="font-display font-semibold text-lg text-charcoal mb-6 pb-2 border-b border-light-gray">
-        {title}
+      <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-dashed border-light-gray">
+        {">"} {title}
       </h3>
       {type === "experience" && (
         <div className="space-y-6">
           {items.map((item, index) => (
             <div key={index} className="grid grid-cols-[1fr_140px] gap-6">
               <div>
-                <p className="font-medium text-charcoal">{item.role}</p>
-                <p className="text-medium-gray">{item.institution}</p>
+                <p className="font-body font-medium text-charcoal text-base">{item.role}</p>
+                <p className="text-medium-gray text-sm">{item.institution}</p>
                 <p className="text-sm text-medium-gray">{item.location}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right">{item.period}</span>
+              <span className="text-sm text-medium-gray text-right font-body">{item.period}</span>
             </div>
           ))}
         </div>
@@ -123,25 +120,29 @@ const CVSection = ({ title, items, type }) => {
           {items.map((item, index) => (
             <div key={index} className="grid grid-cols-[1fr_140px] gap-6">
               <div>
-                <p className="font-medium text-charcoal">{item.degree}</p>
-                <p className="text-medium-gray">{item.institution}</p>
+                <p className="font-body font-medium text-charcoal text-base">{item.degree}</p>
+                <p className="text-medium-gray text-sm">{item.institution}</p>
                 <p className="text-sm text-medium-gray">{item.location}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right">{item.period}</span>
+              <span className="text-sm text-medium-gray text-right font-body">{item.period}</span>
             </div>
           ))}
         </div>
       )}
       {type === "teaching" && (
-        <div className="space-y-4">
+        <div className="space-y-6">
           {items.map((item, index) => (
-            <div key={index} className="grid grid-cols-[1fr_100px] gap-6">
-              <div>
-                <p className="font-medium text-charcoal">{item.role}</p>
-                <p className="text-medium-gray text-sm">{item.course}</p>
-                <p className="text-sm text-medium-gray">{item.institution}</p>
+            <div key={index}>
+              <p className="font-body font-medium text-charcoal text-base">{item.course}</p>
+              <p className="text-sm text-medium-gray mb-2">{item.institution}</p>
+              <div className="space-y-1 pl-4 border-l-2 border-light-gray">
+                {item.roles.map((r, i) => (
+                  <div key={i} className="flex items-baseline justify-between">
+                    <p className="text-sm text-medium-gray">{r.role}</p>
+                    <span className="text-sm text-medium-gray font-body">{r.period}</span>
+                  </div>
+                ))}
               </div>
-              <span className="text-sm text-medium-gray text-right">{item.period}</span>
             </div>
           ))}
         </div>
@@ -151,10 +152,10 @@ const CVSection = ({ title, items, type }) => {
           {items.map((item, index) => (
             <div key={index} className="grid grid-cols-[1fr_80px] gap-6">
               <div>
-                <p className="font-medium text-charcoal">{item.title}</p>
+                <p className="font-body font-medium text-charcoal text-base">{item.title}</p>
                 <p className="text-sm text-medium-gray">{item.venue}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right">{item.year}</span>
+              <span className="text-sm text-medium-gray text-right font-body">{item.year}</span>
             </div>
           ))}
         </div>
@@ -163,7 +164,7 @@ const CVSection = ({ title, items, type }) => {
         <div className="space-y-4">
           {items.map((item, index) => (
             <div key={index}>
-              <p className="font-medium text-charcoal">{item.role} — {item.activity}</p>
+              <p className="font-body font-medium text-charcoal text-base">{item.role} — {item.activity}</p>
               <p className="text-sm text-medium-gray">{item.description}</p>
             </div>
           ))}
@@ -173,10 +174,10 @@ const CVSection = ({ title, items, type }) => {
         <div className="space-y-6">
           {Object.entries(items).map(([category, skillList]) => (
             <div key={category} className="flex flex-col md:grid md:grid-cols-[180px_1fr] gap-2 md:gap-6">
-              <span className="text-sm font-medium md:font-normal text-charcoal md:text-medium-gray">{category}</span>
-              <div className="flex flex-wrap gap-x-4 gap-y-1">
+              <span className="text-sm font-medium md:font-normal text-charcoal md:text-medium-gray font-body">{category}</span>
+              <div className="flex flex-wrap gap-x-3 gap-y-1">
                 {skillList.map((skill) => (
-                  <span key={skill} className="text-charcoal text-sm">
+                  <span key={skill} className="text-charcoal text-sm font-body">
                     {skill}
                   </span>
                 ))}
@@ -191,7 +192,7 @@ const CVSection = ({ title, items, type }) => {
 
 const CV = () => {
   return (
-    <section id="cv" className="py-20 border-t border-light-gray">
+    <section id="cv" className="py-20">
       <div className="section-container">
         <h2 className="section-title">Curriculum Vitae</h2>
         <div className="max-w-3xl">

@@ -10,7 +10,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Bricolage Grotesque\:400,500,600,700`,
+          `Bricolage Grotesque\:200,300,400,500,600,700`,
           `Rethink Sans\:400,500,600,700`
         ],
         display: 'swap'

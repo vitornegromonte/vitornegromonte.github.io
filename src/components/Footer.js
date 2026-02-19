@@ -5,20 +5,20 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="py-16 mt-20 border-t border-light-gray">
+    <footer className="py-16 mt-20">
       <div className="section-container">
         <div className="max-w-3xl flex flex-col md:flex-row md:items-start md:justify-between gap-8">
           <div>
-            <p className="font-display font-medium text-charcoal mb-2">Vitor Negromonte</p>
-            <p className="text-sm text-medium-gray">
-              © {currentYear} Vitor Negromonte. All rights reserved.
+            <p className="font-display text-sm text-charcoal mb-2">{">"} Vitor Negromonte</p>
+            <p className="text-sm text-medium-gray font-body">
+              © {currentYear} All rights reserved.
             </p>
           </div>
           <div className="text-left md:text-right">
-            <h4 className="font-display font-medium text-charcoal mb-3">Get in Touch</h4>
+            <h4 className="font-display text-sm text-charcoal mb-3">{">"} Contact</h4>
             <a
               href="mailto:contato.vnco@gmail.com"
-              className="text-medium-gray hover:text-charcoal transition-colors block mb-4"
+              className="text-medium-gray hover:text-charcoal transition-colors block mb-4 text-sm font-body underline decoration-dashed hover:decoration-solid"
             >
               contato.vnco@gmail.com
             </a>
@@ -30,7 +30,7 @@ const Footer = () => {
                 className="text-medium-gray hover:text-charcoal transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href="https://github.com/vitornegromonte"
@@ -39,7 +39,7 @@ const Footer = () => {
                 className="text-medium-gray hover:text-charcoal transition-colors"
                 aria-label="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-4 h-4" />
               </a>
               <a
                 href="https://instagram.com/vitor.ncabral"
@@ -48,7 +48,7 @@ const Footer = () => {
                 className="text-medium-gray hover:text-charcoal transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-4 h-4" />
               </a>
               <a
                 href="https://scholar.google.com/citations?user=r4FGCH0AAAAJ"
@@ -57,11 +57,14 @@ const Footer = () => {
                 className="text-medium-gray hover:text-charcoal transition-colors"
                 aria-label="Google Scholar"
               >
-                <GraduationCap className="w-5 h-5" />
+                <GraduationCap className="w-4 h-4" />
               </a>
             </div>
           </div>
         </div>
+        <p className="font-body text-[10px] text-light-gray text-center mt-10 select-none">
+          {"/* built with gatsby + tailwind */"}
+        </p>
       </div>
     </footer>
   )

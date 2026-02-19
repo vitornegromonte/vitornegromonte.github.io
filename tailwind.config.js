@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'off-white': '#faf9f7',
+        'off-white': '#fdfbf7',
         //'off-white': '#faf8f5',
         'charcoal': '#2c2c2c',
         'medium-gray': '#6b6b6b',
@@ -16,9 +16,12 @@ module.exports = {
       },
       fontFamily: {
         'display': ['"Bricolage Grotesque"', 'sans-serif'],
-        //'display': ['"Cormorant Garamond"', 'serif'],
         'body': ['"Rethink Sans"', 'sans-serif'],
-        //'body': ['"Crimson Pro"', 'serif'],
+      },
+      boxShadow: {
+        'pixel': '4px 4px 0px 0px #2c2c2c',
+        'pixel-sm': '2px 2px 0px 0px #2c2c2c',
+        'pixel-hover': '6px 6px 0px 0px #2c2c2c',
       },
     },
   },

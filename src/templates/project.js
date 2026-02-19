@@ -12,18 +12,23 @@ const ProjectTemplate = ({ data }) => {
       <Header />
       <article className="py-20">
         <div className="section-container">
-          <Link 
-            to="/projects" 
-            className="inline-flex items-center gap-2 text-medium-gray hover:text-charcoal transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Projects
-          </Link>
+          <div className="mb-6">
+            <button
+              type="button"
+              onClick={() => window.history.back()}
+              className="btn-secondary inline-flex items-center gap-2"
+              aria-label="Go back to previous page"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to previous page
+            </button>
+          </div>
+
 
           <div className="max-w-3xl">
             {/* 1. Thumbnail */}
             {frontmatter.image && (
-              <div className="aspect-video overflow-hidden bg-gray-100 mb-8">
+              <div className="aspect-video overflow-hidden border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100 mb-8">
                 <img
                   src={frontmatter.image}
                   alt={frontmatter.title}
@@ -33,7 +38,7 @@ const ProjectTemplate = ({ data }) => {
             )}
 
             {/* 2. Title */}
-            <h1 className="font-display font-bold text-3xl md:text-4xl text-charcoal mb-4">
+            <h1 className="font-display text-lg md:text-xl text-charcoal mb-4 leading-relaxed">
               {frontmatter.title}
             </h1>
 
@@ -43,7 +48,7 @@ const ProjectTemplate = ({ data }) => {
                 <React.Fragment key={tag}>
                   <span className="tag">{tag}</span>
                   {index < frontmatter.tags.length - 1 && (
-                    <span className="text-medium-gray mx-2">•</span>
+                    <span className="text-light-gray mx-1">·</span>
                   )}
                 </React.Fragment>
               ))}
@@ -51,7 +56,7 @@ const ProjectTemplate = ({ data }) => {
 
             {/* 4. Summary (quote-like block) */}
             {frontmatter.summary && (
-              <blockquote className="border-l-4 border-charcoal bg-light-gray/30 pl-6 pr-4 py-4 mb-10 text-medium-gray italic">
+              <blockquote className="border-l-4 border-charcoal bg-light-gray/30 pl-6 pr-4 py-4 mb-10 text-medium-gray text-base font-body">
                 {frontmatter.summary}
               </blockquote>
             )}

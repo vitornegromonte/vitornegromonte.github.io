@@ -5,11 +5,11 @@ const Hero = () => {
   return (
     <section id="home" className="py-24 md:py-32">
       <div className="section-container text-center">
-        <h1 className="font-display font-bold text-5xl md:text-7xl text-charcoal mb-4">
+        <h1 className="font-display text-2xl md:text-4xl text-charcoal mb-4 leading-relaxed">
           Vitor Negromonte
         </h1>
-        <h2 className="font-display font-medium text-xl md:text-2xl text-medium-gray mb-10">
-          Data Scientist & Machine Learning Researcher
+        <h2 className="font-body font-medium text-base md:text-lg text-medium-gray mb-10 tracking-wide">
+          Data Scientist & ML Researcher
         </h2>
         
         <div className="flex items-center justify-center gap-6">
