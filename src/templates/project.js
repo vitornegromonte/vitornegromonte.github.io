@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, navigate } from "gatsby"
 import { ArrowLeft, Code, ExternalLink } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
@@ -15,12 +15,12 @@ const ProjectTemplate = ({ data }) => {
           <div className="mb-6">
             <button
               type="button"
-              onClick={() => window.history.back()}
+              onClick={() => navigate(-1)}
               className="btn-secondary inline-flex items-center gap-2"
               aria-label="Go back to previous page"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to previous page
+              Back
             </button>
           </div>
 
@@ -32,6 +32,7 @@ const ProjectTemplate = ({ data }) => {
                 <img
                   src={frontmatter.image}
                   alt={frontmatter.title}
+                  loading="lazy"
                   className="w-full h-full object-cover grayscale opacity-80"
                 />
               </div>
@@ -102,15 +103,25 @@ const ProjectTemplate = ({ data }) => {
 
 export default ProjectTemplate
 
-export const Head = ({ data }) => (
-  <>
-    <title>{data.markdownRemark.frontmatter.title} - Vitor Negromonte</title>
-    <meta 
-      name="description" 
-      content={`${data.markdownRemark.frontmatter.title} - ${data.markdownRemark.frontmatter.category}`} 
-    />
-  </>
-)
+export const Head = ({ data }) => {
+  const { frontmatter } = data.markdownRemark
+  return (
+    <>
+      <title>{frontmatter.title} - Vitor Negromonte</title>
+      <meta name="description" content={`${frontmatter.title} — ${frontmatter.summary}`} />
+
+      <meta property="og:title" content={`${frontmatter.title} - Vitor Negromonte`} />
+      <meta property="og:description" content={frontmatter.summary} />
+      <meta property="og:type" content="article" />
+      <meta property="og:image" content={frontmatter.image} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={`${frontmatter.title} - Vitor Negromonte`} />
+      <meta name="twitter:description" content={frontmatter.summary} />
+      <meta name="twitter:image" content={frontmatter.image} />
+    </>
+  )
+}
 
 export const query = graphql`
   query ProjectBySlug($slug: String!) {

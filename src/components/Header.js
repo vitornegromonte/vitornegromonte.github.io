@@ -21,7 +21,7 @@ const Header = () => {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-xs font-body uppercase tracking-wider text-xs-gray hover:text-charcoal transition-colors font-xs"
+                  className="text-xs font-body uppercase tracking-wider text-medium-gray hover:text-charcoal transition-colors"
                 >
                   {link.label}
                 </a>

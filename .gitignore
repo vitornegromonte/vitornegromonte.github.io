@@ -6,8 +6,9 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.md
-*.pdf
+# Only ignore markdown/pdf at root level (not in content/ or static/)
+/*.md
+/*.pdf
 test-*
 # Runtime data
 pids

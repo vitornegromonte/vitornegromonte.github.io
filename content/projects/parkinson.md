@@ -10,16 +10,16 @@ codeUrl: "https://github.com/vitornegromonte/CPNE2024"
 summary: "Created a CNN model for Parkinson's disease detection using spiral‐drawing images. Outperformed state‐of‐the‐art methods by ≈ 10%, achieving 95% accuracy on the benchmark dataset."
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Parkinson's disease affects millions worldwide, and early diagnosis remains challenging. This project explores a non-invasive diagnostic approach using computer vision to analyze hand-drawn spirals — a standard clinical test for motor impairment.
 
 ## Overview
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Patients with Parkinson's disease often exhibit characteristic tremors and motor dysfunctions that manifest in drawing tasks. By analyzing spiral drawings captured from digitizing tablets, we developed a CNN-based system capable of distinguishing Parkinson's patients from healthy controls with high accuracy.
 
 ## Dataset
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+The model was trained and evaluated on a public benchmark dataset of spiral drawings. Data augmentation techniques including rotation, scaling, and elastic deformations were applied to improve generalization. Hyperparameter optimization was performed using Optuna to maximize classification performance.
 
 ## Results
 
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+Our approach achieved 95% accuracy on the benchmark dataset, outperforming existing state-of-the-art methods by approximately 10 percentage points. The model was presented as a keynote at Campus Party 2024, demonstrating the potential of computer vision as a low-cost screening tool for Parkinson's disease.

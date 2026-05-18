@@ -1,57 +1,10 @@
 import * as React from "react"
 import { useState, useMemo } from "react"
-import { graphql, Link } from "gatsby"
-import { ArrowLeft, Code, ChevronDown } from "lucide-react"
+import { graphql, navigate } from "gatsby"
+import { ArrowLeft, ChevronDown } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-
-const ProjectCard = ({ project }) => {
-  const { frontmatter, fields } = project
-  
-  return (
-    <article className="grid md:grid-cols-[220px_1fr] gap-5 md:gap-8 py-6 border-b-2 border-dashed border-light-gray last:border-0">
-      <div className="aspect-[16/10] overflow-hidden border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100">
-        <img
-          src={frontmatter.image}
-          alt={frontmatter.title}
-          className="w-full h-full object-cover grayscale opacity-80"
-        />
-      </div>
-      <div className="flex flex-col">
-        <p className="metadata mb-1">
-          {frontmatter.year} · {frontmatter.category}
-        </p>
-        <h3 className="font-display text-base md:text-lg text-charcoal leading-snug mb-2">
-          {frontmatter.title}
-        </h3>
-        <p className="text-medium-gray leading-relaxed text-sm mb-3">
-          {frontmatter.summary}
-        </p>
-        <div className="flex items-center gap-1 flex-wrap mb-4">
-          {frontmatter.tags.map((tag, index) => (
-            <React.Fragment key={tag}>
-              <span className="tag">{tag}</span>
-              {index < frontmatter.tags.length - 1 && (
-                <span className="text-light-gray mx-1">·</span>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="flex items-center gap-3 mt-auto">
-          <Link to={fields.slug} className="btn-primary">
-            View Project
-          </Link>
-          {frontmatter.codeUrl && frontmatter.codeUrl !== "#" && (
-            <a href={frontmatter.codeUrl} className="btn-secondary">
-              <Code className="w-3.5 h-3.5" />
-              Code
-            </a>
-          )}
-        </div>
-      </div>
-    </article>
-  )
-}
+import ProjectCard from "../components/ProjectCard"
 
 const ProjectsPage = ({ data }) => {
   const projects = data.allMarkdownRemark.nodes
@@ -82,12 +35,12 @@ const ProjectsPage = ({ data }) => {
           <div className="mb-6">
             <button
               type="button"
-              onClick={() => window.history.back()}
+              onClick={() => navigate(-1)}
               className="btn-secondary inline-flex items-center gap-2"
               aria-label="Go back to previous page"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to previous page
+              Back
             </button>
           </div>
           <h1 className="font-display text-xl md:text-2xl text-charcoal mb-4 leading-relaxed">
@@ -147,7 +100,16 @@ export default ProjectsPage
 export const Head = () => (
   <>
     <title>Projects - Vitor Negromonte</title>
-    <meta name="description" content="Research projects and open-source tools by Vitor Negromonte" />
+    <meta name="description" content="Research projects and open-source tools by Vitor Negromonte." />
+
+    <meta property="og:title" content="Projects - Vitor Negromonte" />
+    <meta property="og:description" content="Research projects and open-source tools by Vitor Negromonte." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vitornegromonte.github.io/projects" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Projects - Vitor Negromonte" />
+    <meta name="twitter:description" content="Research projects and open-source tools by Vitor Negromonte." />
   </>
 )
 
