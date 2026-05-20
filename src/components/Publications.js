@@ -34,7 +34,7 @@ const Publications = () => {
     <section id="publications" className="py-20">
       <div className="section-container">
         <h2 className="section-title">Publications</h2>
-        <div className="max-w-3xl">
+        <div className="max-w-3xl space-y-6">
           {publications.map((publication) => (
             <PublicationCard key={publication.id} publication={publication} />
           ))}

@@ -11,32 +11,34 @@ const PublicationCard = ({ publication, showDetails }) => {
   const { frontmatter, html } = publication
 
   return (
-    <article className="py-6 border-b-2 border-dashed border-light-gray last:border-0">
-      <p className="metadata mb-1">
-        {frontmatter.year} · {frontmatter.venue}
-      </p>
-      <h3 className="font-display text-base md:text-lg text-charcoal mb-2 leading-snug">
-        {frontmatter.title}
-      </h3>
-      <p className="text-medium-gray leading-relaxed text-sm mb-1">
-        {html.replace(/<[^>]*>/g, '')}
-      </p>
-      <p className="text-sm text-medium-gray mb-4 italic font-body">
-        {frontmatter.venueDetails}
-      </p>
-      <div className="flex items-center gap-2">
-        {frontmatter.pdfUrl && frontmatter.pdfUrl !== "#" && (
-          <a href={frontmatter.pdfUrl} className="btn-secondary">
-            <PdfIcon />
-            PDF
-          </a>
-        )}
-        {frontmatter.codeUrl && frontmatter.codeUrl !== "#" && (
-          <a href={frontmatter.codeUrl} className="btn-secondary">
-            <Code className="w-4 h-4" />
-            Code
-          </a>
-        )}
+    <article className="border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100">
+      <div className="p-5 md:p-8">
+        <p className="metadata mb-1">
+          {frontmatter.year} · {frontmatter.venue}
+        </p>
+        <h3 className="font-display text-base md:text-lg text-charcoal mb-2 leading-snug">
+          {frontmatter.title}
+        </h3>
+        <p className="text-medium-gray leading-relaxed text-sm mb-1">
+          {html.replace(/<[^>]*>/g, '')}
+        </p>
+        <p className="text-sm text-medium-gray mb-4 italic font-body">
+          {frontmatter.venueDetails}
+        </p>
+        <div className="flex items-center gap-2">
+          {frontmatter.pdfUrl && frontmatter.pdfUrl !== "#" && (
+            <a href={frontmatter.pdfUrl} className="btn-secondary">
+              <PdfIcon />
+              PDF
+            </a>
+          )}
+          {frontmatter.codeUrl && frontmatter.codeUrl !== "#" && (
+            <a href={frontmatter.codeUrl} className="btn-secondary">
+              <Code className="w-4 h-4" />
+              Code
+            </a>
+          )}
+        </div>
       </div>
     </article>
   )

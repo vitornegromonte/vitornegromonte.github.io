@@ -30,7 +30,7 @@ const PublicationsPage = ({ data }) => {
           <p className="text-medium-gray max-w-2xl mb-12 text-sm font-body">
             Selected peer-reviewed publications and pre-prints.
           </p>
-          <div className="max-w-3xl">
+          <div className="max-w-3xl space-y-6">
             {publications.map((publication) => (
               <PublicationCard key={publication.id} publication={publication} />
             ))}
