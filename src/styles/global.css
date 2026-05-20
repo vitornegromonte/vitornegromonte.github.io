@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Rethink+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,24 +7,22 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    image-rendering: auto;
   }
 
   body {
-    @apply bg-off-white text-charcoal font-body antialiased;
+    @apply bg-white text-charcoal font-body antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold;  
+    @apply font-display font-bold uppercase tracking-tight;
   }
 
-  /* Remove all rounded corners globally for pixel feel */
   *, *::before, *::after {
     border-radius: 0 !important;
   }
 
   ::selection {
-    @apply bg-charcoal text-off-white;
+    @apply bg-bauhaus-yellow text-charcoal;
   }
 }
 
@@ -34,36 +32,33 @@
   }
 
   .section-title {
-    @apply font-display text-charcoal mb-4;
+    @apply font-display text-charcoal mb-6 inline-block relative;
     font-size: 1.5rem;
   }
 
-  .section-title::before {
-    @apply text-medium-gray;
-  }
-
-  .separator-line {
-    @apply w-full h-px bg-light-gray mx-auto my-8;
+  .section-title::after {
+    content: "";
+    @apply block h-1.5 w-full mt-1;
+    background-color: #E53935;
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 bg-charcoal text-white font-body text-xs font-medium uppercase tracking-wider
-           border-2 border-charcoal shadow-pixel-sm
-           hover:shadow-pixel hover:-translate-y-0.5 
-           active:shadow-none active:translate-y-0.5
+    @apply inline-flex items-center gap-1.5 px-4 py-2 bg-charcoal text-white font-body text-xs font-medium uppercase tracking-wider
+           border-2 border-charcoal
+           hover:bg-bauhaus-red hover:border-bauhaus-red
+           active:translate-y-0.5
            transition-all duration-100;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 bg-off-white border-2 border-charcoal text-charcoal font-body text-xs font-medium uppercase tracking-wider
-           shadow-pixel-sm
-           hover:shadow-pixel hover:-translate-y-0.5 hover:bg-charcoal hover:text-white
-           active:shadow-none active:translate-y-0.5
+    @apply inline-flex items-center gap-1.5 px-4 py-2 bg-white border-2 border-charcoal text-charcoal font-body text-xs font-medium uppercase tracking-wider
+           hover:bg-charcoal hover:text-white
+           active:translate-y-0.5
            transition-all duration-100;
   }
 
   .tag {
-    @apply text-xs uppercase tracking-wider text-medium-gray font-body;
+    @apply text-xs uppercase tracking-wider text-gray font-body;
   }
 
   .tag::before {
@@ -77,26 +72,19 @@
   }
 
   .metadata {
-    @apply text-xs text-medium-gray font-body font-medium tracking-wide;
+    @apply text-xs text-gray font-body font-medium tracking-wide;
   }
 
-  /* Pixel border box */
-  .pixel-box {
-    @apply border-2 border-charcoal shadow-pixel-sm;
+  .bauhaus-bar {
+    @apply h-2 w-full;
   }
 
-  /* ASCII divider */
-  .ascii-divider {
-    @apply text-light-gray font-body text-xs text-center py-4 select-none;
-  }
-
-  /* Prose styling for markdown content */
   .prose {
     @apply text-charcoal leading-relaxed text-base font-body;
   }
 
   .prose > p {
-    @apply mb-6 text-medium-gray;
+    @apply mb-6 text-gray;
   }
 
   .prose > h2 {
@@ -112,11 +100,11 @@
   }
 
   .prose > ul, .prose > ol {
-    @apply mb-6 pl-6 text-medium-gray;
+    @apply mb-6 pl-6 text-gray;
   }
 
   .prose > ul {
-    list-style-type: "► ";
+    list-style-type: "— ";
   }
 
   .prose > ol {
@@ -127,37 +115,32 @@
     @apply mb-2;
   }
 
-  .prose li::marker {
-    @apply text-charcoal;
-  }
-
   .prose a {
-    @apply text-charcoal underline underline-offset-4 decoration-dashed hover:decoration-solid;
+    @apply text-charcoal underline underline-offset-4 decoration-bauhaus-red decoration-2 hover:bg-bauhaus-yellow hover:no-underline;
   }
 
   .prose code {
-    @apply bg-light-gray px-1.5 py-0.5 text-sm font-body border border-charcoal/20;
+    @apply bg-light-gray px-1.5 py-0.5 text-sm font-body;
   }
 
   .prose > pre {
-    @apply bg-charcoal text-white p-4 overflow-x-auto mb-6 border-2 border-charcoal shadow-pixel-sm;
+    @apply bg-charcoal text-white p-4 overflow-x-auto mb-6;
   }
 
   .prose pre code {
-    @apply bg-transparent p-0 border-0;
+    @apply bg-transparent p-0;
   }
 
   .prose > blockquote {
-    @apply border-l-4 border-charcoal pl-4 text-medium-gray my-6 bg-light-gray/30 py-2;
+    @apply border-l-4 border-bauhaus-blue pl-4 text-gray my-6 py-2;
   }
 
   .prose img {
-    @apply max-w-full my-6 border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100;
+    @apply max-w-full my-6 border-2 border-charcoal;
   }
 
   .prose > hr {
     @apply border-light-gray my-10;
-    border-style: dashed;
   }
 
   .prose strong {

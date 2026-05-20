@@ -8,20 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'off-white': '#fdfbf7',
-        //'off-white': '#faf8f5',
-        'charcoal': '#2c2c2c',
-        'medium-gray': '#6b6b6b',
-        'light-gray': '#e5e5e5',
+        'white': '#FFFFFF',
+        'off-white': '#FAFAFA',
+        'charcoal': '#1E1E1E',
+        'gray': '#9E9E9E',
+        'light-gray': '#E0E0E0',
+        'bauhaus-red': '#E53935',
+        'bauhaus-blue': '#1E88E5',
+        'bauhaus-yellow': '#FDD835',
       },
       fontFamily: {
-        'display': ['"Bricolage Grotesque"', 'sans-serif'],
-        'body': ['"Rethink Sans"', 'sans-serif'],
-      },
-      boxShadow: {
-        'pixel': '4px 4px 0px 0px #2c2c2c',
-        'pixel-sm': '2px 2px 0px 0px #2c2c2c',
-        'pixel-hover': '6px 6px 0px 0px #2c2c2c',
+        'display': ['"Josefin Sans"', 'sans-serif'],
+        'body': ['Inter', 'sans-serif'],
       },
     },
   },

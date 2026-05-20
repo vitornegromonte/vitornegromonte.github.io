@@ -43,10 +43,11 @@ const ProjectsPage = ({ data }) => {
               Back
             </button>
           </div>
-          <h1 className="font-display text-xl md:text-2xl text-charcoal mb-4 leading-relaxed">
+          <h1 className="font-display text-xl md:text-2xl text-charcoal mb-2 leading-relaxed">
             Projects
           </h1>
-          <p className="text-medium-gray max-w-2xl mb-8 text-sm font-body">
+          <div className="w-12 h-1.5 bg-bauhaus-red mb-4" />
+          <p className="text-gray max-w-2xl mb-8 text-sm font-body">
             A collection of research projects, open-source tools, and experiments 
             in machine learning, natural language processing, and data science.
           </p>
@@ -55,22 +56,22 @@ const ProjectsPage = ({ data }) => {
           <div className="relative inline-block mb-10">
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center gap-2 px-4 py-2 border-2 border-charcoal text-charcoal text-sm font-body font-medium uppercase tracking-wider shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100"
+              className="flex items-center gap-2 px-4 py-2 border-2 border-charcoal text-charcoal text-sm font-body font-medium uppercase tracking-wider hover:bg-charcoal hover:text-white transition-none"
             >
               <span>Filter: {activeFilter}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${isFilterOpen ? "rotate-180" : ""}`} />
             </button>
             
             {isFilterOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-off-white border-2 border-charcoal shadow-pixel z-10 min-w-[200px]">
+              <div className="absolute top-full left-0 mt-1 bg-white border-2 border-charcoal z-10 min-w-[200px]">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => handleFilterSelect(category)}
-                    className={`block w-full text-left px-4 py-2 text-sm font-body transition-colors ${
+                    className={`block w-full text-left px-4 py-2 text-sm font-body transition-none ${
                       activeFilter === category
                         ? "bg-charcoal text-white"
-                        : "text-medium-gray hover:bg-light-gray hover:text-charcoal"
+                        : "text-gray hover:bg-bauhaus-yellow hover:text-charcoal"
                     }`}
                   >
                     {category}
@@ -85,7 +86,7 @@ const ProjectsPage = ({ data }) => {
               <ProjectCard key={project.id} project={project} />
             ))}
             {filteredProjects.length === 0 && (
-              <p className="text-medium-gray py-8">No projects found in this category.</p>
+              <p className="text-gray py-8">No projects found in this category.</p>
             )}
           </div>
         </div>

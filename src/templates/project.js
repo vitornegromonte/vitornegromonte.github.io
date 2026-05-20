@@ -8,7 +8,7 @@ const ProjectTemplate = ({ data }) => {
   const { frontmatter, html } = data.markdownRemark
 
   return (
-    <main className="min-h-screen bg-off-white">
+    <main className="min-h-screen bg-white">
       <Header />
       <article className="py-20">
         <div className="section-container">
@@ -24,11 +24,9 @@ const ProjectTemplate = ({ data }) => {
             </button>
           </div>
 
-
           <div className="max-w-3xl">
-            {/* 1. Thumbnail */}
             {frontmatter.image && (
-              <div className="aspect-video overflow-hidden border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100 mb-8">
+              <div className="aspect-video overflow-hidden border-2 border-charcoal mb-8">
                 <img
                   src={frontmatter.image}
                   alt={frontmatter.title}
@@ -38,12 +36,12 @@ const ProjectTemplate = ({ data }) => {
               </div>
             )}
 
-            {/* 2. Title */}
+            <div className="w-12 h-1.5 bg-bauhaus-red mb-4" />
+
             <h1 className="font-display text-lg md:text-xl text-charcoal mb-4 leading-relaxed">
               {frontmatter.title}
             </h1>
 
-            {/* 3. Stack (Tags) */}
             <div className="flex items-center gap-1 mb-6">
               {frontmatter.tags.map((tag, index) => (
                 <React.Fragment key={tag}>
@@ -55,14 +53,12 @@ const ProjectTemplate = ({ data }) => {
               ))}
             </div>
 
-            {/* 4. Summary (quote-like block) */}
             {frontmatter.summary && (
-              <blockquote className="border-l-4 border-charcoal bg-light-gray/30 pl-6 pr-4 py-4 mb-10 text-medium-gray text-base font-body">
+              <blockquote className="border-l-4 border-bauhaus-blue pl-6 pr-4 py-4 mb-10 text-gray text-base font-body">
                 {frontmatter.summary}
               </blockquote>
             )}
 
-            {/* Action Buttons */}
             <div className="flex items-center gap-4 mb-10">
               {frontmatter.projectUrl && frontmatter.projectUrl !== "#" && (
                 <a 
@@ -88,7 +84,6 @@ const ProjectTemplate = ({ data }) => {
               )}
             </div>
 
-            {/* 5. Content */}
             <div 
               className="prose prose-lg prose-charcoal max-w-none"
               dangerouslySetInnerHTML={{ __html: html }}

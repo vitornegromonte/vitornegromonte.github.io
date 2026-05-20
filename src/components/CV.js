@@ -98,8 +98,8 @@ const skills = {
 const CVSection = ({ title, items, type }) => {
   return (
     <div className="mb-12 last:mb-0">
-      <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-dashed border-light-gray">
-        {">"} {title}
+      <h3 className="font-display text-lg text-charcoal mb-6 pb-2 border-b-2 border-charcoal">
+        {title}
       </h3>
       {type === "experience" && (
         <div className="space-y-6">
@@ -107,10 +107,10 @@ const CVSection = ({ title, items, type }) => {
             <div key={index} className="grid grid-cols-[1fr_140px] gap-6">
               <div>
                 <p className="font-body font-medium text-charcoal text-base">{item.role}</p>
-                <p className="text-medium-gray text-sm">{item.institution}</p>
-                <p className="text-sm text-medium-gray">{item.location}</p>
+                <p className="text-gray text-sm">{item.institution}</p>
+                <p className="text-sm text-gray">{item.location}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right font-body">{item.period}</span>
+              <span className="text-sm text-gray text-right font-body">{item.period}</span>
             </div>
           ))}
         </div>
@@ -121,10 +121,10 @@ const CVSection = ({ title, items, type }) => {
             <div key={index} className="grid grid-cols-[1fr_140px] gap-6">
               <div>
                 <p className="font-body font-medium text-charcoal text-base">{item.degree}</p>
-                <p className="text-medium-gray text-sm">{item.institution}</p>
-                <p className="text-sm text-medium-gray">{item.location}</p>
+                <p className="text-gray text-sm">{item.institution}</p>
+                <p className="text-sm text-gray">{item.location}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right font-body">{item.period}</span>
+              <span className="text-sm text-gray text-right font-body">{item.period}</span>
             </div>
           ))}
         </div>
@@ -134,12 +134,12 @@ const CVSection = ({ title, items, type }) => {
           {items.map((item, index) => (
             <div key={index}>
               <p className="font-body font-medium text-charcoal text-base">{item.course}</p>
-              <p className="text-sm text-medium-gray mb-2">{item.institution}</p>
+              <p className="text-sm text-gray mb-2">{item.institution}</p>
               <div className="space-y-1 pl-4 border-l-2 border-light-gray">
                 {item.roles.map((r, i) => (
                   <div key={i} className="flex items-baseline justify-between">
-                    <p className="text-sm text-medium-gray">{r.role}</p>
-                    <span className="text-sm text-medium-gray font-body">{r.period}</span>
+                    <p className="text-sm text-gray">{r.role}</p>
+                    <span className="text-sm text-gray font-body">{r.period}</span>
                   </div>
                 ))}
               </div>
@@ -153,9 +153,9 @@ const CVSection = ({ title, items, type }) => {
             <div key={index} className="grid grid-cols-[1fr_80px] gap-6">
               <div>
                 <p className="font-body font-medium text-charcoal text-base">{item.title}</p>
-                <p className="text-sm text-medium-gray">{item.venue}</p>
+                <p className="text-sm text-gray">{item.venue}</p>
               </div>
-              <span className="text-sm text-medium-gray text-right font-body">{item.year}</span>
+              <span className="text-sm text-gray text-right font-body">{item.year}</span>
             </div>
           ))}
         </div>
@@ -165,7 +165,7 @@ const CVSection = ({ title, items, type }) => {
           {items.map((item, index) => (
             <div key={index}>
               <p className="font-body font-medium text-charcoal text-base">{item.role} — {item.activity}</p>
-              <p className="text-sm text-medium-gray">{item.description}</p>
+              <p className="text-sm text-gray">{item.description}</p>
             </div>
           ))}
         </div>
@@ -174,7 +174,7 @@ const CVSection = ({ title, items, type }) => {
         <div className="space-y-6">
           {Object.entries(items).map(([category, skillList]) => (
             <div key={category} className="flex flex-col md:grid md:grid-cols-[180px_1fr] gap-2 md:gap-6">
-              <span className="text-sm font-medium md:font-normal text-charcoal md:text-medium-gray font-body">{category}</span>
+              <span className="text-sm font-medium md:font-normal text-charcoal md:text-gray font-body">{category}</span>
               <div className="flex flex-wrap gap-x-3 gap-y-1">
                 {skillList.map((skill) => (
                   <span key={skill} className="text-charcoal text-sm font-body">

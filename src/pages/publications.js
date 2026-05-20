@@ -24,10 +24,11 @@ const PublicationsPage = ({ data }) => {
               Back
             </button>
           </div>
-          <h1 className="font-display text-xl md:text-2xl text-charcoal mb-4 leading-relaxed">
+          <h1 className="font-display text-xl md:text-2xl text-charcoal mb-2 leading-relaxed">
             Publications
           </h1>
-          <p className="text-medium-gray max-w-2xl mb-12 text-sm font-body">
+          <div className="w-12 h-1.5 bg-bauhaus-red mb-4" />
+          <p className="text-gray max-w-2xl mb-12 text-sm font-body">
             Selected peer-reviewed publications and pre-prints.
           </p>
           <div className="max-w-3xl space-y-6">

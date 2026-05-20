@@ -16,23 +16,23 @@ const About = () => {
       <div className="section-container">
         <h2 className="section-title">About</h2>
         <div className="space-y-5 max-w-3xl text-base">
-            <p className="text-medium-gray leading-relaxed">
+            <p className="text-gray leading-relaxed">
               I'm a Data Scientist and Machine Learning Researcher with a passion for exploring
               Knowledge Representation and Neural Algorithmic Reasoning, with deep interests in Self-referential Systems and Mechanistic Interpretability.
             </p>
-            <p className="text-medium-gray leading-relaxed">
-              Currently, I'm Outreach Director at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline decoration-dashed hover:decoration-solid">Ligia</a>,
+            <p className="text-gray leading-relaxed">
+              Currently, I'm Outreach Director at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline underline-offset-2 decoration-bauhaus-red decoration-2 hover:bg-bauhaus-yellow hover:no-underline">Ligia</a>,
                where I lead partnership development, organize AI‐focused events, and create educational content to promote AI learning and application across multiple disciplines
             </p>
-            <p className="text-medium-gray leading-relaxed">
+            <p className="text-gray leading-relaxed">
              Outside academics, I enjoy photography, reading, sports, and creative coding.
             </p>
             <div className="pt-4">
               <div className="flex items-center justify-between">
-                <h3 className="font-display text-lg text-charcoal mb-4">{">"} Research Interests</h3>
+                <h3 className="font-display text-lg text-charcoal mb-4">Research Interests</h3>
                 <button
                   type="button"
-                  className="md:hidden inline-flex items-center gap-2 text-sm text-medium-gray hover:text-charcoal"
+                  className="md:hidden inline-flex items-center gap-2 text-sm text-gray hover:text-charcoal"
                   aria-expanded={openInterests}
                   aria-controls="research-interests"
                   onClick={() => setOpenInterests(!openInterests)}
@@ -47,7 +47,7 @@ const About = () => {
                   {interests.map((interest) => (
                     <li
                       key={interest}
-                      className="px-3 py-1.5 border-2 border-charcoal text-sm text-charcoal font-body shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100 mr-2 mb-2 inline-block"
+                      className="px-3 py-1.5 border-2 border-charcoal text-sm text-charcoal font-body mr-2 mb-2 inline-block hover:bg-bauhaus-yellow hover:border-bauhaus-yellow transition-none"
                     >
                       {interest}
                     </li>
