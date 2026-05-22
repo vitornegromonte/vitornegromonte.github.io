@@ -204,7 +204,7 @@ const CV = () => {
           <CVSection title="Skills" items={skills} type="skills" />
         </div>
         <div className="mt-8">
-          <a href="/cv/cv.pdf" className="btn-secondary">
+          <a href="/cv.pdf" className="btn-secondary">
             <Download className="w-4 h-4" />
             Check Full CV
           </a>
