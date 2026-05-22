@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Vitor Negromonte`,
-    siteUrl: `https://vitornegromonte.github.io`,
+    siteUrl: `https://vitornegromonte.github.io/`,
     description: `Portfolio website of Vitor Negromonte, Data Scientist and Machine Learning Researcher.`,
   },
   plugins: [
