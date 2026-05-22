@@ -3,25 +3,32 @@ import { Download } from "lucide-react"
 
 const experience = [
   {
-    period: "2024 - Today",
-    role: "Co-founder & Outreach Director",
+    period: "Dec 2025 - Present",
+    role: "Applied Machine Learning Engineer",
+    institution: "Projeto Sinapse",
+    location: "Recife, PE",
+  },
+
+  {
+    period: "Mar 2024 - Present",
+    role: "President & Co-founder (Former Outreach Director)",
     institution: "Ligia - UFPE's Academic League of Artificial Intelligence",
     location: "Recife, PE",
   },
   {
-    period: "2025",
+    period: "Jan 2025 - Sep 2025",
     role: "Machine Learning Engineer",
     institution: "Freelancer",
     location: "Recife, PE",
   },
   {
-    period: "2023–2024",
+    period: "Nov 2023 - Jul 2024",
     role: "Data Scientist",
     institution: "redduo.ai",
     location: "Recife, PE",
   },
   {
-    period: "2023–2024",
+    period: "2023 - 2024",
     role: "Undergraduate Research Assistant",
     institution: "National Institute of Software Engineering",
     location: "Remote/Recife, PE",
@@ -30,7 +37,7 @@ const experience = [
 
 const education = [
   {
-    period: "2025 – Today",
+    period: "2025 - Present",
     degree: "B.Sc. in Information Systems",
     institution: "Federal University of Pernambuco",
     location: "Recife, PE",
@@ -56,7 +63,7 @@ const teaching = [
     course: "Computational Creativity",
     institution: "UFPE",
     roles: [
-      { period: "2024–2025", role: "Teaching Assistant" },
+      { period: "2024 - 2025", role: "Teaching Assistant" },
     ],
   },
 ]
@@ -73,7 +80,7 @@ const extracurricular = [
   {
     role: "Co-founder & Outreach Director",
     activity: "Ligia - UFPE's Academic League of Artificial Intelligence",
-    description: "The league is a non‐profit initiative advised by professors from the CIn.AI research group at the Federal University of Pernambuco. Our mission is to promoting AI knowledge and projects among students through workshops, hackathons, and collaborative research.",
+    description: "The league is a non-profit initiative advised by professors from the CIn.AI research group at the Federal University of Pernambuco. Our mission is to promoting AI knowledge and projects among students through workshops, hackathons, and collaborative research.",
   },
   {
     role: "Co-organizer",
@@ -89,10 +96,10 @@ const extracurricular = [
 
 const skills = {
   "Programming Languages": ["Python", "R", "C++", "SQL"],
-  "ML & Data Science": ["PyTorch", "JAX", "Scikit-Learn", "Keras", "Lightning", "NumPy", "Pandas", "Polars", "OpenCV"],
-  "Data Visualization": ["Matplotlib", "Seaborn", "PowerBI"],
-  "SWE & MLOps": ["FastAPI", "Django", "PostgreSQL", "Redis", "MLflow", "Weights & Biases"],
-  "Tools & Platforms": ["AWS", "Docker", "Git", "Linux"],
+  "Machine Learning & Data Science": ["PyTorch", "Jax", "TensorFlow", "Scikit-learn", "Keras", "PyTorch Lightning", "NumPy", "Pandas", "OpenCV", "MLflow", "Weights & Biases"],
+  "Data Visualization": ["Matplotlib", "Seaborn", "Power BI"],
+  "SWE & DevOps": ["FastAPI", "MinIO", "PostgreSQL", "Redis", "Celery"],
+  "Tools & Platforms": ["AWS", "Docker", "Git", "Linux"]
 }
 
 const CVSection = ({ title, items, type }) => {

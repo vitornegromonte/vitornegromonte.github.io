@@ -8,6 +8,7 @@ const About = () => {
     "Dynamical Systems",
     "Self-referential Systems",
     "Neural Algorithmic Reasoning",
+    "Reasoning & Planning",
     "Knowledge Representation",
     "Mechanistic Interpretability",
   ]
@@ -18,14 +19,13 @@ const About = () => {
         <div className="space-y-5 max-w-3xl text-base">
             <p className="text-gray leading-relaxed">
               I'm a Data Scientist and Machine Learning Researcher with a passion for exploring
-              Knowledge Representation and Neural Algorithmic Reasoning, with deep interests in Self-referential Systems and Mechanistic Interpretability.
+              Knowledge Representation and Neural Algorithmic Reasoning, with deep interests in Recursive and Self-referential Systems.
             </p>
             <p className="text-gray leading-relaxed">
-              Currently, I'm Outreach Director at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline underline-offset-2 decoration-charcoal decoration-2 hover:bg-charcoal hover:text-white hover:no-underline">Ligia</a>,
-               where I lead partnership development, organize AI‐focused events, and create educational content to promote AI learning and application across multiple disciplines
-            </p>
-            <p className="text-gray leading-relaxed">
-             Outside academics, I enjoy photography, reading, sports, and creative coding.
+              Currently, I'm President at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline underline-offset-2 decoration-charcoal decoration-2 hover:bg-charcoal hover:text-white hover:no-underline">Ligia</a>,
+               where I lead a group of ~30 researchers across applied NLP, Machine Learning and Computer Vision tracks. Previously, as Outreach Director, led external relations to 
+               establish strategic partnerships within the public and private sectors and organized technical events to integrate academic research with the local tech ecosystem.
+
             </p>
             <div className="pt-4">
               <div className="flex items-center justify-between">
