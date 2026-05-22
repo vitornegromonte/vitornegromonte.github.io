@@ -13,13 +13,14 @@ module.exports = {
         'charcoal': '#1E1E1E',
         'gray': '#9E9E9E',
         'light-gray': '#E0E0E0',
-        'bauhaus-red': '#E53935',
-        'bauhaus-blue': '#1E88E5',
-        'bauhaus-yellow': '#FDD835',
+
       },
       fontFamily: {
         'display': ['"Josefin Sans"', 'sans-serif'],
-        'body': ['Inter', 'sans-serif'],
+        'body': ['"Rethink Sans"', 'sans-serif'],
+      },
+      boxShadow: {
+        'pixel-sm': '2px 2px 0px 0px #1E1E1E',
       },
     },
   },

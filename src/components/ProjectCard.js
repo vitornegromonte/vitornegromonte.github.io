@@ -6,7 +6,7 @@ const ProjectCard = ({ project, showAll }) => {
   const { frontmatter, fields } = project
 
   return (
-    <article className="border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100">
+    <article className="border-2 border-charcoal hover:shadow-pixel-sm transition-shadow duration-100">
       <div className="p-5 md:p-8">
         <div className="grid md:grid-cols-[220px_1fr] gap-5 md:gap-8">
           <div className="aspect-[16/10] overflow-hidden border-2 border-charcoal">
@@ -24,7 +24,7 @@ const ProjectCard = ({ project, showAll }) => {
             <h3 className="font-display text-base md:text-lg text-charcoal leading-snug mb-2">
               {frontmatter.title}
             </h3>
-            <p className="text-medium-gray leading-relaxed text-sm mb-3">
+            <p className="text-gray leading-relaxed text-sm mb-3">
               {frontmatter.summary}
             </p>
             <div className="flex items-center gap-1 flex-wrap mb-4">

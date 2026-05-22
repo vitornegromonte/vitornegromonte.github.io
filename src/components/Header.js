@@ -14,14 +14,14 @@ const Header = () => {
       <div className="section-container">
         <nav className="max-w-3xl flex items-center justify-between py-3">
           <a href="/" className="font-display text-charcoal text-lg font-bold tracking-tight">
-            VN<span className="text-bauhaus-red">.</span>
+            VN<span className="text-charcoal">.</span>
           </a>
           <ul className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-xs font-body uppercase tracking-wider text-charcoal px-3 py-1.5 hover:bg-bauhaus-yellow transition-none"
+                  className="text-xs font-body uppercase tracking-wider text-charcoal px-3 py-1.5 hover:bg-charcoal hover:text-white transition-none"
                 >
                   {link.label}
                 </a>

@@ -21,7 +21,7 @@ const About = () => {
               Knowledge Representation and Neural Algorithmic Reasoning, with deep interests in Self-referential Systems and Mechanistic Interpretability.
             </p>
             <p className="text-gray leading-relaxed">
-              Currently, I'm Outreach Director at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline underline-offset-2 decoration-bauhaus-red decoration-2 hover:bg-bauhaus-yellow hover:no-underline">Ligia</a>,
+              Currently, I'm Outreach Director at the <a href="https://www.instagram.com/ligia.ufpe/" className="text-charcoal underline underline-offset-2 decoration-charcoal decoration-2 hover:bg-charcoal hover:text-white hover:no-underline">Ligia</a>,
                where I lead partnership development, organize AI‐focused events, and create educational content to promote AI learning and application across multiple disciplines
             </p>
             <p className="text-gray leading-relaxed">
@@ -47,7 +47,7 @@ const About = () => {
                   {interests.map((interest) => (
                     <li
                       key={interest}
-                      className="px-3 py-1.5 border-2 border-charcoal text-sm text-charcoal font-body mr-2 mb-2 inline-block hover:bg-bauhaus-yellow hover:border-bauhaus-yellow transition-none"
+                      className="px-3 py-1.5 border-2 border-charcoal text-sm text-charcoal font-body mr-2 mb-2 inline-block hover:bg-charcoal hover:text-white hover:border-charcoal transition-none"
                     >
                       {interest}
                     </li>

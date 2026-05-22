@@ -11,7 +11,7 @@ module.exports = {
       options: {
         fonts: [
           `Josefin Sans\:300,400,500,600,700`,
-          `Inter\:400,500,600,700`
+          `Rethink Sans\:400,500,600,700`
         ],
         display: 'swap'
       }

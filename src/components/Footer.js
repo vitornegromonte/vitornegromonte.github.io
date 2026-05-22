@@ -18,7 +18,7 @@ const Footer = () => {
             <h4 className="font-display text-sm text-charcoal mb-3 font-bold">Contact</h4>
             <a
               href="mailto:contato.vnco@gmail.com"
-              className="text-gray hover:text-charcoal block mb-4 text-sm font-body underline underline-offset-2 decoration-bauhaus-red decoration-2 hover:bg-bauhaus-yellow hover:no-underline"
+              className="text-gray hover:text-charcoal block mb-4 text-sm font-body underline underline-offset-2 decoration-charcoal decoration-2 hover:bg-charcoal hover:text-white hover:no-underline"
             >
               contato.vnco@gmail.com
             </a>
@@ -27,7 +27,7 @@ const Footer = () => {
                 href="https://linkedin.com/in/vitornegromonte"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-charcoal p-2 text-charcoal hover:bg-bauhaus-red hover:text-white hover:border-bauhaus-red transition-none"
+                className="border-2 border-charcoal p-2 text-charcoal hover:bg-charcoal hover:text-white transition-none"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -45,7 +45,7 @@ const Footer = () => {
                 href="https://instagram.com/vitor.ncabral"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-charcoal p-2 text-charcoal hover:bg-bauhaus-yellow hover:text-charcoal transition-none"
+                className="border-2 border-charcoal p-2 text-charcoal hover:bg-charcoal hover:text-white transition-none"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -54,7 +54,7 @@ const Footer = () => {
                 href="https://scholar.google.com/citations?user=r4FGCH0AAAAJ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-charcoal p-2 text-charcoal hover:bg-bauhaus-blue hover:text-white hover:border-bauhaus-blue transition-none"
+                className="border-2 border-charcoal p-2 text-charcoal hover:bg-charcoal hover:text-white transition-none"
                 aria-label="Google Scholar"
               >
                 <GraduationCap className="w-4 h-4" />

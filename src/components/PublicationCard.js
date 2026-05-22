@@ -11,7 +11,7 @@ const PublicationCard = ({ publication, showDetails }) => {
   const { frontmatter, html } = publication
 
   return (
-    <article className="border-2 border-charcoal shadow-pixel-sm hover:shadow-pixel hover:-translate-y-0.5 transition-all duration-100">
+    <article className="border-2 border-charcoal hover:shadow-pixel-sm transition-shadow duration-100">
       <div className="p-5 md:p-8">
         <p className="metadata mb-1">
           {frontmatter.year} · {frontmatter.venue}

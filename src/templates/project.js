@@ -36,7 +36,7 @@ const ProjectTemplate = ({ data }) => {
               </div>
             )}
 
-            <div className="w-12 h-1.5 bg-bauhaus-red mb-4" />
+            <div className="w-12 h-1.5 bg-charcoal mb-4" />
 
             <h1 className="font-display text-lg md:text-xl text-charcoal mb-4 leading-relaxed">
               {frontmatter.title}
@@ -54,7 +54,7 @@ const ProjectTemplate = ({ data }) => {
             </div>
 
             {frontmatter.summary && (
-              <blockquote className="border-l-4 border-bauhaus-blue pl-6 pr-4 py-4 mb-10 text-gray text-base font-body">
+              <blockquote className="border-l-4 border-charcoal pl-6 pr-4 py-4 mb-10 text-gray text-base font-body">
                 {frontmatter.summary}
               </blockquote>
             )}

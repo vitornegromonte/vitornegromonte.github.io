@@ -46,7 +46,7 @@ const ProjectsPage = ({ data }) => {
           <h1 className="font-display text-xl md:text-2xl text-charcoal mb-2 leading-relaxed">
             Projects
           </h1>
-          <div className="w-12 h-1.5 bg-bauhaus-red mb-4" />
+          <div className="w-12 h-1.5 bg-charcoal mb-4" />
           <p className="text-gray max-w-2xl mb-8 text-sm font-body">
             A collection of research projects, open-source tools, and experiments 
             in machine learning, natural language processing, and data science.
@@ -71,7 +71,7 @@ const ProjectsPage = ({ data }) => {
                     className={`block w-full text-left px-4 py-2 text-sm font-body transition-none ${
                       activeFilter === category
                         ? "bg-charcoal text-white"
-                        : "text-gray hover:bg-bauhaus-yellow hover:text-charcoal"
+                        : "text-gray hover:bg-charcoal hover:text-white"
                     }`}
                   >
                     {category}
