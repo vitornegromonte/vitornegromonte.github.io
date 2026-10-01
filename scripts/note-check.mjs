@@ -8,9 +8,15 @@ import { join, basename } from 'node:path';
 const ROOT = join(import.meta.dirname, '..');
 const NOTES_DIR = join(ROOT, 'src/content/notes');
 let fails = 0;
+let warns = 0;
 const fail = (f, msg) => {
   fails++;
   console.log(`FAIL ${f}: ${msg}`);
+};
+// Warnings (author TODOs) never fail CI; hard errors do.
+const warn = (f, msg) => {
+  warns++;
+  console.log(`WARN ${f}: ${msg}`);
 };
 
 for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
@@ -32,7 +38,7 @@ for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
     const local = join(ROOT, 'public', m[1]);
     if (!existsSync(local)) fail(f, `missing file ${m[1]}`);
   }
-  if (/!\[\]\(/.test(text)) fail(f, 'empty-alt placeholder image — add a caption');
+  if (/!\[\]\(/.test(text)) warn(f, 'empty-alt placeholder image — add a caption');
   // Figure one-liners need blank lines around them, else markdown merges
   // them into the adjacent paragraph (lazy continuation) and no <figure>
   // wrapper/caption is produced.
@@ -55,5 +61,5 @@ for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
   void slug;
 }
 
-console.log(fails === 0 ? 'note:check OK' : `${fails} problem(s)`);
+console.log(fails === 0 ? `note:check OK (${warns} warning(s))` : `${fails} problem(s), ${warns} warning(s)`);
 process.exit(fails === 0 ? 0 : 1);

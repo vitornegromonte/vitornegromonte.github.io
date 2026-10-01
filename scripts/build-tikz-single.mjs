@@ -170,6 +170,18 @@ async function compileOne(tikz, workDir, outDir, baseName) {
     return { ok: true, name, svgPath, cached: true };
   }
 
+  // Fresh compile needed (new ```tikz fence): requires a TeX toolchain.
+  // CI runners don't have one — compile locally and commit public/ SVGs.
+  const hasToolchain = await run('pdflatex', ['--version'], workDir).then(
+    (r) => r.code === 0,
+    () => false,
+  );
+  if (!hasToolchain) {
+    return {
+      ok: false,
+      error: `no TeX toolchain (pdflatex) for new figure ${baseName}. Compile locally with pdflatex + dvisvgm (bun run prebuild) and commit public/notes/*/figures/ before pushing.`,
+    };
+  }
   await writeFile(texPath, `${PREAMBLE}\n\\begin{document}\n${tikz}\n\\end{document}\n`, 'utf8');
   await run('pdflatex', ['-interaction=nonstopmode', '-halt-on-error', `${name}.tex`], workDir);
   if (!existsSync(pdfPath)) {
