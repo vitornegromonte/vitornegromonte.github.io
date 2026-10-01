@@ -1,0 +1,309 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Single light theme only — no dark variant in this template. */
+
+/* ---------------------------------------------------------------------
+   Design tokens (light values). Edit these five colors to re-skin the
+   entire site — every component reads from the tokens below, nothing
+   hardcodes a hex value.
+   --------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --paper: #faf6ef; /* page background — warm off-white (cream) */
+  --ink: #141413; /* primary text */
+  --ink-soft: #3d3d3a; /* secondary text */
+  --signal: #cc785c; /* the one accent color */
+  --line: #e5dfd2; /* borders, rules */
+  --surface: #f0ebe1; /* cards, raised panels */
+}
+
+/* Single light theme only — no .dark overrides in this template. */
+
+/* `inline` keeps these resolving against the live --paper/--ink/etc custom
+   properties above at runtime, instead of Tailwind inlining a static value
+   at build time — required for the .dark class swap to work. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-signal: var(--signal);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+
+  /* Astro's Fonts API exposes the loaded families on --ff-* (see
+     astro.config.mjs). These map them to font-display / font-body /
+     font-mono utility classes. */
+  --font-display: var(--ff-display);
+  --font-body: var(--ff-body);
+  --font-mono: var(--ff-mono);
+}
+
+/* Stronger ease-out for press/translate motion (default Tailwind ease-out
+   is too weak — see emil-design-eng). Color-only hovers keep `ease`. */
+@theme {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* No double-tap zoom delay on interactive elements (mobile). */
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* Editorial rhythm — measure + hanging punctuation, no color/type change. */
+  p {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      transition:
+        background-color 200ms ease,
+        color 200ms ease;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+    /* Decorative motion is gated with motion-safe: in markup; this is the
+       backstop so no positional movement survives under reduced motion.
+       Color/opacity transitions are intentionally preserved. */
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Tune @tailwindcss/typography to use the site's tokens instead of its
+   default gray scale, so rendered Markdown matches the rest of the page. */
+.prose {
+  --tw-prose-body: var(--color-ink-soft);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-links: var(--color-signal);
+  --tw-prose-bullets: var(--color-signal);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-signal);
+  --tw-prose-code: var(--color-ink);
+  max-width: 65ch;
+  line-height: 1.7;
+}
+.prose :where(h2, h3, h4) {
+  font-family: var(--font-display);
+}
+.prose :where(a) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------
+   Shared code styles — padroniza inline `code` e blocos `pre` em
+   projetos (.prose) e notes (.note-page). Antes mini_nn() em
+   projetos usava o default do @tailwindcss/typography (cinza) e em
+   notes usava color-mix com JetBrains Mono — agora idênticos.
+   --------------------------------------------------------------------- */
+.prose :where(code):not(:where([class~='not-prose'] *)),
+.note-page :where(code):not(:where([class~='not-prose'] *)) {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+  font-weight: 400;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+  padding: 0.18em 0.38em;
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
+  content: none;
+}
+
+.prose :where(pre):not(:where([class~='not-prose'] *)),
+.note-page :where(pre):not(:where([class~='not-prose'] *)) {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Horizon para blocos (APENAS código) — preserva background do tema
+   (horizon-bright #FDF0ED no claro, horizon #1C1E26 no escuro). Mantém
+   borda/padding do site sem esconder a paleta Horizon com !important. */
+.prose :where(pre.astro-code),
+.note-page :where(pre.astro-code) {
+  border: 1px solid var(--line);
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Auto-numbered figure captions ("Figure N", injected by remarkFigRefs). */
+.fig-no {
+  font-weight: 600;
+  color: var(--ink);
+  margin-right: 0.4em;
+}
+a.fig-ref {
+  white-space: nowrap;
+}
+
+/* TikZ figures — single light-only <img> with intrinsic width/height
+   (emitted by remark-tikz-single) so space is reserved before paint. */
+.tikz-figure {
+  margin: 2rem auto;
+  max-width: 80%;
+}
+.tikz-figure.fullwidth {
+  max-width: 100%;
+}
+.tikz-figure img {
+  width: 100%;
+  max-width: 100%;
+  align-self: center;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  margin: 0 auto;
+}
+.tikz-figure figcaption {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+
+/* Figuras normais (markdown ![alt](src)) — legenda via remarkFigure, mesmo tamanho 80% */
+.prose figure,
+.note-page figure {
+  margin: 2rem auto;
+  max-width: 80%;
+}
+.prose figure img,
+.note-page figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.prose figcaption,
+.note-page figcaption,
+figure figcaption {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+
+/* Shiki single light theme — no .dark overrides needed. */
+
+.prose :where(pre code):not(:where([class~='not-prose'] *)),
+.note-page :where(pre code):not(:where([class~='not-prose'] *)) {
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Legenda para blocos de código (figcaption após pre sem figure wrapper) */
+.prose figcaption,
+.note-page figcaption {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+pre + figcaption,
+.prose pre + figcaption,
+.note-page pre + figcaption {
+  display: block;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Print — dossier mode: hide chrome, black on white, full measure. */
+@media print {
+  header,
+  footer,
+  nav,
+  button,
+  [data-toc] {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .note-page,
+  .prose {
+    max-width: 100% !important;
+  }
+  a {
+    text-decoration: underline;
+    color: inherit !important;
+  }
+}

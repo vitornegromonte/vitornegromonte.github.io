@@ -1,0 +1,121 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('work', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: entries[i - 1] ? { id: entries[i - 1].id, title: entries[i - 1].data.title } : null,
+      next: entries[i + 1] ? { id: entries[i + 1].id, title: entries[i + 1].data.title } : null,
+    },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  prev: { id: string; title: string } | null;
+  next: { id: string; title: string } | null;
+}
+
+const { entry, prev, next } = Astro.props;
+const { title, summary, date, tags, url, repo, category, abstract } = entry.data;
+const { Content } = await render(entry);
+
+const year = date.getUTCFullYear();
+const poster = `/images/projects/${entry.id}.jpg`;
+---
+
+<BaseLayout title={title} description={summary} type="article" tags={tags}>
+  <article class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <a href="/projects" class="text-ink-soft hover:text-signal font-mono text-xs tracking-[0.08em] uppercase transition-colors">
+      ← Index of projects
+    </a>
+
+    <div class="mt-8 grid gap-8 sm:grid-cols-1 lg:grid-cols-[1fr_12rem] lg:gap-10">
+      <div class="min-w-0 flex-1">
+        <h1 class="font-display text-ink text-3xl font-medium tracking-[-0.015em] leading-[1.08] text-balance sm:text-4xl">
+          {title}
+        </h1>
+
+        {abstract && abstract !== summary && (
+          <p class="text-ink-soft mt-6 max-w-xl text-lg leading-relaxed">{abstract}</p>
+        )}
+
+        <dl class="border-line mt-6 divide-y divide-line border-y">
+          <div class="grid grid-cols-[7rem_1fr] gap-4 py-2.5">
+            <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em] opacity-60">Year</dt>
+            <dd class="text-ink-soft text-sm leading-relaxed">{year}</dd>
+          </div>
+          {category && (
+            <div class="grid grid-cols-[7rem_1fr] gap-4 py-2.5">
+              <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em] opacity-60">Category</dt>
+              <dd class="text-ink-soft text-sm leading-relaxed">{category}</dd>
+            </div>
+          )}
+          {tags.length > 0 && (
+            <div class="grid grid-cols-[7rem_1fr] gap-4 py-2.5">
+              <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em] opacity-60">Stack</dt>
+              <dd class="text-ink text-sm leading-relaxed">{tags.join(', ')}</dd>
+            </div>
+          )}
+        </dl>
+      </div>
+
+      <aside class="w-40 shrink-0 sm:w-48 lg:sticky lg:top-24 lg:self-start">
+        <figure class="mt-1">
+          <img
+          src={poster}
+          alt={`Cover artwork for ${title}`}
+          loading="lazy"
+          width="960"
+          height="1200"
+            class="aspect-[4/5] w-full rounded-[6px] border border-line object-cover"
+          />
+        </figure>
+        <p class="text-ink-soft mt-3 hidden font-mono text-[11px] leading-relaxed tracking-[0.08em] uppercase opacity-70 lg:block">
+          {year}{category ? ` · ${category}` : ''}
+        </p>
+      </aside>
+    </div>
+
+    <div class="prose prose-sm sm:prose-base mt-10 max-w-2xl">
+      <Content />
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      {url && (
+        <Button href={url.toString()} variant="solid">
+          Visit live →
+        </Button>
+      )}
+      {repo && (
+        <Button href={repo.toString()} variant="ghost">
+          View source
+        </Button>
+      )}
+    </div>
+
+    {(prev || next) && (
+      <nav class="border-line mt-16 grid gap-4 border-t pt-6 sm:grid-cols-2" aria-label="More projects">
+        {prev ? (
+          <a href={`/${prev.id}`} class="group min-w-0">
+            <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">← Newer</span>
+            <span class="font-display text-ink group-hover:text-signal mt-1 block truncate text-lg transition-colors">{prev.title}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={`/${next.id}`} class="group min-w-0 sm:text-right">
+            <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">Older →</span>
+            <span class="font-display text-ink group-hover:text-signal mt-1 block truncate text-lg transition-colors">{next.title}</span>
+          </a>
+        ) : <span />}
+      </nav>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import WorkRow from '@/components/WorkRow.astro';
+import PublicationRow from '@/components/PublicationRow.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import NoteRow from '@/components/NoteRow.astro';
+import { SITE } from '@/site.config';
+
+const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const featured = allWork.filter((entry) => entry.data.featured);
+const rest = allWork.filter((entry) => !entry.data.featured);
+const selected = [...featured, ...rest].slice(0, 3);
+
+const publications = (await getCollection('publications')).sort((a, b) =>
+  b.data.year.localeCompare(a.data.year),
+);
+const topPublications = publications.slice(0, 3);
+
+const notes = (await getCollection('notes')).sort((a, b) =>
+  a.id.localeCompare(b.id),
+);
+const topNotes = notes.slice(0, 3);
+
+const [leadWork, ...moreWork] = selected;
+const leadPoster = leadWork ? `/images/projects/${leadWork.id}.jpg` : '';
+const leadYear = leadWork?.data.date.getUTCFullYear();
+const yearNow = new Date().getUTCFullYear();
+---
+
+<BaseLayout title={SITE.name}>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-20 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">
+      Recife, BR — {yearNow}
+    </p>
+    <p class="text-ink-soft mb-6 inline-flex items-center gap-2 font-mono text-xs">
+      <span class="bg-signal h-1.5 w-1.5 rounded-full" aria-hidden="true"></span>
+      {SITE.status}
+    </p>
+
+    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.08] font-medium tracking-[-0.015em] text-balance sm:text-5xl">
+      {SITE.tagline}
+    </h1>
+
+    <p class="text-ink-soft mt-6 max-w-xl text-xl leading-relaxed">
+      {SITE.description}
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <Button href="/projects" variant="solid">Browse the projects →</Button>
+      <Button href="/notes" variant="ghost">Read the field notes</Button>
+    </div>
+  </section>
+
+  <section id="work" class="mx-auto max-w-3xl px-6 pb-20">
+    <SectionHeading eyebrow="Selected work" count={allWork.length} />
+    {leadWork && (
+      <a href={`/${leadWork.id}`} class="group border-line hover:border-signal mb-4 grid gap-6 rounded-[6px] border p-5 transition-colors sm:grid-cols-[1.2fr_1fr] sm:p-6">
+        <span class="min-w-0 order-2 sm:order-1">
+          <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">
+            Featured · {leadYear}{leadWork.data.category ? ` · ${leadWork.data.category}` : ''}
+          </span>
+          <span class="font-display text-ink group-hover:text-signal mt-2 block text-2xl leading-tight text-balance transition-colors">
+            {leadWork.data.title}
+          </span>
+          <span class="text-ink-soft mt-2 block text-sm leading-relaxed line-clamp-3">{leadWork.data.summary}</span>
+          <span class="text-ink-soft group-hover:text-signal mt-3 inline-block font-mono text-[11px] uppercase tracking-[0.08em] transition-colors">
+            Open case →
+          </span>
+        </span>
+        <span class="order-1 sm:order-2">
+          <img
+            src={leadPoster}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width="960"
+            height="600"
+            class="border-line aspect-[16/10] w-full rounded-[6px] border object-cover"
+          />
+        </span>
+      </a>
+    )}
+    <div>
+      {moreWork.map((entry) => <WorkRow entry={entry} />)}
+    </div>
+    <div class="mt-6">
+      <a
+        href="/projects"
+        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+      >
+        View all {allWork.length} projects →
+      </a>
+    </div>
+  </section>
+
+  <section id="publications" class="mx-auto max-w-3xl px-6 pb-20">
+    <SectionHeading eyebrow="Publications" count={publications.length} />
+    <div>
+      {topPublications.map((entry) => <PublicationRow entry={entry} />)}
+    </div>
+    <div class="mt-6">
+      <a
+        href="/publications"
+        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+      >
+        All publications →
+      </a>
+    </div>
+  </section>
+
+  <section id="notes" class="mx-auto max-w-3xl px-6 pb-20">
+    <SectionHeading eyebrow="Notes" count={notes.length} />
+    <div>
+      {topNotes.map((note) => (
+        <NoteRow {...note.data} slug={note.id} />
+      ))}
+    </div>
+    <div class="mt-6">
+      <a
+        href="/notes"
+        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+      >
+        All notes →
+      </a>
+    </div>
+  </section>
+
+  <section id="about" class="mx-auto max-w-3xl px-6 pb-20">
+    <SectionHeading eyebrow="About" />
+    <p class="text-ink-soft max-w-xl leading-relaxed">
+      {SITE.description}
+    </p>
+    <a href="/about" class="text-signal mt-4 inline-block font-mono text-xs hover:underline hover:underline-offset-4">
+      More about me →
+    </a>
+  </section>
+
+  <section id="contact" class="mx-auto max-w-3xl px-6 pb-24">
+    <SectionHeading eyebrow="Correspondence" />
+    <p class="font-display text-ink max-w-lg text-2xl sm:text-3xl">
+      Get in touch
+    </p>
+    <a
+      href={`mailto:${SITE.email}`}
+      class="text-signal mt-4 inline-flex items-center gap-2 font-mono hover:underline"
+    >
+      {SITE.email}
+    </a>
+  </section>
+</BaseLayout>

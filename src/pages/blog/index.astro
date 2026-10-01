@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import NoteRow from '@/components/NoteRow.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+function minutesOf(body: string | undefined): number {
+  const words = (body ?? '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+const postsWithTime = posts.map((post) => ({ post, minutes: minutesOf(post.body) }));
+---
+
+<BaseLayout
+  title="Blog"
+  description="Occasional writing by Vitor Negromonte."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <SectionHeading eyebrow="Blog" count={posts.length} />
+    {posts.length === 0 ? (
+      <p class="text-ink-soft max-w-xl text-base leading-relaxed">
+        Nothing here yet — longer writing will land here when there's something worth saying.
+        Meanwhile, the <a href="/notes" class="text-signal hover:underline">Field Notes</a> hold
+        the study material.
+      </p>
+    ) : (
+      <div>
+        {postsWithTime.map(({ post, minutes }) => (
+          <NoteRow
+            title={post.data.title}
+            topic={post.data.tags.length > 0 ? post.data.tags.join(' · ') : String(post.data.date.getUTCFullYear())}
+            lang={post.data.lang}
+            slug={post.id}
+            minutes={minutes}
+            basePath="/blog"
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

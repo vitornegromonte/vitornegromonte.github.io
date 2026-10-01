@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PublicationRow from '@/components/PublicationRow.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const publications = (await getCollection('publications')).sort((a, b) =>
+  b.data.year.localeCompare(a.data.year),
+);
+const pubYears = [...new Set(publications.map((p) => p.data.year))].sort((a, b) =>
+  b.localeCompare(a),
+);
+const pubsByYear = pubYears.map((year) => ({
+  year,
+  items: publications.filter((p) => p.data.year === year),
+}));
+---
+
+<BaseLayout
+  title="Publications"
+  description="Selected peer-reviewed publications and pre-prints by Vitor Negromonte."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <h1 class="sr-only">Publications</h1>
+    <SectionHeading eyebrow="Publications" count={publications.length} />
+    <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
+      Peer-reviewed work and pre-prints. Full text where allowed.
+    </p>
+    <div>
+      {pubsByYear.map(({ year, items }) => (
+        <section>
+          <p class="text-ink-soft mt-10 mb-2 flex items-baseline justify-between font-mono text-[11px] uppercase tabular-nums tracking-[0.14em] opacity-70 first:mt-0">
+            <span>{year}</span>
+            <span>({String(items.length).padStart(2, '0')})</span>
+          </p>
+          <div class="border-line border-t">
+            {items.map((entry) => <PublicationRow entry={entry} />)}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

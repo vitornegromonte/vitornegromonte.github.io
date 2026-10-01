@@ -1,0 +1,20 @@
+{
+  "name": "Vitor Negromonte",
+  "role": "Data Scientist & ML Researcher",
+  "email": "contato.vnco@gmail.com",
+  "tagline": "Vitor Negromonte.",
+  "description": "Data Scientist and Machine Learning Researcher working on latent reasoning, humanoid learning, and self-referential systems.",
+  "status": "Software Engineer (ML) at Sinapse · President at Ligia UFPE",
+  "locale": "en",
+  "social": [
+    { "label": "GitHub", "href": "https://github.com/vitornegromonte" },
+    { "label": "LinkedIn", "href": "https://linkedin.com/in/vitornegromonte" },
+    { "label": "Scholar", "href": "https://scholar.google.com/citations?user=r4FGCH0AAAAJ" }
+  ],
+  "nav": [
+    { "label": "About", "href": "/about" },
+    { "label": "Projects", "href": "/projects" },
+    { "label": "Publications", "href": "/publications" },
+    { "label": "Field Notes", "href": "/notes" }
+  ]
+}

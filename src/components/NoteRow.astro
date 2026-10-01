@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  topic: string;
+  lang: string;
+  slug: string;
+  minutes?: number;
+  shelf?: string;
+  basePath?: string;
+}
+
+const { title, topic, lang, slug, minutes, shelf, basePath = '/notes' } = Astro.props;
+const poster = basePath === '/blog' ? null : `/images/notes/${slug}.jpg`;
+---
+
+<a
+  href={`${basePath}/${slug}/`}
+  data-topic={topic}
+  data-shelf={shelf}
+  class:list={[
+    'group border-line hover:border-signal grid items-start gap-4 border-b py-6 transition-colors sm:gap-6',
+    poster ? 'grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[5rem_1fr_auto]' : 'grid-cols-[1fr_auto]',
+  ]}
+>
+  {poster && (
+    <img
+      src={poster}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      width="960"
+      height="1200"
+      class="aspect-[4/5] w-14 shrink-0 rounded-[6px] border border-line object-cover motion-safe:transition-transform motion-safe:pointer-fine:group-hover:scale-[1.03] sm:w-20 mt-0.5"
+    />
+  )}
+
+  <span class="min-w-0">
+    <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">
+      {topic} · {lang}{typeof minutes === 'number' ? ` · ${minutes} min` : ''}
+    </span>
+    <span class="font-display text-ink group-hover:text-signal mt-1 block text-xl leading-snug text-pretty transition-colors">
+      {title}
+    </span>
+  </span>
+
+  <span class="flex items-center pt-1">
+    <span
+      aria-hidden="true"
+      class="text-ink-soft opacity-60 transition-[transform,color,opacity] duration-150 ease-out motion-safe:pointer-fine:group-hover:translate-x-0.5 group-hover:text-signal group-hover:opacity-100"
+    >
+      →
+    </span>
+  </span>
+</a>

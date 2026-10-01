@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vitornegromonte.github.io/sitemap-index.xml

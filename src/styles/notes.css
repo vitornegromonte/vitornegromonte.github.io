@@ -1,0 +1,347 @@
+/* ---------------------------------------------------------------------
+   Notes pages — sem Tufte. Layout simples, mesma tipografia e tokens
+   do resto do site. Sidenotes e marginfigures viram blocos no fluxo,
+   sem floats ou colunas estreitas.
+   --------------------------------------------------------------------- */
+
+.note-page {
+  width: 100%;
+  max-width: 68ch;
+  margin-inline: auto;
+  font-family: var(--ff-body);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+/* Tipografia — usa tokens do site, sem fontes serifadas forçadas */
+.note-page :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.note-page > h1 {
+  font-weight: 600;
+  margin-top: 2.6rem;
+  margin-bottom: 1.2rem;
+  font-size: 2.1rem;
+  line-height: 1.05;
+}
+
+.note-page > h2 {
+  margin-top: 2.4rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.note-page > h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.note-page > h4 {
+  font-size: 1.1rem;
+  margin: 1.6rem 0 0.6rem;
+}
+
+.note-page p {
+  margin: 1.2rem 0;
+  color: var(--ink-soft);
+}
+
+/* Editorial drop-cap on the opening paragraph — display serif, quiet. */
+.note-page > p:first-of-type::first-letter {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: 3.2em;
+  line-height: 0.9;
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  color: var(--ink);
+}
+
+.note-page a {
+  color: var(--signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.note-page > ul,
+.note-page > ol {
+  margin: 1.2rem 0;
+  padding-left: 1.5rem;
+}
+
+.note-page > blockquote {
+  border-left: 3px solid var(--signal);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  color: var(--ink-soft);
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1.15em;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.note-page > table {
+  width: 100%;
+  max-width: 80%;
+  border-collapse: collapse;
+  margin: 1.5rem auto;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.note-page > table th,
+.note-page > table td {
+  border: 1px solid var(--line);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.note-page > table th {
+  background: var(--surface);
+  font-weight: 600;
+}
+
+/* Legenda de tabela (ex.: *Table: ...* logo após a tabela) */
+.note-page > table + p:has(em) {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+/* code / pre — padronizado em global.css (Shared code styles).
+   Mantido aqui apenas o reset para código dentro de pre. */
+.note-page pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Figuras normais — 20% menores (80%) e centralizadas, com legenda */
+.note-page > figure,
+.note-page figure {
+  margin: 2rem auto;
+  max-width: 80%;
+}
+
+.note-page figure img,
+.note-page img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+.note-page figcaption,
+.note-page > figure figcaption,
+figure figcaption {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.6rem;
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 0.5rem;
+}
+
+/* Anchor offset for sticky header (in-page jumps + ToC links). */
+.note-page :where(h2, h3)[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* --- Floating table of contents: the text keeps its original centered
+   column; the ToC floats in the right margin (viewport-fixed, no layout
+   space taken). Only on viewports wide enough to fit it (80rem+). --- */
+.toc-float {
+  display: none;
+}
+@media (min-width: 80rem) {
+  .toc-float {
+    display: block;
+    position: fixed;
+    left: calc(50% + 26.5rem);
+    top: 8rem;
+    width: 12rem;
+    z-index: 30;
+  }
+}
+/* Collapsed state (desktop toggle button). */
+.toc-float.toc-collapsed [data-toc-nav] {
+  display: none;
+}
+.toc-toggle {
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+.toc-toggle:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+/* Mobile section menu (tiny toggle after the title, below 80rem). */
+.toc-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ff-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  list-style: none;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+.toc-menu-btn::-webkit-details-marker {
+  display: none;
+}
+.toc-menu-btn:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+.toc-link {
+  display: block;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-left: 2px solid transparent;
+  padding: 0.15rem 0 0.15rem 0.75rem;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+.toc-link:hover {
+  color: var(--signal);
+}
+.toc-link[aria-current='true'] {
+  color: var(--signal);
+  border-left-color: var(--signal);
+}
+.toc-link-h3 {
+  padding-left: 1.5rem;
+  font-size: 12px;
+}
+
+/* --- Links: always the accent tone --- */
+.note-page a {
+  color: var(--signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.note-page a:hover {
+  text-decoration-thickness: 2px;
+}
+a.fig-ref {
+  font-weight: 500;
+  white-space: nowrap;
+}
+/* --- Sidenotes: antes flutuavam na margem, agora são callouts no fluxo --- */
+.note-page > div.sidenote {
+  background: var(--surface);
+  border-left: 3px solid var(--signal);
+  border-radius: 0 6px 6px 0;
+  padding: 0.85rem 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.note-page > div.sidenote .note-no {
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  margin-right: 0.35em;
+}
+
+/* Marginfigures: antes na margem, agora figura centralizada no fluxo — 20% menor */
+.note-page > figure.marginfigure {
+  margin: 2rem auto;
+  max-width: 80%;
+  float: none;
+  width: 100%;
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.note-page > figure.marginfigure img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.note-page sup.note-ref {
+  font-size: 0.75em;
+  position: relative;
+  top: -0.4em;
+}
+
+.note-page sup.note-ref a {
+  text-decoration: none;
+}
+
+/* --- KaTeX --- */
+.note-page .katex-display {
+  display: block;
+  text-align: center;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  color: var(--ink);
+}
+
+.note-page .katex-display > .katex {
+  text-align: center;
+}
+
+.note-page .fullwidth {
+  max-width: 100%;
+}
+
+.note-page #refs {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.note-page #refs .csl-entry {
+  margin: 0.6rem 0;
+  line-height: 1.5;
+  font-size: 0.92rem;
+}

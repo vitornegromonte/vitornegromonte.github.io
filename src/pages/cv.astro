@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { experience, education, teaching, awards, extracurricular, skills } from '@/utils/cv.mjs';
+---
+
+<BaseLayout
+  title="CV"
+  description="Curriculum vitae of Vitor Negromonte."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <h1 class="sr-only">Curriculum Vitae</h1>
+    <SectionHeading eyebrow="Curriculum Vitae" />
+    <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
+      A concise record of work, study, and teaching.
+    </p>
+    <p class="mb-10">
+      <a href="/cv.pdf" class="text-signal font-mono text-xs tracking-[0.08em] uppercase hover:underline hover:underline-offset-4">Print or save — download PDF →</a>
+    </p>
+
+    <SectionHeading eyebrow="Experience" />
+    <div class="border-line border-b">
+      {experience.map((item) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+          <span>
+            <span class="text-ink block text-sm font-medium">{item.role}</span>
+            <span class="text-ink-soft block text-sm">{item.institution}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10"><SectionHeading eyebrow="Education" /></div>
+    <div class="border-line border-b">
+      {education.map((item) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+          <span>
+            <span class="text-ink block text-sm font-medium">{item.degree}</span>
+            <span class="text-ink-soft block text-sm">{item.institution}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10"><SectionHeading eyebrow="Teaching" /></div>
+    <div class="border-line border-b">
+      {teaching.map((item) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.institution}</span>
+          <span>
+            <span class="text-ink block text-sm font-medium">{item.course}</span>
+            {item.roles.map((r) => (
+              <span class="text-ink-soft block text-sm">{r.role} ({r.period})</span>
+            ))}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10"><SectionHeading eyebrow="Awards" /></div>
+    <div class="border-line border-b">
+      {awards.map((item) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.year}</span>
+          <span>
+            <span class="text-ink block text-sm font-medium">{item.title}</span>
+            <span class="text-ink-soft block text-sm">{item.venue}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10"><SectionHeading eyebrow="Extracurricular" /></div>
+    <div class="border-line border-b">
+      {extracurricular.map((item) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.role}</span>
+          <span>
+            <span class="text-ink block text-sm font-medium">{item.activity}</span>
+            <span class="text-ink-soft block text-sm">{item.description}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10"><SectionHeading eyebrow="Skills" /></div>
+    <div class="border-line border-b">
+      {skills.map(([category, list]) => (
+        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{category}</span>
+          <span class="text-ink block text-sm">{list}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

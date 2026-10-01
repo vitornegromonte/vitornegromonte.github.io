@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import WorkRow from '@/components/WorkRow.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const categories = [...new Set(allWork.map((e) => e.data.category).filter(Boolean))];
+const years = [...new Set(allWork.map((e) => e.data.date.getUTCFullYear()))].sort((a, b) => b - a);
+const byYear = years.map((year) => ({
+  year,
+  items: allWork.filter((e) => e.data.date.getUTCFullYear() === year),
+}));
+---
+
+<BaseLayout
+  title="Projects"
+  description="Research projects and open-source tools by Vitor Negromonte."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <h1 class="sr-only">Projects</h1>
+    <SectionHeading eyebrow="All projects" count={allWork.length} />
+    <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
+      A working index — research systems and tools, newest first.
+    </p>
+
+    <div class="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+      <button
+        type="button"
+        class="border-signal text-paper cursor-pointer rounded-[6px] border bg-signal px-3.5 py-1.5 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All
+      </button>
+      {categories.map((category) => (
+        <button
+          type="button"
+          class="border-line text-ink-soft hover:border-signal cursor-pointer rounded-[6px] border bg-transparent px-3.5 py-1.5 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
+          data-filter={category}
+          aria-pressed="false"
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <div>
+      {byYear.map(({ year, items }) => (
+        <section data-year-group={year}>
+          <p class="text-ink-soft mt-10 mb-2 flex items-baseline justify-between font-mono text-[11px] uppercase tabular-nums tracking-[0.14em] opacity-70 first:mt-0">
+            <span>{year}</span>
+            <span>({String(items.length).padStart(2, '0')})</span>
+          </p>
+          <div class="border-line border-t">
+            {items.map((entry) => <WorkRow entry={entry} />)}
+          </div>
+        </section>
+      ))}
+      <p data-empty hidden class="text-ink-soft mt-8 text-sm leading-relaxed italic">
+        Nothing filed here yet — try another shelf.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-category]'));
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-year-group]'));
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+
+  function apply(filter: string) {
+    const showAll = filter === 'all';
+    for (const row of rows) {
+      const hidden = !showAll && row.dataset.category !== filter;
+      row.hidden = hidden;
+    }
+    let visibleCount = 0;
+    for (const group of groups) {
+      const visible = Array.from(group.querySelectorAll<HTMLElement>('[data-category]')).some((r) => !r.hidden);
+      group.hidden = !visible;
+      if (visible) visibleCount += 1;
+    }
+    if (empty) empty.hidden = visibleCount > 0;
+    for (const btn of buttons) {
+      const active = btn.dataset.filter === filter;
+      btn.setAttribute('aria-pressed', String(active));
+      btn.classList.toggle('text-paper', active);
+      btn.classList.toggle('text-ink-soft', !active);
+      btn.classList.toggle('bg-signal', active);
+      btn.classList.toggle('bg-transparent', !active);
+      btn.classList.toggle('border-signal', active);
+      btn.classList.toggle('border-line', !active);
+    }
+  }
+
+  for (const btn of buttons) {
+    btn.addEventListener('click', () => apply(btn.dataset.filter ?? 'all'));
+  }
+</script>

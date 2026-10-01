@@ -1,0 +1,53 @@
+{
+  "experience": [
+    { "period": "Dec 2025 - Present", "role": "Software Engineer (Machine Learning) Fellow", "institution": "Sinapse — Facepe/Polícia Civil de Pernambuco" },
+    { "period": "Mar 2024 - Present", "role": "President & Co-founder", "institution": "Ligia - UFPE's Academic League of Artificial Intelligence" },
+    { "period": "2023 - 2024", "role": "Undergraduate Research Assistant", "institution": "National Institute of Software Engineering" }
+  ],
+  "education": [
+    { "period": "Aug 2022 - Present", "degree": "B.Sc. in Information Systems", "institution": "Federal University of Pernambuco" }
+  ],
+  "teaching": [
+    {
+      "course": "Introduction to Deep Learning",
+      "institution": "UFPE",
+      "roles": [
+        { "period": "2025", "role": "Head Teaching Assistant" },
+        { "period": "2024", "role": "Teaching Assistant" }
+      ]
+    },
+    {
+      "course": "Computational Creativity",
+      "institution": "UFPE",
+      "roles": [{ "period": "2024 - 2025", "role": "Teaching Assistant" }]
+    }
+  ],
+  "awards": [
+    { "year": "2025", "title": "Cohere Labs Catalyst Grants Program", "venue": "Cohere Labs" }
+  ],
+  "extracurricular": [
+    {
+      "role": "Co-founder & President",
+      "activity": "Ligia - UFPE's Academic League of Artificial Intelligence",
+      "description": "Non-profit initiative promoting AI knowledge among students through workshops, hackathons, and collaborative research."
+    },
+    {
+      "role": "Co-organizer",
+      "activity": "II Advanced Summer School of Responsible AutoML",
+      "description": "Event by CIn (UFPE) and Engineering Faculty of the University of Porto"
+    },
+    {
+      "role": "Volunteer",
+      "activity": "Vibe Hack (1st ed.)",
+      "description": "Recife's 1st hackathon focused on vibe coding technology."
+    }
+  ],
+  "skills": [
+    ["Programming Languages", "Python, R, C++, SQL, Bash"],
+    ["Machine Learning", "PyTorch, TensorFlow, Scikit-learn, PyTorch Lightning, Keras, OpenCV, MLFlow, Weights & Biases"],
+    ["Data Science", "NumPy, Pandas, Polars"],
+    ["Data Visualization", "Matplotlib, Seaborn, Power BI, Tableau"],
+    ["Backend & Data", "FastAPI, PostgreSQL, Redis, Celery"],
+    ["Cloud & Infrastructure", "AWS, Docker, Git, Linux, MinIO"]
+  ]
+}

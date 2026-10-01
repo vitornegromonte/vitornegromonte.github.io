@@ -1,0 +1,32 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE } from '@/site.config';
+import '@/styles/global.css';
+import '@/styles/notes.css';
+import 'katex/dist/katex.min.css';
+import BaseHead from '@/components/BaseHead.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = SITE.description, image = '/og-image.jpg' } = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <BaseHead title={title} description={description} image={image} type="article" />
+  </head>
+  <body id="top" class="bg-paper text-ink">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:underline">Skip to content</a>
+    <Header />
+    <main id="main" class="mx-auto max-w-3xl px-6 pt-10 pb-24 sm:pt-14">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

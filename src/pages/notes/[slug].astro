@@ -1,0 +1,122 @@
+---
+import { getCollection, render } from 'astro:content';
+import NotesLayout from '@/layouts/NotesLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return Promise.all(
+    notes.map(async (note) => ({
+      params: { slug: note.id },
+      props: { note },
+    })),
+  );
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const { title, topic, lang } = note.data;
+const minutes = Math.max(1, Math.round(((note.body ?? '').trim().split(/\s+/).filter(Boolean).length) / 200));
+---
+
+<NotesLayout title={title} description={`${title} — ${topic}`}>
+  <header class="pb-8 border-b border-line mb-8">
+    <a href="/notes" class="text-ink-soft hover:text-signal font-mono text-xs tracking-[0.08em] uppercase transition-colors">
+      ← All notes
+    </a>
+    <h1 class="font-display text-ink mt-6 text-3xl font-medium tracking-[-0.015em] leading-[1.08] text-balance sm:text-4xl">{title}</h1>
+    <p class="text-ink-soft mt-3 font-mono text-[11px] tracking-[0.14em] uppercase opacity-80">
+      {topic} · {lang} · {minutes} min
+    </p>
+    {/* Mobile section menu (tiny toggle after the title); populated by script below. */}
+    <details data-toc-mobile hidden class="mt-6 min-[80rem]:hidden">
+      <summary class="toc-menu-btn"><span>Jump to a section</span><span aria-hidden="true">▾</span></summary>
+      <ul data-toc-mobile-list class="mt-2 space-y-1"></ul>
+    </details>
+  </header>
+
+  {/* Text keeps the original centered column; the ToC floats in the
+      right margin (fixed, viewport-relative) without taking layout space. */}
+  <div class="note-page min-w-0">
+    <Content />
+  </div>
+  <aside class="toc-float" aria-label="On this page">
+    <div data-toc hidden>
+      <div class="mb-3 flex items-center justify-between gap-4">
+        <p class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">On this page</p>
+        <button data-toc-toggle class="toc-toggle" aria-expanded="true" aria-label="Hide table of contents">–</button>
+      </div>
+      <nav data-toc-nav class="max-h-[calc(100vh-10rem)] overflow-y-auto">
+        <ul data-toc-list class="space-y-1"></ul>
+      </nav>
+    </div>
+  </aside>
+</NotesLayout>
+
+<script>
+  const page = document.querySelector('.note-page');
+  const toc = document.querySelector<HTMLElement>('[data-toc]');
+  const list = document.querySelector('[data-toc-list]');
+  const mobile = document.querySelector<HTMLDetailsElement>('[data-toc-mobile]');
+  const mobileList = document.querySelector('[data-toc-mobile-list]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-toc-toggle]');
+  if (page && toc && list) {
+    const headings = Array.from(page.querySelectorAll('h2[id], h3[id]')).slice(0, 12);
+    if (headings.length > 1) {
+      const links = new Map<string, HTMLAnchorElement[]>();
+      const addLink = (h: Element, ul: Element | null, mobileLink: boolean) => {
+        if (!ul) return;
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${h.id}`;
+        a.textContent = h.textContent ?? '';
+        a.className = 'toc-link' + (h.tagName === 'H3' ? ' toc-link-h3' : '');
+        if (mobileLink) {
+          a.addEventListener('click', () => {
+            if (mobile) mobile.open = false;
+          });
+        }
+        li.appendChild(a);
+        ul.appendChild(li);
+        const arr = links.get(h.id) ?? [];
+        arr.push(a);
+        links.set(h.id, arr);
+      };
+      for (const h of headings) {
+        addLink(h, list, false);
+        addLink(h, mobileList, true);
+      }
+      toc.hidden = false;
+      if (mobile) mobile.hidden = false;
+
+      // Desktop collapse toggle for the floating panel.
+      const aside = toc.closest('aside');
+      if (toggle && aside) {
+        toggle.addEventListener('click', () => {
+          const collapsed = aside.classList.toggle('toc-collapsed');
+          toggle.setAttribute('aria-expanded', String(!collapsed));
+          toggle.setAttribute('aria-label', collapsed ? 'Show table of contents' : 'Hide table of contents');
+          toggle.textContent = collapsed ? '+' : '–';
+        });
+      }
+
+      // Scrollspy: accent the chapter currently in view (both menus).
+      const setActive = (id: string | null) => {
+        for (const [key, anchors] of links) {
+          for (const a of anchors) {
+            if (key === id) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+          }
+        }
+      };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          }
+        },
+        { rootMargin: '-15% 0px -70% 0px', threshold: 0 },
+      );
+      for (const h of headings) observer.observe(h);
+    }
+  }
+</script>

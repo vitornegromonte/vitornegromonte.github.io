@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+}
+
+const { entry } = Astro.props;
+const { title, summary, date, category, featured } = entry.data;
+
+const year = date.getUTCFullYear();
+const poster = `/images/projects/${entry.id}.jpg`;
+---
+
+<a
+  href={`/${entry.id}`}
+  data-category={category ?? ''}
+  class="group border-line hover:border-signal grid grid-cols-[3.5rem_1fr_auto] items-start gap-4 border-b py-7 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:gap-6"
+>
+  <img
+    src={poster}
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    width="960"
+    height="1200"
+    class="aspect-[4/5] w-14 shrink-0 rounded-[6px] border border-line object-cover motion-safe:transition-transform motion-safe:pointer-fine:group-hover:scale-[1.03] sm:w-20 mt-0.5"
+  />
+
+  <span class="min-w-0">
+    <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">
+      {featured ? `Featured · ${year}` : year}{category ? ` · ${category}` : ''}
+    </span>
+    <span class="font-display text-ink group-hover:text-signal mt-1 block text-xl leading-snug text-pretty transition-colors">
+      {title}
+    </span>
+    <span class="text-ink-soft mt-1 block text-sm leading-relaxed line-clamp-2">{summary}</span>
+  </span>
+
+  <span class="flex items-center pt-1">
+    <span
+      aria-hidden="true"
+      class="text-ink-soft opacity-60 transition-[transform,color,opacity] duration-150 ease-out motion-safe:pointer-fine:group-hover:translate-x-0.5 group-hover:text-signal group-hover:opacity-100"
+    >
+      →
+    </span>
+  </span>
+</a>

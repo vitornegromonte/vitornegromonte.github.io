@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import NoteRow from '@/components/NoteRow.astro';
+
+const notes = (await getCollection('notes')).sort((a, b) =>
+  a.id.localeCompare(b.id),
+);
+const HANDBOOK_IDS = new Set(['intro-neural-networks', 'autodiff', 'generalization']);
+function shelfOf(id: string): 'Handbook' | 'Others' {
+  return HANDBOOK_IDS.has(id) ? 'Handbook' : 'Others';
+}
+const shelves = ['Handbook', 'Others'] as const;
+function minutesOf(body: string | undefined): number {
+  const words = (body ?? '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+const notesWithTime = notes.map((note) => ({
+  note,
+  minutes: minutesOf(note.body),
+  shelf: shelfOf(note.id),
+}));
+---
+
+<BaseLayout
+  title="Field Notes"
+  description="Machine learning study notes by Vitor Negromonte."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+    <h1 class="sr-only">Field Notes</h1>
+    <SectionHeading eyebrow="Field notes" count={notes.length} />
+    <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
+      Study notes from the desk — deep learning, in Portuguese and English.
+    </p>
+
+      <div class="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter notes by shelf">
+      <button
+        type="button"
+        class="border-signal text-paper cursor-pointer rounded-[6px] border bg-signal px-3.5 py-1.5 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All
+      </button>
+      {shelves.map((shelf) => (
+        <button
+          type="button"
+          class="border-line text-ink-soft hover:border-signal cursor-pointer rounded-[6px] border bg-transparent px-3.5 py-1.5 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
+          data-filter={shelf}
+          aria-pressed="false"
+        >
+          {shelf}
+        </button>
+      ))}
+    </div>
+
+    <div>
+      {notesWithTime.map(({ note, minutes, shelf }) => (
+        <NoteRow {...note.data} slug={note.id} minutes={minutes} shelf={shelf} />
+      ))}
+      <p data-empty hidden class="text-ink-soft mt-8 text-sm leading-relaxed italic">
+        Nothing filed here yet — try another shelf.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-shelf]'));
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  if (buttons.length > 0) {
+    function apply(filter: string) {
+      const showAll = filter === 'all';
+      let visible = 0;
+      for (const row of rows) {
+        const hidden = !showAll && row.dataset.shelf !== filter;
+        row.hidden = hidden;
+        if (!hidden) visible += 1;
+      }
+      if (empty) empty.hidden = visible > 0;
+      for (const btn of buttons) {
+        const active = btn.dataset.filter === filter;
+        btn.setAttribute('aria-pressed', String(active));
+        btn.classList.toggle('text-paper', active);
+        btn.classList.toggle('text-ink-soft', !active);
+        btn.classList.toggle('bg-signal', active);
+        btn.classList.toggle('bg-transparent', !active);
+        btn.classList.toggle('border-signal', active);
+        btn.classList.toggle('border-line', !active);
+      }
+    }
+    for (const btn of buttons) {
+      btn.addEventListener('click', () => apply(btn.dataset.filter ?? 'all'));
+    }
+  }
+</script>
