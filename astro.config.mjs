@@ -38,15 +38,14 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // Same three families as the main site (DM Serif Display / Lora /
-  // JetBrains Mono), self-hosted at build time. Single light theme only.
+  // Three families (DM Serif Display / Lora / JetBrains Mono), self-hosted
+  // at build time. Mono is for code only. Single light theme only.
   fonts: [
     {
       provider: fontProviders.google(),
       name: 'DM Serif Display',
       cssVariable: '--ff-display',
-      weights: ['400', '500', '600'],
-      styles: ['normal', 'italic'],
+      weights: ['400'],
       subsets: ['latin'],
     },
     {

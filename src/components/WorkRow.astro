@@ -9,13 +9,13 @@ const { entry } = Astro.props;
 const { title, summary, date, category, featured } = entry.data;
 
 const year = date.getUTCFullYear();
-const poster = `/images/projects/${entry.id}.jpg`;
+const poster = entry.data.hero ?? `/images/projects/${entry.id}.jpg`;
 ---
 
 <a
   href={`/${entry.id}`}
   data-category={category ?? ''}
-  class="group border-line hover:border-signal grid grid-cols-[3.5rem_1fr_auto] items-start gap-4 border-b py-7 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:gap-6"
+  class="group grid grid-cols-[3.5rem_1fr_auto] items-start gap-5 py-6 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:gap-6"
 >
   <img
     src={poster}
@@ -24,23 +24,23 @@ const poster = `/images/projects/${entry.id}.jpg`;
     loading="lazy"
     width="960"
     height="1200"
-    class="aspect-[4/5] w-14 shrink-0 rounded-[6px] border border-line object-cover motion-safe:transition-transform motion-safe:pointer-fine:group-hover:scale-[1.03] sm:w-20 mt-0.5"
+    class="aspect-[4/5] w-14 shrink-0 rounded-[6px] border border-line object-cover sm:w-20 mt-0.5"
   />
 
   <span class="min-w-0">
-    <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">
+    <span class="text-ink-muted block text-sm">
       {featured ? `Featured · ${year}` : year}{category ? ` · ${category}` : ''}
     </span>
-    <span class="font-display text-ink group-hover:text-signal mt-1 block text-xl leading-snug text-pretty transition-colors">
+    <span class="font-display text-ink group-hover:text-signal-ink mt-1.5 block text-xl leading-snug text-pretty transition-colors sm:text-2xl">
       {title}
     </span>
-    <span class="text-ink-soft mt-1 block text-sm leading-relaxed line-clamp-2">{summary}</span>
+    <span class="text-ink-soft mt-1.5 block text-sm leading-relaxed line-clamp-2">{summary}</span>
   </span>
 
   <span class="flex items-center pt-1">
     <span
       aria-hidden="true"
-      class="text-ink-soft opacity-60 transition-[transform,color,opacity] duration-150 ease-out motion-safe:pointer-fine:group-hover:translate-x-0.5 group-hover:text-signal group-hover:opacity-100"
+      class="text-ink-muted transition-[transform,color] duration-150 ease-out motion-safe:pointer-fine:group-hover:translate-x-0.5 group-hover:text-signal-ink"
     >
       →
     </span>

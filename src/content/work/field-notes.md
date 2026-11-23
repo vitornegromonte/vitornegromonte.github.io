@@ -8,7 +8,7 @@ date: 2026-06-09
 tags: ["Study Notes", "Deep Learning", "Math", "Statistics"]
 url: "https://github.com/vitornegromonte/ml-notes"
 repo: "https://github.com/vitornegromonte/ml-notes"
-featured: true
+featured: false
 draft: false
 category: "Study"
 abstract: "Personal machine learning and deep learning study notes, written in LaTeX using Edward Tufte style."

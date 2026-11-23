@@ -3,6 +3,7 @@ title: "World Models"
 keyword: "WORLD MODELS"
 topic: "A Survey of Internal Representations in Artificial Intelligence"
 lang: "EN"
+summary: "TODO: one-line summary — write after reviewing the note body."
 ---
 
 

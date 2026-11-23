@@ -11,8 +11,12 @@ repo: "https://github.com/vitornegromonte/mars"
 featured: true
 draft: false
 category: "Productivity Tool"
+problem: "TODO: describe the problem MARS solves — who needs paper recommendations and what is missing today."
+approach: "TODO: describe the approach — ArXiv collection, LLM agent review/filtering pipeline, FastAPI service."
 abstract: "Developed a FastAPI‐based system that automates research paper collection from ArXiv using LLM agents to review and filter relevant papers."
 ---
+
+<!-- TODO(copy): the two introductory paragraphs below both introduce MARS (multi-agent ArXiv collection/filtering) — merge into one. -->
 
 We present MARS, a multi-agent system built with FastAPI that automates research paper collection and filtering from ArXiv. A team of LLM-powered agents — collector, reviewer, and summarizer — collaboratively curate relevant papers based on user-defined criteria, reducing the cognitive load of literature monitoring.
 

@@ -1,13 +1,14 @@
 ---
 title: "Parkinson Diagnosis using Computer Vision: Campus Party'24 Keynote"
 keyword: "Parkinson"
+# TODO(verify): "≈ 10%" improvement and "95% accuracy" — confirm benchmark split and baselines (see Results section).
 summary: "Created a CNN model for Parkinson's disease detection using spiral‐drawing images. Outperformed state‐of‐the‐art methods by ≈ 10%, achieving 95% accuracy on the benchmark dataset."
 role: "ML Researcher — Computer Vision"
 date: 2024-11-01
 tags: ['Python', 'PyTorch', 'OpenCV', 'Optuna']
 url: "https://github.com/vitornegromonte/CPNE2024"
 repo: "https://github.com/vitornegromonte/CPNE2024"
-featured: true
+featured: false
 draft: false
 category: "Computer Vision"
 abstract: "Created a CNN model for Parkinson's disease detection using spiral‐drawing images. Outperformed state‐of‐the‐art methods by ≈ 10%, achieving 95% accuracy on the benchmark dataset."
@@ -26,5 +27,7 @@ Patients with Parkinson's disease often exhibit characteristic tremors and motor
 The model was trained and evaluated on a public benchmark dataset of spiral drawings. Data augmentation techniques including rotation, scaling, and elastic deformations were applied to improve generalization. Hyperparameter optimization was performed using Optuna to maximize classification performance.
 
 ## Results
+
+<!-- TODO(verify): "95% accuracy" and "approximately 10 percentage points" over state of the art — which benchmark split, which baselines? Also repeated in the frontmatter summary. -->
 
 Our approach achieved 95% accuracy on the benchmark dataset, outperforming existing state-of-the-art methods by approximately 10 percentage points. The model was presented as a keynote at Campus Party 2024, demonstrating the potential of computer vision as a low-cost screening tool for Parkinson's disease.

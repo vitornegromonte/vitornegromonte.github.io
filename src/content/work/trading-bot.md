@@ -13,6 +13,9 @@ category: "College Project"
 abstract: "C++ trading bot for automated cryptocurrency and stock market transactions."
 ---
 
+<!-- TODO(copy): the two introductory paragraphs below repeat the same "high-performance C++ trading bot" sentence — merge into one. -->
+<!-- TODO(verify): "sub-millisecond order execution latency" — measured how, on what hardware/feed? Repeated in the Performance section. -->
+
 We implemented a high-performance automated trading bot in C++ supporting cryptocurrency and stock markets. The system features an event-driven architecture with WebSocket-based market data ingestion, configurable strategy engine, risk management, and sub-millisecond order execution latency.
 
 Automated trading systems enable rapid execution of complex trading strategies without human intervention. This project implements a high-performance trading bot in C++ for cryptocurrency and stock markets.
@@ -26,5 +29,7 @@ The bot connects to exchange APIs (Binance, Alpaca) via WebSocket for real-time 
 The system is built with a modular event-driven architecture. A data ingestion module handles market data streams, a strategy engine evaluates trading signals, a risk management module enforces position limits and stop-losses, and an execution module submits orders. All components run asynchronously to minimize latency.
 
 ## Performance
+
+<!-- TODO(verify): "consistent profitability" in backtesting and "sub-millisecond order execution latency" — add the backtest setup and measurement details, or soften the claims. -->
 
 Backtesting on historical data across multiple market conditions demonstrated consistent profitability for the implemented strategies. The C++ implementation provides sub-millisecond order execution latency, critical for high-frequency trading scenarios. The project includes comprehensive logging and performance monitoring tools.

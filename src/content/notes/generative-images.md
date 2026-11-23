@@ -3,6 +3,7 @@ title: "Generative Models for Images"
 keyword: "Image Generation"
 topic: "VAE, GAN, Diffusion e Style Transfer"
 lang: "PT"
+summary: "TODO: one-line summary — write after reviewing the note body."
 ---
 
 

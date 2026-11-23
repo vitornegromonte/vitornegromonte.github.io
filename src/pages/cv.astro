@@ -15,14 +15,14 @@ import { experience, education, teaching, awards, extracurricular, skills } from
       A concise record of work, study, and teaching.
     </p>
     <p class="mb-10">
-      <a href="/cv.pdf" class="text-signal font-mono text-xs tracking-[0.08em] uppercase hover:underline hover:underline-offset-4">Print or save — download PDF →</a>
+      <a href="/cv.pdf" class="text-signal-ink text-sm hover:underline hover:underline-offset-4">Print or save — download PDF →</a>
     </p>
 
     <SectionHeading eyebrow="Experience" />
-    <div class="border-line border-b">
+    <div>
       {experience.map((item) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{item.period}</span>
           <span>
             <span class="text-ink block text-sm font-medium">{item.role}</span>
             <span class="text-ink-soft block text-sm">{item.institution}</span>
@@ -32,10 +32,10 @@ import { experience, education, teaching, awards, extracurricular, skills } from
     </div>
 
     <div class="mt-10"><SectionHeading eyebrow="Education" /></div>
-    <div class="border-line border-b">
+    <div>
       {education.map((item) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{item.period}</span>
           <span>
             <span class="text-ink block text-sm font-medium">{item.degree}</span>
             <span class="text-ink-soft block text-sm">{item.institution}</span>
@@ -45,10 +45,10 @@ import { experience, education, teaching, awards, extracurricular, skills } from
     </div>
 
     <div class="mt-10"><SectionHeading eyebrow="Teaching" /></div>
-    <div class="border-line border-b">
+    <div>
       {teaching.map((item) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.institution}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{item.institution}</span>
           <span>
             <span class="text-ink block text-sm font-medium">{item.course}</span>
             {item.roles.map((r) => (
@@ -60,10 +60,10 @@ import { experience, education, teaching, awards, extracurricular, skills } from
     </div>
 
     <div class="mt-10"><SectionHeading eyebrow="Awards" /></div>
-    <div class="border-line border-b">
+    <div>
       {awards.map((item) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.year}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{item.year}</span>
           <span>
             <span class="text-ink block text-sm font-medium">{item.title}</span>
             <span class="text-ink-soft block text-sm">{item.venue}</span>
@@ -73,10 +73,10 @@ import { experience, education, teaching, awards, extracurricular, skills } from
     </div>
 
     <div class="mt-10"><SectionHeading eyebrow="Extracurricular" /></div>
-    <div class="border-line border-b">
+    <div>
       {extracurricular.map((item) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.role}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{item.role}</span>
           <span>
             <span class="text-ink block text-sm font-medium">{item.activity}</span>
             <span class="text-ink-soft block text-sm">{item.description}</span>
@@ -86,10 +86,10 @@ import { experience, education, teaching, awards, extracurricular, skills } from
     </div>
 
     <div class="mt-10"><SectionHeading eyebrow="Skills" /></div>
-    <div class="border-line border-b">
+    <div>
       {skills.map(([category, list]) => (
-        <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-          <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{category}</span>
+        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+          <span class="text-ink-muted text-sm">{category}</span>
           <span class="text-ink block text-sm">{list}</span>
         </div>
       ))}

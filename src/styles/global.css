@@ -14,7 +14,9 @@
   --paper: #faf6ef; /* page background — warm off-white (cream) */
   --ink: #141413; /* primary text */
   --ink-soft: #3d3d3a; /* secondary text */
-  --signal: #cc785c; /* the one accent color */
+  --ink-muted: #6d6a62; /* meta text — still 4.5:1 on paper */
+  --signal: #cc785c; /* the one accent color — fills, dots, rules */
+  --signal-ink: #9c4a28; /* the same accent as text: 5.7:1 on paper */
   --line: #e5dfd2; /* borders, rules */
   --surface: #f0ebe1; /* cards, raised panels */
 }
@@ -28,7 +30,9 @@
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
   --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
   --color-line: var(--line);
   --color-surface: var(--surface);
 
@@ -78,18 +82,17 @@
   }
 
   .font-display {
-    letter-spacing: -0.015em;
     line-height: 1.08;
     text-wrap: balance;
   }
 
   ::selection {
-    background-color: var(--color-signal);
+    background-color: var(--color-signal-ink);
     color: var(--color-paper);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-signal);
+    outline: 2px solid var(--color-signal-ink);
     outline-offset: 3px;
   }
 
@@ -124,17 +127,49 @@
   --tw-prose-body: var(--color-ink-soft);
   --tw-prose-headings: var(--color-ink);
   --tw-prose-bold: var(--color-ink);
-  --tw-prose-links: var(--color-signal);
+  --tw-prose-links: var(--color-signal-ink);
   --tw-prose-bullets: var(--color-signal);
   --tw-prose-hr: var(--color-line);
   --tw-prose-quotes: var(--color-ink);
   --tw-prose-quote-borders: var(--color-signal);
   --tw-prose-code: var(--color-ink);
-  max-width: 65ch;
-  line-height: 1.7;
+  /* Same measure and rhythm as the Field Notes body (.note-page). */
+  max-width: 68ch;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
+.prose :where(p) {
+  margin-block: 1.2rem;
+}
+/* Section headings match SectionHeading.astro (text-xl / semibold / mb-6),
+   not the typography plugin's larger, bolder defaults. */
 .prose :where(h2, h3, h4) {
   font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.prose :where(h2) {
+  font-size: 1.25rem;
+  line-height: 1.15;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.prose :where(h3) {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose :where(h4) {
+  font-size: 1rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+.prose > :first-child {
+  margin-top: 0;
+}
+.prose > :last-child {
+  margin-bottom: 0;
 }
 .prose :where(a) {
   text-decoration-thickness: 1px;
@@ -152,8 +187,7 @@
   font-family: var(--ff-mono), ui-monospace, monospace;
   font-size: 0.875em;
   font-weight: 400;
-  background: color-mix(in srgb, var(--ink) 6%, transparent);
-  border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+  background: var(--surface);
   padding: 0.18em 0.38em;
   border-radius: 4px;
   color: var(--ink);
@@ -220,8 +254,7 @@ a.fig-ref {
   margin: 0 auto;
 }
 .tikz-figure figcaption {
-  font-family: var(--ff-mono), ui-monospace, monospace;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--ink-soft);
   text-align: center;
   margin-top: 0.6rem;
@@ -245,8 +278,7 @@ a.fig-ref {
 .prose figcaption,
 .note-page figcaption,
 figure figcaption {
-  font-family: var(--ff-mono), ui-monospace, monospace;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--ink-soft);
   text-align: center;
   margin-top: 0.6rem;
@@ -267,22 +299,59 @@ figure figcaption {
 }
 
 /* Legenda para blocos de código (figcaption após pre sem figure wrapper) */
-.prose figcaption,
-.note-page figcaption {
-  font-family: var(--ff-mono), ui-monospace, monospace;
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  text-align: center;
-  margin-top: 0.6rem;
-  line-height: 1.4;
-  padding: 0 0.5rem;
-}
 pre + figcaption,
 .prose pre + figcaption,
 .note-page pre + figcaption {
   display: block;
   margin-top: -1rem;
   margin-bottom: 1.5rem;
+}
+
+/* Scroll edge effect — soft depth only while content scrolls under the
+   floating header, instead of a hard divider line. */
+header {
+  transition: box-shadow 200ms ease;
+}
+header[data-scrolled] {
+  box-shadow: 0 8px 24px -16px rgb(20 20 19 / 0.35);
+}
+
+/* Mobile menu materializes from its trigger (top-right anchor) instead of
+   popping. Browsers without ::details-content fall back to instant open. */
+header details::details-content {
+  opacity: 0;
+  transform: scale(0.98) translateY(-4px);
+  transform-origin: top right;
+  transition:
+    content-visibility 150ms allow-discrete,
+    opacity 150ms ease,
+    transform 150ms var(--ease-out);
+}
+header details[open]::details-content {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  header details::details-content {
+    transform: none;
+    transition:
+      content-visibility 150ms allow-discrete,
+      opacity 150ms ease;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  header {
+    background-color: var(--paper);
+    backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  header {
+    background-color: var(--paper);
+    backdrop-filter: none;
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 /* Print — dossier mode: hide chrome, black on white, full measure. */

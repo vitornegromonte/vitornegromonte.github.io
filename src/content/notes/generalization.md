@@ -3,6 +3,7 @@ title: "Generalization and Regularization"
 keyword: "Generalization"
 topic: "Bias-Variance, Double Descent, L2, Dropout, BatchNorm, Early Stopping"
 lang: "EN"
+summary: "TODO: one-line summary — write after reviewing the note body."
 ---
 
 # Optimization vs. Generalization

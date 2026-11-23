@@ -15,48 +15,30 @@ const { role, interests, tools } = about.data;
 
 <BaseLayout title="About" description={`A bit about ${SITE.name} and how they work.`}>
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
-    <p class="text-ink-soft mb-6 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">About</p>
-
-    <h1 class="font-display text-ink max-w-xl text-3xl font-medium tracking-[-0.015em] leading-[1.08] text-balance sm:text-4xl">
-      {role}.
+    <h1 class="font-display text-ink max-w-xl text-3xl font-medium leading-[1.08] text-balance sm:text-4xl">
+      {role}
     </h1>
 
-    <div class="prose prose-sm sm:prose-base mt-8 max-w-none">
+    <div class="prose mt-8 max-w-none">
       <Content />
     </div>
 
-    <aside class="border-line bg-surface mt-10 rounded-[6px] border p-5">
-      <p class="text-ink-soft mb-2 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">Now</p>
+    <div class="mt-10">
+      <h2 class="text-ink mb-2 text-base font-semibold">Now</h2>
       <p class="text-ink-soft text-sm leading-relaxed">
         Software Engineer (ML) Fellow at Sinapse, president of Ligia UFPE, and drafting an open
-        deep learning handbook in the <a href="/notes" class="text-signal hover:underline">Field Notes</a>.
+        deep learning handbook in the <a href="/notes" class="text-signal-ink hover:underline">Field Notes</a>.
       </p>
-    </aside>
+    </div>
 
     <div class="mt-10">
-      <p class="text-ink-soft mb-3 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">Research interests</p>
-      <ul class="flex flex-wrap gap-2">
-        {
-          interests.map((interest) => (
-            <li class="border-line text-ink-soft hover:border-signal hover:text-signal rounded-[6px] border px-3 py-1 font-mono text-xs transition-colors">
-              {interest}
-            </li>
-          ))
-        }
-      </ul>
+      <h2 class="text-ink mb-2 text-base font-semibold">Research interests</h2>
+      <p class="text-ink-soft text-sm leading-relaxed">{interests.join(', ')}</p>
     </div>
 
     <div class="mt-8">
-      <p class="text-ink-soft mb-3 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">Tools</p>
-      <ul class="flex flex-wrap gap-2">
-        {
-          tools.map((tool) => (
-            <li class="border-line text-ink-soft hover:border-signal hover:text-signal rounded-[6px] border px-3 py-1 font-mono text-xs transition-colors">
-              {tool}
-            </li>
-          ))
-        }
-      </ul>
+      <h2 class="text-ink mb-2 text-base font-semibold">Tools</h2>
+      <p class="text-ink-soft text-sm leading-relaxed">{tools.join(', ')}</p>
     </div>
 
     <div class="mt-10 flex flex-wrap gap-3">
@@ -66,10 +48,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-20">
       <SectionHeading eyebrow="Experience" />
-      <div class="border-line border-b">
+      <div>
         {experience.map((item) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{item.period}</span>
             <span>
               <span class="text-ink block text-sm font-medium">{item.role}</span>
               <span class="text-ink-soft block text-sm">{item.institution}</span>
@@ -81,10 +63,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-14">
       <SectionHeading eyebrow="Education" />
-      <div class="border-line border-b">
+      <div>
         {education.map((item) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.period}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{item.period}</span>
             <span>
               <span class="text-ink block text-sm font-medium">{item.degree}</span>
               <span class="text-ink-soft block text-sm">{item.institution}</span>
@@ -96,10 +78,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-14">
       <SectionHeading eyebrow="Teaching" />
-      <div class="border-line border-b">
+      <div>
         {teaching.map((item) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.institution}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{item.institution}</span>
             <span>
               <span class="text-ink block text-sm font-medium">{item.course}</span>
               {item.roles.map((r) => (
@@ -113,10 +95,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-14">
       <SectionHeading eyebrow="Awards" />
-      <div class="border-line border-b">
+      <div>
         {awards.map((item) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.year}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{item.year}</span>
             <span>
               <span class="text-ink block text-sm font-medium">{item.title}</span>
               <span class="text-ink-soft block text-sm">{item.venue}</span>
@@ -128,10 +110,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-14">
       <SectionHeading eyebrow="Extracurricular" />
-      <div class="border-line border-b">
+      <div>
         {extracurricular.map((item) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{item.role}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{item.role}</span>
             <span>
               <span class="text-ink block text-sm font-medium">{item.activity}</span>
               <span class="text-ink-soft block text-sm">{item.description}</span>
@@ -143,10 +125,10 @@ const { role, interests, tools } = about.data;
 
     <div class="mt-14">
       <SectionHeading eyebrow="Skills" />
-      <div class="border-line border-b">
+      <div>
         {skills.map(([category, list]) => (
-          <div class="border-line grid grid-cols-1 gap-1 border-b py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
-            <span class="text-ink-soft font-mono text-[11px] uppercase tracking-[0.08em]">{category}</span>
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-ink-muted text-sm">{category}</span>
             <span class="text-ink block text-sm">{list}</span>
           </div>
         ))}

@@ -20,11 +20,11 @@ const postsWithTime = posts.map((post) => ({ post, minutes: minutesOf(post.body)
   description="Occasional writing by Vitor Negromonte."
 >
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
-    <SectionHeading eyebrow="Blog" count={posts.length} />
+    <SectionHeading eyebrow="Blog" />
     {posts.length === 0 ? (
       <p class="text-ink-soft max-w-xl text-base leading-relaxed">
         Nothing here yet — longer writing will land here when there's something worth saying.
-        Meanwhile, the <a href="/notes" class="text-signal hover:underline">Field Notes</a> hold
+        Meanwhile, the <a href="/notes" class="text-signal-ink hover:underline">Field Notes</a> hold
         the study material.
       </p>
     ) : (

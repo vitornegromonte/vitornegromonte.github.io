@@ -10,6 +10,7 @@ export const SITE = siteData as {
   tagline: string;
   description: string;
   status: string;
+  openTo: string;
   locale: 'en';
   social: { label: string; href: string }[];
 };

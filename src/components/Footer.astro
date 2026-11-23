@@ -4,23 +4,29 @@ import { SITE } from '@/site.config';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-line border-t">
+<footer>
   <div
-    class="text-ink-soft mx-auto flex max-w-3xl flex-col gap-4 px-6 py-8 font-mono text-xs sm:flex-row sm:items-start sm:justify-between"
+    class="text-ink-soft mx-auto flex max-w-3xl flex-col gap-4 px-6 py-10 text-sm sm:flex-row sm:items-start sm:justify-between"
   >
     <p>
       © {year} {SITE.name}.<br />Built with Astro. Set in DM Serif Display & Lora.
     </p>
 
-    <nav class="flex items-center gap-4" aria-label="Social">
+    <nav class="flex flex-wrap items-center gap-4" aria-label="Contact and social links">
+      <a href={`mailto:${SITE.email}`} class="hover:text-signal-ink transition-colors">
+        Email
+      </a>
       {
         SITE.social.map((link) => (
-          <a href={link.href} class="hover:text-signal transition-colors" rel="me">
+          <a href={link.href} class="hover:text-signal-ink transition-colors" rel="me">
             {link.label}
           </a>
         ))
       }
-      <a href="#top" class="hover:text-signal transition-colors"> Top ↑ </a>
+      <a href="/cv.pdf" download class="hover:text-signal-ink transition-colors">
+        Download CV
+      </a>
+      <a href="#top" class="hover:text-signal-ink transition-colors"> Top ↑ </a>
     </nav>
   </div>
 </footer>

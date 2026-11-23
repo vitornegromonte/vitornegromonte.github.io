@@ -13,7 +13,8 @@ const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
 );
 const featured = allWork.filter((entry) => entry.data.featured);
 const rest = allWork.filter((entry) => !entry.data.featured);
-const selected = [...featured, ...rest].slice(0, 3);
+// The field-notes repo lives on /projects; the homepage links to /notes instead.
+const selected = [...featured, ...rest].filter((entry) => entry.id !== 'field-notes').slice(0, 3);
 
 const publications = (await getCollection('publications')).sort((a, b) =>
   b.data.year.localeCompare(a.data.year),
@@ -26,28 +27,23 @@ const notes = (await getCollection('notes')).sort((a, b) =>
 const topNotes = notes.slice(0, 3);
 
 const [leadWork, ...moreWork] = selected;
-const leadPoster = leadWork ? `/images/projects/${leadWork.id}.jpg` : '';
+const leadPoster = leadWork ? (leadWork.data.hero ?? `/images/projects/${leadWork.id}.jpg`) : '';
 const leadYear = leadWork?.data.date.getUTCFullYear();
-const yearNow = new Date().getUTCFullYear();
 ---
 
 <BaseLayout title={SITE.name}>
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-20 sm:pt-24">
-    <p class="text-ink-soft mb-6 font-mono text-[11px] uppercase tracking-[0.14em] opacity-70">
-      Recife, BR — {yearNow}
-    </p>
-    <p class="text-ink-soft mb-6 inline-flex items-center gap-2 font-mono text-xs">
-      <span class="bg-signal h-1.5 w-1.5 rounded-full" aria-hidden="true"></span>
-      {SITE.status}
-    </p>
-
-    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.08] font-medium tracking-[-0.015em] text-balance sm:text-5xl">
+    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.08] font-medium text-balance sm:text-5xl">
       {SITE.tagline}
     </h1>
 
     <p class="text-ink-soft mt-6 max-w-xl text-xl leading-relaxed">
       {SITE.description}
     </p>
+
+    <p class="text-ink-muted mt-3 text-sm">{SITE.openTo}</p>
+
+    <p class="text-ink-muted mt-1 text-sm">{SITE.status}</p>
 
     <div class="mt-8 flex flex-wrap items-center gap-3">
       <Button href="/projects" variant="solid">Browse the projects →</Button>
@@ -56,19 +52,19 @@ const yearNow = new Date().getUTCFullYear();
   </section>
 
   <section id="work" class="mx-auto max-w-3xl px-6 pb-20">
-    <SectionHeading eyebrow="Selected work" count={allWork.length} />
+    <SectionHeading eyebrow="Selected work" />
     {leadWork && (
-      <a href={`/${leadWork.id}`} class="group border-line hover:border-signal mb-4 grid gap-6 rounded-[6px] border p-5 transition-colors sm:grid-cols-[1.2fr_1fr] sm:p-6">
-        <span class="min-w-0 order-2 sm:order-1">
-          <span class="text-ink-soft block font-mono text-[11px] uppercase tracking-[0.08em] opacity-70">
-            Featured · {leadYear}{leadWork.data.category ? ` · ${leadWork.data.category}` : ''}
+      <a href={`/${leadWork.id}`} class="group mb-4 grid gap-6 transition-colors sm:grid-cols-[1.2fr_1fr]">
+        <span class="min-w-0 order-2 flex flex-col sm:order-1">
+          <span class="text-ink-muted block text-sm">
+            {leadWork.data.featured ? 'Featured · ' : ''}{leadYear}{leadWork.data.category ? ` · ${leadWork.data.category}` : ''}
           </span>
-          <span class="font-display text-ink group-hover:text-signal mt-2 block text-2xl leading-tight text-balance transition-colors">
+          <span class="font-display text-ink group-hover:text-signal-ink mt-2 block text-2xl leading-tight text-balance transition-colors">
             {leadWork.data.title}
           </span>
           <span class="text-ink-soft mt-2 block text-sm leading-relaxed line-clamp-3">{leadWork.data.summary}</span>
-          <span class="text-ink-soft group-hover:text-signal mt-3 inline-block font-mono text-[11px] uppercase tracking-[0.08em] transition-colors">
-            Open case →
+          <span class="text-signal-ink mt-3 inline-block text-sm group-hover:underline group-hover:underline-offset-4 sm:mt-auto sm:pt-4">
+            Open project →
           </span>
         </span>
         <span class="order-1 sm:order-2">
@@ -87,25 +83,31 @@ const yearNow = new Date().getUTCFullYear();
     <div>
       {moreWork.map((entry) => <WorkRow entry={entry} />)}
     </div>
-    <div class="mt-6">
+    <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
       <a
         href="/projects"
-        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
       >
-        View all {allWork.length} projects →
+        View all projects →
+      </a>
+      <a
+        href="/notes"
+        class="text-signal-ink text-sm hover:underline hover:underline-offset-4"
+      >
+        Read the field notes →
       </a>
     </div>
   </section>
 
   <section id="publications" class="mx-auto max-w-3xl px-6 pb-20">
-    <SectionHeading eyebrow="Publications" count={publications.length} />
+    <SectionHeading eyebrow="Publications" />
     <div>
       {topPublications.map((entry) => <PublicationRow entry={entry} />)}
     </div>
     <div class="mt-6">
       <a
         href="/publications"
-        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
       >
         All publications →
       </a>
@@ -113,7 +115,7 @@ const yearNow = new Date().getUTCFullYear();
   </section>
 
   <section id="notes" class="mx-auto max-w-3xl px-6 pb-20">
-    <SectionHeading eyebrow="Notes" count={notes.length} />
+    <SectionHeading eyebrow="Notes" />
     <div>
       {topNotes.map((note) => (
         <NoteRow {...note.data} slug={note.id} />
@@ -122,7 +124,7 @@ const yearNow = new Date().getUTCFullYear();
     <div class="mt-6">
       <a
         href="/notes"
-        class="text-ink-soft hover:text-signal font-mono text-[11px] uppercase tracking-[0.08em] transition-colors"
+        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
       >
         All notes →
       </a>
@@ -132,9 +134,10 @@ const yearNow = new Date().getUTCFullYear();
   <section id="about" class="mx-auto max-w-3xl px-6 pb-20">
     <SectionHeading eyebrow="About" />
     <p class="text-ink-soft max-w-xl leading-relaxed">
-      {SITE.description}
+      I build continuous architectures that reason, adapt and act in digital and physical
+      environments — work that sits at the intersection of recursive and self-referential systems.
     </p>
-    <a href="/about" class="text-signal mt-4 inline-block font-mono text-xs hover:underline hover:underline-offset-4">
+    <a href="/about" class="text-signal-ink mt-4 inline-block text-sm hover:underline hover:underline-offset-4">
       More about me →
     </a>
   </section>
@@ -146,7 +149,7 @@ const yearNow = new Date().getUTCFullYear();
     </p>
     <a
       href={`mailto:${SITE.email}`}
-      class="text-signal mt-4 inline-flex items-center gap-2 font-mono hover:underline"
+      class="text-signal-ink mt-4 inline-flex items-center gap-2 hover:underline"
     >
       {SITE.email}
     </a>

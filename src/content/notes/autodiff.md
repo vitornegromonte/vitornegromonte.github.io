@@ -3,6 +3,7 @@ title: "Differentiable Programming and Optimization"
 keyword: "Autodiff"
 topic: "Backpropagation, Autograd, Optimizers"
 lang: "EN"
+summary: "TODO: one-line summary — write after reviewing the note body."
 ---
 
 # Part I: The Engine (Differentiable Programming)

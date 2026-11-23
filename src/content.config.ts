@@ -18,6 +18,12 @@ const work = defineCollection({
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
     category: z.string().optional(),
+    // Optional detail-page sections; rendered only when present.
+    problem: z.string().optional(),
+    approach: z.string().optional(),
+    results: z.array(z.object({ value: z.string(), note: z.string().optional() })).optional(),
+    // Optional hero image path; falls back to /images/projects/<id>.jpg.
+    hero: z.string().optional(),
     abstract: z.string().optional(),
     keyword: z.string().optional(),
     acrostic: z.boolean().optional(),
@@ -48,6 +54,8 @@ const notes = defineCollection({
     title: z.string(),
     topic: z.string(),
     lang: z.string(),
+    keyword: z.string().optional(),
+    summary: z.string().optional(),
   }),
 });
 

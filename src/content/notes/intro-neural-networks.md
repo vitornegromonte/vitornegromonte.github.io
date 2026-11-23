@@ -3,6 +3,7 @@ title: "Introduction to Neural Networks"
 keyword: "Neural Nets"
 topic: "Neural Networks"
 lang: "EN"
+summary: "TODO: one-line summary — write after reviewing the note body."
 ---
 
 # The Concept of Modeling
