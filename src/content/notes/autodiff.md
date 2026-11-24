@@ -3,10 +3,10 @@ title: "Differentiable Programming and Optimization"
 keyword: "Autodiff"
 topic: "Backpropagation, Autograd, Optimizers"
 lang: "EN"
-summary: "TODO: one-line summary — write after reviewing the note body."
+summary: "A hands-on guide to reverse-mode automatic differentiation, backpropagation, and the optimizers that train neural networks."
 ---
 
-# Part I: The Engine (Differentiable Programming)
+## Part I: The Engine (Differentiable Programming)
 
 To teach our model to learn, we must answer a fundamental question: *If I change this specific weight by a tiny amount, how much will the total error change?* The mathematical tool to answer this is the derivative. However, neural networks have millions of parameters nested in complex compositions. Calculating these derivatives manually is infeasible. This is where Automatic Differentiation (Autodiff) comes in.
 
@@ -379,7 +379,7 @@ For any operation, autograd only needs to know how to multiply an incoming gradi
 
 Because the loss $\mathcal{L}$ is a scalar, $\frac{\partial \mathcal{L}}{\partial \mathbf{x}}$ for any tensor $\mathbf{x}$ is a vector of the same shape as $\mathbf{x}$. This is why `param.grad` always "looks like" `param`. The scalar chain rule is simply applied entrywise through every tensor in the network.
 
-# Part II: The Steering Wheel (Optimization)
+## Part II: The Steering Wheel (Optimization)
 
 Now that we possess the gradients---the vector pointing in the direction of steepest ascent of the loss---we must decide how to use this information to update the weights. This is the domain of optimization. If Autograd is the engine that calculates the slope, Optimization is the steering wheel that decides how fast and in what manner we descend the mountain.
 
@@ -461,8 +461,7 @@ The learning rate $\eta$ is the single most sensitive hyperparameter in deep lea
 
 A learning rate that is too large can cause divergence: each step overshoots the valley and lands higher up the opposite slope. A rate that is too small wastes compute. This is why modern practice uses *learning rate schedules*---start with a larger $\eta$ and shrink it over time---or adaptive optimizers that effectively tune a per-parameter learning rate (Section 2.5).
 
-## The Evolution of Optimizers {#sec:optimizers}
-
+## The Evolution of Optimizers
 Plain SGD updates weights using the rule: $\theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}$, where $\eta$ is the learning rate. However, the loss landscape of deep neural networks is rarely a perfect bowl; it is full of ravines, saddle points, and flat plateaus. Plain SGD oscillates heavily in ravines (narrow steep valleys) and struggles to escape flat plateaus.
 
 ![Optimization in a ravine. Plain SGD (terracotta) oscillates violently across the steep walls. Momentum (gold, dashed) averages out the oscillations, directing the path straight to the minimum.](/notes/autodiff/figures/fig-be28103d51.svg){#fig-sgd_vs_momentum .fullwidth}

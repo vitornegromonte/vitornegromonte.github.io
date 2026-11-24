@@ -1,19 +1,19 @@
 ---
-title: "Generative Models for Images"
+title: "Modelos Generativos para Imagem"
 keyword: "Image Generation"
 topic: "VAE, GAN, Diffusion e Style Transfer"
 lang: "PT"
-summary: "TODO: one-line summary — write after reviewing the note body."
+summary: "Uma visão geral sobre style transfer, autoencoders, VAEs, GANs, e modelos de difusão para geração de imagens."
 ---
 
 
-# Style Transfer
+## Style Transfer
 
 A transferência de estilo é uma técnica de visão computacional que utiliza redes neurais convolucionais (CNNs) para gerar uma nova imagem que combina o conteúdo de uma imagem com o estilo artístico de outra. Essa técnica foi proposta no artigo seminal *A Neural Algorithm of Artistic Style* por Leon Gatys et al. e faz uso de redes convolucionais pré-treinadas, como a ResNet50, para extrair características visuais de diferentes níveis de abstração.
 
 A metodologia se baseia na relação entre as múltiplas camadas de uma CNN, onde cada camada $l$ produz um conjunto de mapas de características $F^{l}(I)$. Esses mapas capturam informações visuais em diferentes níveis de complexidade, desde bordas e texturas nas camadas iniciais até formas e objetos nas camadas mais profundas. Assim, a CNN pode ser vista como um extrator hierárquico de características, onde cada camada contribui para a representação da imagem $I$.
 
-![](/notes/generative-images/figures/fig0.svg)
+![Content and style features extracted by a convolutional style-transfer model](/notes/generative-images/figures/fig0.svg)
 
 O processo de transferência de estilo depende de duas imagens de entrada:
 
@@ -23,7 +23,7 @@ O processo de transferência de estilo depende de duas imagens de entrada:
 
 A imagem gerada ($G$) é obtida por meio da otimização de uma função de perda composta, que combina a representação do conteúdo e do estilo.
 
-![](/notes/generative-images/figures/fig1.svg)
+![Gram-matrix representation of image style across convolutional feature maps](/notes/generative-images/figures/fig1.svg)
 
 ## Representação do Conteúdo
 
@@ -81,9 +81,9 @@ $$
 
  Onde $\eta$ é a taxa de aprendizado.
 
-![](/notes/generative-images/figures/fig2.svg)
+![Autoencoder architecture mapping input images through a latent bottleneck](/notes/generative-images/figures/fig2.svg)
 
-# Autoencoders
+## Autoencoders
 
 Autoencoders (AEs) são uma técnica de aprendizado não supervisionado que visa aprender representações compactas e eficientes de dados sem a necessidade de rótulos. Eles consistem em duas redes neurais principais: o **encoder** (codificador) e o **decoder** (decodificador). O encoder transforma os dados de entrada em uma representação codificada, enquanto o decoder tenta reconstruir os dados originais a partir dessa representação. Matematicamente, um autoencoder pode ser definido como:
 
@@ -107,7 +107,7 @@ Onde:
 
 O objetivo do autoencoder é aprender uma representação compacta $z \in \mathcal{Z}$ dos dados de entrada $x \in \mathcal{X}$, de modo que a reconstrução $\hat{x} = D_{\theta}(E_{\phi}(x))$ seja o mais próxima possível de $x$.
 
-![](/notes/generative-images/figures/fig3.svg)
+![Latent-space interpolation and reconstruction in an autoencoder](/notes/generative-images/figures/fig3.svg)
 
 ## Espaço Latente
 
@@ -177,11 +177,11 @@ Além do autoencoder básico, existem várias variações que ampliam suas capac
 
 -   Convolutional Autoencoder: Utiliza camadas convolucionais no encoder e decoder, sendo especialmente útil para dados imagéticos.
 
-# Variational Autoencoders (VAEs)
+## Variational Autoencoders (VAEs)
 
 Os Variational Autoencoders (VAEs) são uma extensão dos autoencoders tradicionais que incorporam conceitos de inferência probabilística. Enquanto autoencoders comuns aprendem uma representação determinística no espaço latente, os VAEs modelam a distribuição de probabilidade dos dados no espaço latente, permitindo a geração de novos dados a partir dessa distribuição.
 
-![](/notes/generative-images/figures/fig4.svg)
+![Probabilistic encoder and decoder used by a variational autoencoder](/notes/generative-images/figures/fig4.svg)
 
 ## Fundamentos Probabilísticos
 
@@ -267,7 +267,7 @@ Um VAE típico consiste em:
 
 ## Vantagens e Desvantagens
 
-#### Vantagens
+### Vantagens
 
 -   Permitem a geração de novos dados a partir de uma distribuição aprendida.
 
@@ -275,13 +275,13 @@ Um VAE típico consiste em:
 
 -   São baseados em fundamentos probabilísticos sólidos.
 
-#### Desvantagens
+### Desvantagens
 
 -   As amostras geradas podem ser menos nítidas ou realistas em comparação com outras técnicas, como GANs (Generative Adversarial Networks).
 
 -   O treinamento pode ser mais complexo devido à necessidade de otimizar a ELBO.
 
-# Generative Adversarial Networks (GANs)
+## Generative Adversarial Networks (GANs)
 
 As Generative Adversarial Networks (GANs) são uma classe de modelos de aprendizado profundo introduzidos por Ian Goodfellow e colaboradores em 2014. Elas são amplamente utilizadas para geração de dados, como imagens, áudio e texto. A ideia central das GANs é treinar dois modelos neurais simultaneamente: um **gerador** (generator) e um **discriminador** (discriminator), que competem entre si em um jogo de soma zero. Essa competição leva à geração de dados realistas que são indistinguíveis dos dados reais.
 
@@ -293,7 +293,7 @@ Uma GAN consiste em dois componentes principais:
 
 2.  Discriminador ($D$): Um modelo que tenta distinguir entre dados reais (amostrados da distribuição real $p_{\text{data}}(x)$) e dados falsos (gerados pelo gerador). O discriminador é treinado para maximizar a probabilidade de classificar corretamente os dados como reais ou falsos.
 
-![](/notes/generative-images/figures/fig5.svg)
+![Generator and discriminator training loop in a generative adversarial network](/notes/generative-images/figures/fig5.svg)
 
 O treinamento das GANs é formulado como um jogo minimax entre o gerador e o discriminador, onde o gerador tenta enganar o discriminador, e o discriminador tenta detectar as amostras falsas. Matematicamente, o objetivo pode ser expresso como:
 
@@ -331,7 +331,7 @@ O treinamento de uma GAN envolve as seguintes etapas iterativas:
 
 Esse processo é repetido até que o gerador produza dados realistas e o discriminador não consiga distinguir entre dados reais e falsos.
 
-![](/notes/generative-images/figures/fig6.svg)
+![Generator and discriminator objective curves during GAN training](/notes/generative-images/figures/fig6.svg)
 
 ## Funções de Perda
 
@@ -343,7 +343,7 @@ A função de perda das GANs pode ser interpretada como uma medida de divergênc
 
 -   Least Squares GAN (LSGAN): Substitui a função de perda binária cruzada por uma função de perda quadrática.
 
-![](/notes/generative-images/figures/fig7.svg)
+![Comparison of GAN loss functions and their gradients](/notes/generative-images/figures/fig7.svg)
 
 ## Comparação com Outras Técnicas
 
@@ -353,7 +353,7 @@ As GANs são frequentemente comparadas com outras técnicas de geração de dado
 
 -   VAEs: São mais estáveis e fornecem uma representação probabilística do espaço latente, mas as amostras geradas podem ser menos nítidas.
 
-# Modelos de Difusão
+## Modelos de Difusão
 
 Os Modelos de Difusão (Diffusion Models) são uma classe de modelos generativos que se baseiam em um processo de difusão para transformar dados reais em ruído e, em seguida, aprender a reverter esse processo para gerar novos dados. Eles têm se destacado por sua capacidade de produzir amostras de alta qualidade e por sua estabilidade de treinamento, superando desafios comuns em outras abordagens, como GANs (Generative Adversarial Networks) e VAEs (Variational Autoencoders).
 
@@ -511,7 +511,7 @@ O Stable Diffusion é uma variação dos Modelos de Difusão que opera no **espa
 
 3.  **Qualidade Aprimorada**: O modelo pode se concentrar em capturar a semântica e a estrutura de alto nível dos dados, enquanto o VAE cuida dos detalhes de baixo nível.
 
-#### Como Funciona o Stable Diffusion
+### Como Funciona o Stable Diffusion
 
 1.  **Treinamento do VAE**: Um VAE é treinado para comprimir imagens em um espaço latente de menor dimensão. O encoder do VAE mapeia uma imagem $\mathbf{x}$ para uma representação latente $\mathbf{z} = E(\mathbf{x})$, e o decoder reconstrói a imagem a partir da representação latente: $\mathbf{x} \approx D(\mathbf{z})$.
 
@@ -521,13 +521,13 @@ O Stable Diffusion é uma variação dos Modelos de Difusão que opera no **espa
 
 4.  **Geração de Amostras**: Para gerar uma nova amostra, o processo de reversão é executado no espaço latente, começando com ruído gaussiano puro $\mathbf{z}_T$. Em seguida, o decoder do VAE é usado para mapear a representação latente gerada $\mathbf{z}_0$ de volta para o espaço de pixels, produzindo a imagem final $\mathbf{x} = D(\mathbf{z}_0)$.
 
-#### Arquitetura do Stable Diffusion
+### Arquitetura do Stable Diffusion
 
 O Stable Diffusion geralmente usa uma arquitetura U-Net para o modelo de difusão no espaço latente. Além disso, ele pode incorporar mecanismos de atenção cruzada (cross-attention) para condicionar a geração a entradas de texto. Isso permite que o modelo gere imagens que correspondam a descrições textuais específicas.
 
 **Em resumo**, o Stable Diffusion é uma abordagem eficiente e poderosa para a geração de imagens de alta qualidade, combinando a força dos Modelos de Difusão com a eficiência de trabalhar em um espaço latente aprendido por um VAE.
 
-# Matrizes de Gram na Transferência de Estilo
+## Matrizes de Gram na Transferência de Estilo
 
 As matrizes de Gram desempenham um papel crucial na captura do estilo de uma imagem durante o processo de transferência de estilo. Elas são usadas para medir as correlações entre os mapas de características em diferentes camadas de uma rede neural convolucional (CNN). Esta seção fornece uma explicação detalhada das matrizes de Gram, seu cálculo e sua importância na transferência de estilo.
 
@@ -571,7 +571,7 @@ A matriz de Gram codifica informações sobre as correlações entre os mapas de
 
 Ao comparar as matrizes de Gram da imagem de estilo e da imagem gerada, o algoritmo de transferência de estilo garante que a imagem gerada imite a textura e o estilo da imagem de estilo.
 
-![](/notes/generative-images/figures/fig8.svg)
+![Gram-matrix calculation for style feature correlation](/notes/generative-images/figures/fig8.svg)
 
 ## Matrizes de Gram na Função de Perda de Estilo
 
@@ -655,7 +655,7 @@ Cada elemento de $G^l$ representa a correlação entre os mapas de característi
 
 As matrizes de Gram são essenciais para a transferência de estilo porque fornecem uma maneira de quantificar e comparar a textura e o estilo das imagens. Ao minimizar a diferença entre as matrizes de Gram da imagem de estilo e da imagem gerada, o algoritmo garante que a imagem gerada adote o estilo artístico da imagem de estilo enquanto preserva o conteúdo da imagem de conteúdo.
 
-# Interpretação de GANs via Teoria de Jogos
+## Interpretação de GANs via Teoria de Jogos
 
 As Generative Adversarial Networks (GANs) podem ser interpretadas como um jogo entre dois jogadores: o gerador ($G$) e o discriminador ($D$). Neste apêndice, exploramos como a teoria de jogos fornece uma estrutura matemática para entender o treinamento e a convergência das GANs, baseando-nos no artigo original de Goodfellow et al. (2014).
 
@@ -675,7 +675,7 @@ $$
 
 Onde:
 
-![](/notes/generative-images/figures/fig9.svg)
+![Minimax game between a GAN generator and discriminator](/notes/generative-images/figures/fig9.svg)
 
 O objetivo é encontrar um ponto de sela desta função, onde o discriminador maximiza $V(G, D)$ em relação a $\theta_d$ e o gerador minimiza $V(G, D)$ em relação a $\theta_g$.
 
@@ -785,7 +785,7 @@ Importante:
 
 -   A definição acima refere-se ao **equilíbrio de Nash puro**. Existem também **equilíbrios de Nash mistos**, onde os jogadores escolhem suas estratégias probabilisticamente.
 
-#### Conexão com a Divergência de Jensen-Shannon (Demonstrado no Artigo Original)
+### Conexão com a Divergência de Jensen-Shannon (Demonstrado no Artigo Original)
 
 Quando o discriminador é ótimo, **minimizar a função de valor** $V(G, D)$ **é equivalente a minimizar a divergência de Jensen-Shannon (JSD)** entre $p_{\text{data}}$ e $p_g$, conforme a seguinte relação:
 
@@ -833,7 +833,7 @@ Neste cenário, o equilíbrio de Nash ocorre quando $\theta_g = 1$ e $\theta_d =
 
 -   O discriminador se torna incapaz de distinguir entre dados reais e falsos, atribuindo uma probabilidade de 0,5 para ambos.
 
-#### Demonstração
+### Demonstração
 
 Para um gerador fixo, o discriminador ótimo é:
 

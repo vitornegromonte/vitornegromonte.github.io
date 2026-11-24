@@ -1,5 +1,5 @@
 ---
-title: "Computer Vision in Breast Cancer Diagnosis: A Comparative Study with CBIS‐DDSM Data"
+title: "Breast Cancer Detection with CNNs"
 keyword: "Breast Cancer"
 summary: "Performed a comparative study of multiple CNN architectures for early breast cancer detection using mammography images."
 role: "ML Researcher — Computer Vision"

@@ -7,16 +7,11 @@ import { join, basename } from 'node:path';
 
 const ROOT = join(import.meta.dirname, '..');
 const NOTES_DIR = join(ROOT, 'src/content/notes');
+const WORK_DIR = join(ROOT, 'src/content/work');
 let fails = 0;
-let warns = 0;
 const fail = (f, msg) => {
   fails++;
   console.log(`FAIL ${f}: ${msg}`);
-};
-// Warnings (author TODOs) never fail CI; hard errors do.
-const warn = (f, msg) => {
-  warns++;
-  console.log(`WARN ${f}: ${msg}`);
 };
 
 for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
@@ -38,7 +33,9 @@ for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
     const local = join(ROOT, 'public', m[1]);
     if (!existsSync(local)) fail(f, `missing file ${m[1]}`);
   }
-  if (/!\[\]\(/.test(text)) warn(f, 'empty-alt placeholder image — add a caption');
+  if (/!\[\]\(/.test(text)) fail(f, 'empty-alt placeholder image — add descriptive alt text');
+  if (/^#{1,6}\s+.*\{#[^}]+\}/m.test(text)) fail(f, 'heading contains raw Quarto/Pandoc label syntax');
+  if (/\bTODO(?:\:|\(|\b)/.test(text)) fail(f, 'TODO placeholder text');
   // Figure one-liners need blank lines around them, else markdown merges
   // them into the adjacent paragraph (lazy continuation) and no <figure>
   // wrapper/caption is produced.
@@ -61,5 +58,14 @@ for (const f of (await readdir(NOTES_DIR)).filter((x) => x.endsWith('.md'))) {
   void slug;
 }
 
-console.log(fails === 0 ? `note:check OK (${warns} warning(s))` : `${fails} problem(s), ${warns} warning(s)`);
+for (const f of (await readdir(WORK_DIR)).filter((x) => x.endsWith('.md'))) {
+  const p = join(WORK_DIR, f);
+  const text = await readFile(p, 'utf8');
+  if (/\bTODO(?:\:|\(|\b)/.test(text)) fail(`work/${f}`, 'TODO placeholder text');
+  if (/^#{1,6}\s+.*\{#[^}]+\}/m.test(text)) {
+    fail(`work/${f}`, 'heading contains raw Quarto/Pandoc label syntax');
+  }
+}
+
+console.log(fails === 0 ? 'note:check OK' : `${fails} problem(s)`);
 process.exit(fails === 0 ? 0 : 1);

@@ -9,7 +9,8 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  type?: 'website' | 'article' | 'creative-work';
+  lang?: string;
   publishedTime?: string;
   tags?: string[];
 }
@@ -19,13 +20,14 @@ const {
   description = SITE.description,
   image = '/og-image.jpg',
   type = 'website',
+  lang = SITE.locale,
   publishedTime,
   tags = [],
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={SITE.locale}>
+<html lang={lang}>
   <head>
     <BaseHead
       title={title}

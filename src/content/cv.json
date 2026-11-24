@@ -1,6 +1,6 @@
 {
   "experience": [
-    { "period": "Dec 2025 - Present", "role": "Software Engineer (Machine Learning) Fellow", "institution": "Sinapse — Facepe/Polícia Civil de Pernambuco" },
+    { "period": "Dec 2025 - Present", "role": "Machine Learning Engineer", "institution": "Sinapse — Facepe/Polícia Civil de Pernambuco" },
     { "period": "Mar 2024 - Present", "role": "President & Co-founder", "institution": "Ligia - UFPE's Academic League of Artificial Intelligence" },
     { "period": "2023 - 2024", "role": "Undergraduate Research Assistant", "institution": "National Institute of Software Engineering" }
   ],
@@ -12,8 +12,8 @@
       "course": "Introduction to Deep Learning",
       "institution": "UFPE",
       "roles": [
-        { "period": "2025", "role": "Head Teaching Assistant" },
-        { "period": "2024", "role": "Teaching Assistant" }
+        { "period": "2025 - 2026", "role": "Head Teaching Assistant" },
+        { "period": "2024 - 2025", "role": "Teaching Assistant" }
       ]
     },
     {
@@ -43,11 +43,12 @@
     }
   ],
   "skills": [
-    ["Programming Languages", "Python, R, C++, SQL, Bash"],
-    ["Machine Learning", "PyTorch, TensorFlow, Scikit-learn, PyTorch Lightning, Keras, OpenCV, MLFlow, Weights & Biases"],
-    ["Data Science", "NumPy, Pandas, Polars"],
-    ["Data Visualization", "Matplotlib, Seaborn, Power BI, Tableau"],
+    ["Programming Languages", "Python, R, SQL, Bash"],
+    ["Machine Learning", "PyTorch, Scikit-learn, PyTorch Lightning, OpenCV, JAX"],
+    ["MLOps", "MLFlow, Weights & Biases, GitHub Actions"],
+    ["Data Science", "NumPy, Pandas"],
+    ["Data Visualization", "Matplotlib, Seaborn, Power BI, Plotly"],
     ["Backend & Data", "FastAPI, PostgreSQL, Redis, Celery"],
-    ["Cloud & Infrastructure", "AWS, Docker, Git, Linux, MinIO"]
+    ["Infrastructure", "Docker, Git, Linux, MinIO"]
   ]
 }

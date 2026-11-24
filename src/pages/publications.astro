@@ -2,10 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PublicationRow from '@/components/PublicationRow.astro';
-import SectionHeading from '@/components/SectionHeading.astro';
-
-// TODO: publication entries live in src/content/publications/*.md — add one
-// file per publication (see ihc-2024.md for the frontmatter shape).
 const publications = (await getCollection('publications')).sort((a, b) =>
   b.data.year.localeCompare(a.data.year),
 );
@@ -23,8 +19,7 @@ const pubsByYear = pubYears.map((year) => ({
   description="Selected peer-reviewed publications and pre-prints by Vitor Negromonte."
 >
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
-    <h1 class="sr-only">Publications</h1>
-    <SectionHeading eyebrow="Publications" />
+    <h1 class="font-display text-ink text-4xl leading-[1.08] font-normal text-balance sm:text-5xl">Publications</h1>
     <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
       Peer-reviewed work and pre-prints. Full text where allowed.
     </p>
@@ -33,14 +28,14 @@ const pubsByYear = pubYears.map((year) => ({
         <section>
           <p class="text-ink-muted mt-10 mb-2 text-sm tabular-nums first:mt-0">{year}</p>
           <div>
-            {items.map((entry) => <PublicationRow entry={entry} />)}
+            {items.map((entry) => <PublicationRow entry={entry} showYear={false} />)}
           </div>
         </section>
       ))}
       {publications.length === 0 && (
         <p class="text-ink-soft text-sm leading-relaxed">
           Nothing listed here yet — browse the
-          <a href="/projects" class="text-signal-ink hover:underline hover:underline-offset-4">projects index</a>
+          <a href="/projects" class="text-signal-ink inline-flex min-h-11 items-center hover:underline hover:underline-offset-4">projects index</a>
           in the meantime.
         </p>
       )}

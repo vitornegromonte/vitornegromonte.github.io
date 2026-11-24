@@ -8,7 +8,7 @@ export async function GET(context: { site: URL }) {
   return rss({
     title: 'Vitor Negromonte — Field Notes & Projects',
     description:
-      'Data Scientist and Machine Learning Researcher working on latent reasoning, humanoid learning, and self-referential systems.',
+      'Data Scientist and Machine Learning Researcher working on latent reasoning.',
     site: context.site,
     items: [
       ...notes.map((note) => ({

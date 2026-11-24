@@ -6,7 +6,8 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  type?: 'website' | 'article' | 'creative-work';
+  locale?: 'en_US' | 'pt_BR';
   publishedTime?: string;
   tags?: string[];
 }
@@ -16,6 +17,7 @@ const {
   description: pageDescription,
   image,
   type = 'website',
+  locale = 'en_US',
   publishedTime,
   tags = [],
 } = Astro.props;
@@ -45,9 +47,9 @@ const socialImage = new URL(image || '/og-image.jpg', Astro.site);
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 {/* Open Graph / Facebook */}
-<meta property="og:type" content={type} />
+<meta property="og:type" content={type === 'article' ? 'article' : 'website'} />
 <meta property="og:site_name" content={SITE.name} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={locale} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:description" content={description} />
@@ -93,6 +95,16 @@ const socialImage = new URL(image || '/og-image.jpg', Astro.site);
     mainEntityOfPage: canonicalURL.toString(),
     image: socialImage.toString(),
     ...(publishedTime ? { datePublished: publishedTime } : {}),
+  })} />
+) : type === 'creative-work' ? (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: fullTitle,
+    description,
+    author: { '@type': 'Person', name: SITE.name },
+    url: canonicalURL.toString(),
+    image: socialImage.toString(),
   })} />
 ) : (
   <script type="application/ld+json" set:html={JSON.stringify({

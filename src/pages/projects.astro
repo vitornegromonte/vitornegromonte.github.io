@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import WorkRow from '@/components/WorkRow.astro';
-import SectionHeading from '@/components/SectionHeading.astro';
 
 const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -20,31 +19,33 @@ const byYear = years.map((year) => ({
   description="Research projects and open-source tools by Vitor Negromonte."
 >
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
-    <h1 class="sr-only">Projects</h1>
-    <SectionHeading eyebrow="All projects" />
+    <h1 class="font-display text-ink text-4xl leading-[1.08] font-normal text-balance sm:text-5xl">Projects</h1>
     <p class="text-ink-soft mb-8 max-w-xl text-base leading-relaxed">
       A working index — research systems and tools, newest first.
     </p>
 
-    <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
-      <button
-        type="button"
-        class="border-signal-ink text-paper cursor-pointer rounded-lg border bg-signal-ink px-3.5 py-1.5 text-sm transition-[color,background-color,border-color,transform] duration-150 ease-out motion-safe:active:scale-[0.98]"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All
-      </button>
-      {categories.map((category) => (
-        <button
-          type="button"
-          class="border-line text-ink-soft hover:border-signal cursor-pointer rounded-lg border bg-transparent px-3.5 py-1.5 text-sm transition-[color,background-color,border-color,transform] duration-150 ease-out motion-safe:active:scale-[0.98]"
-          data-filter={category}
-          aria-pressed="false"
-        >
-          {category}
-        </button>
-      ))}
+    <div class="mb-8 flex items-center gap-3">
+      <span class="text-ink-muted text-sm">Filter</span>
+      <div class="relative">
+          <select
+            id="project-category"
+            data-project-category
+            class="border-line text-ink bg-surface hover:border-signal focus:border-signal-ink h-11 w-[11.5rem] cursor-pointer appearance-none rounded-lg border py-0 pr-10 pl-3.5 text-sm outline-none transition-[border-color,background-color] focus:ring-2 focus:ring-signal-ink/15"
+          >
+            <option value="all">All categories</option>
+            {categories.map((category) => (
+              <option value={category}>{category}</option>
+            ))}
+          </select>
+          <svg
+            class="text-ink-soft pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+      </div>
     </div>
 
     <div>
@@ -52,7 +53,7 @@ const byYear = years.map((year) => ({
         <section data-year-group={year}>
           <p class="text-ink mt-12 mb-3 text-base font-medium tabular-nums first:mt-0">{year}</p>
           <div>
-            {items.map((entry) => <WorkRow entry={entry} />)}
+            {items.map((entry) => <WorkRow entry={entry} showYear={false} />)}
           </div>
         </section>
       ))}
@@ -64,7 +65,7 @@ const byYear = years.map((year) => ({
 </BaseLayout>
 
 <script>
-  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const select = document.querySelector<HTMLSelectElement>('[data-project-category]');
   const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-category]'));
   const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-year-group]'));
   const empty = document.querySelector<HTMLElement>('[data-empty]');
@@ -75,26 +76,14 @@ const byYear = years.map((year) => ({
       const hidden = !showAll && row.dataset.category !== filter;
       row.hidden = hidden;
     }
-    let visibleCount = 0;
+    let visibleGroups = 0;
     for (const group of groups) {
       const visible = Array.from(group.querySelectorAll<HTMLElement>('[data-category]')).some((r) => !r.hidden);
       group.hidden = !visible;
-      if (visible) visibleCount += 1;
+      if (visible) visibleGroups += 1;
     }
-    if (empty) empty.hidden = visibleCount > 0;
-    for (const btn of buttons) {
-      const active = btn.dataset.filter === filter;
-      btn.setAttribute('aria-pressed', String(active));
-      btn.classList.toggle('text-paper', active);
-      btn.classList.toggle('text-ink-soft', !active);
-      btn.classList.toggle('bg-signal-ink', active);
-      btn.classList.toggle('bg-transparent', !active);
-      btn.classList.toggle('border-signal-ink', active);
-      btn.classList.toggle('border-line', !active);
-    }
+    if (empty) empty.hidden = visibleGroups > 0;
   }
 
-  for (const btn of buttons) {
-    btn.addEventListener('click', () => apply(btn.dataset.filter ?? 'all'));
-  }
+  select?.addEventListener('change', () => apply(select.value));
 </script>

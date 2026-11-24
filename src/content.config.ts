@@ -22,8 +22,6 @@ const work = defineCollection({
     problem: z.string().optional(),
     approach: z.string().optional(),
     results: z.array(z.object({ value: z.string(), note: z.string().optional() })).optional(),
-    // Optional hero image path; falls back to /images/projects/<id>.jpg.
-    hero: z.string().optional(),
     abstract: z.string().optional(),
     keyword: z.string().optional(),
     acrostic: z.boolean().optional(),
@@ -59,20 +57,6 @@ const notes = defineCollection({
   }),
 });
 
-// "posts" entries live in src/content/posts/*.md — blog posts. They reuse
-// the notes reading layout; the file id becomes the URL at /blog/<id>.
-const posts = defineCollection({
-  loader: glob({ base: './src/content/posts', pattern: '**/*.md' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string().max(240).optional(),
-    date: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
-    lang: z.string().default('EN'),
-    draft: z.boolean().default(false),
-  }),
-});
-
 // "about" is a single file (src/content/about/index.md): role + interest and
 // tool lists in frontmatter, bio paragraphs as the body. Editable in the
 // local admin panel like any other collection.
@@ -85,4 +69,4 @@ const about = defineCollection({
   }),
 });
 
-export const collections = { work, publications, notes, posts, about };
+export const collections = { work, publications, notes, about };

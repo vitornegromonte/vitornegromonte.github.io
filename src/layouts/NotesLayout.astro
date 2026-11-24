@@ -11,15 +11,18 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  lang?: 'EN' | 'PT';
 }
 
-const { title, description = SITE.description, image = '/og-image.jpg' } = Astro.props;
+const { title, description = SITE.description, image = '/og-image.jpg', lang = 'EN' } = Astro.props;
+const htmlLang = lang.toUpperCase() === 'PT' ? 'pt' : 'en';
+const ogLocale = lang.toUpperCase() === 'PT' ? 'pt_BR' : 'en_US';
 ---
 
 <!doctype html>
-<html lang={SITE.locale}>
+<html lang={htmlLang}>
   <head>
-    <BaseHead title={title} description={description} image={image} type="article" />
+    <BaseHead title={title} description={description} image={image} type="article" locale={ogLocale} />
   </head>
   <body id="top" class="bg-paper text-ink">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-4 focus:py-2 focus:text-sm focus:underline">Skip to content</a>

@@ -3,23 +3,23 @@ title: "World Models"
 keyword: "WORLD MODELS"
 topic: "A Survey of Internal Representations in Artificial Intelligence"
 lang: "EN"
-summary: "TODO: one-line summary — write after reviewing the note body."
+summary: "A survey of internal world representations in cognition, reinforcement learning, generative systems, robotics, and autonomous agents."
 ---
 
 
-# Introduction
+## Introduction
 
 The ability to model the world is a cornerstone of intelligence. A **world model** is an internal representation that an agent builds of its environment, enabling it to predict future states, reason about consequences, and plan actions without direct trial and error in the real world. This concept appears across cognitive science, robotics, control theory, and deep learning.
 
 In artificial intelligence, world models have gained prominence through architectures that explicitly separate perception, memory, and planning components. This document traces the evolution of these ideas.
 
-# Cognitive Foundations
+## Cognitive Foundations
 
-#### Mental Models in Psychology
+### Mental Models in Psychology
 
 The notion of internal models traces back to Kenneth Craik's 1943 work *The Nature of Explanation*, where he proposed that organisms build "small-scale models" of reality to anticipate events and test alternatives mentally.
 
-#### Dorsal and Ventral Streams
+### Dorsal and Ventral Streams
 
 In neuroscience, the visual cortex is organized into two pathways:
 
@@ -29,9 +29,9 @@ In neuroscience, the visual cortex is organized into two pathways:
 
 Modern world model architectures often mirror this separation between representational and spatial reasoning pathways.
 
-# Theoretical Frameworks
+## Theoretical Frameworks
 
-#### Free Energy Principle
+### Free Energy Principle
 
 Karl Friston's Free Energy Principle (FEP) posits that any self-organizing system restricted to a bounded number of states must minimize a mathematical quantity called *variational free energy* to resist natural entropic decay and maintain its structural integrity <sup>1</sup>. Within this framework, world models emerge as a thermodynamic and statistical necessity. An agent maintains an internal generative model $p(o_t, s_t)$ over sensory observations $o_t$ and hidden environmental states $s_t$. By constructing a variational recognition density $q(s_t)$ that parameterizes its beliefs, the agent minimizes a tractable upper bound on sensory surprise (negative log-evidence):
 
@@ -54,7 +54,7 @@ $$
 
 Because the Kullback-Leibler ($D_{\mathrm{KL}}$) divergence is always non-negative, minimizing $F$ implicitly maximizes the evidence for the agent's internal model of the world, formalizing perception as variational inference.
 
-#### Active Inference
+### Active Inference
 
 A direct corollary of the FEP is active inference, a paradigm asserting that action and perception are not distinct processes, but rather two sides of the same coin. While perception updates internal beliefs $q(s_t)$ to fit incoming data $o_t$, action alters the environment to force future data to conform to the model's prior expectations. Under active inference, an agent evaluates a policy $\pi$ by calculating its Expected Free Energy $G(\pi)$ across a future time horizon:
 
@@ -78,7 +78,7 @@ $$
 
 This formulation structurally unifies the exploration-exploitation dilemma native to model-free reinforcement learning by grounding decision-making inside the agent's generative prediction loop.
 
-#### Predictive Coding
+### Predictive Coding
 
 At the neurocomputational level, Rao and Ballard (1999) proposed that the mammalian cerebral cortex implements a hierarchical architecture optimizing this free-energy objective via a scheme known as *predictive coding* <sup>2</sup>. In this structural hierarchy, higher cortical areas transmit top-down generative predictions to lower layers. The lower layers compare these predictions against raw sensory inputs or lower-level representations, generating a localized prediction error vector $\varepsilon_t = o_t - f(s_t)$.
 
@@ -96,7 +96,7 @@ Crucially, rather than propagating raw, high-dimensional sensory states up the p
 ```
 
 
-# Two Paradigms: Predictive vs Generative World Models
+## Two Paradigms: Predictive vs Generative World Models
 
 A useful distinction cuts across modern world model research: **predictive** world models forecast specific future states given past context and actions, while **generative** world models learn to sample novel trajectories or environments from a learned distribution, often unconditionally or from minimal conditioning.
 
@@ -128,7 +128,7 @@ LeCun, "A Path Towards Autonomous Machine Intelligence"
 
 -   **Dreamer family (Hafner et al.)**: RSSM-based models that learn a latent dynamics model and train policies entirely on imagined trajectories.
 
-#### JEPA: Joint Embedding Predictive Architecture
+### JEPA: Joint Embedding Predictive Architecture
 
 LeCun's JEPA <sup>4</sup> is a self-supervised learning framework that forms the perceptual backbone of his proposed world model. Unlike generative architectures that predict in pixel space (e.g., VAEs), JEPA predicts in latent embedding space:
 
@@ -156,7 +156,7 @@ where $s_x$ and $s_y$ are embeddings of two views (e.g., two crops of an image, 
 
 In the context of world models, JEPA provides the *perception* component that maps raw observations to a structured latent space where prediction becomes tractable. The world model proper then operates on these latent representations, predicting future $s_y$ from past $s_x$ and actions. Predictive world models are evaluated on prediction accuracy, planning success, and sample efficiency in downstream tasks.
 
-![](/notes/world-models/figures/fig1.svg)
+![Comparison of predictive and generative approaches to world modeling](/notes/world-models/figures/fig1.svg)
 
 ## Generative World Models
 
@@ -206,7 +206,7 @@ Importantly, Yann LeCun's JEPA explicitly rejects generative construction loops 
 
 Jürgen Schmidhuber's contributions to world models span decades, predating the deep learning era. His work provides the theoretical bedrock for both predictive and generative paradigms.
 
-#### Artificial Curiosity (1991)
+### Artificial Curiosity (1991)
 
 Schmidhuber formalized *artificial curiosity* <sup>6</sup> as an intrinsic reward signal that drives an agent to seek experiences that improve its world model. The agent is rewarded for prediction errors --- but only those that are *learnable*, avoiding both predictable noise and inherently unpredictable chaos. This creates a lifelong learning loop where the world model and the exploration policy co-develop:
 
@@ -227,7 +227,7 @@ $$
 
 This principle directly inspired modern exploration bonuses in model-based RL (e.g., Intrinsic Curiosity Module by Pathak et al., 2017).
 
-#### Computational Principles of Creativity (2012)
+### Computational Principles of Creativity (2012)
 
 Schmidhuber extended the same framework to explain creativity and humor <sup>7</sup>. A creator (artist, scientist, comedian) generates works that induce a learnable compression progress in the observer's world model. The "fun" or "beauty" of an experience is proportional to the learning progress it produces --- the improvement in the observer's ability to predict or compress the data.
 
@@ -238,7 +238,7 @@ Motivation"
 ```
 
 
-#### Predictive World Models as Universal
+### Predictive World Models as Universal
 
 Schmidhuber argues that any powerful AI will necessarily build predictive world models because they are required for:
 
@@ -250,7 +250,7 @@ Schmidhuber argues that any powerful AI will necessarily build predictive world 
 
 The 2018 *World Models* paper by Ha and Schmidhuber was a direct implementation of these decades-old principles, showing that a VAE + RNN + controller trained with a simple evolutionary strategy could solve RL tasks by "dreaming" --- planning in latent space.
 
-# Foundational Architectures
+## Foundational Architectures
 
 The modern formulation of world models in deep learning was popularized by Ha and Schmidhuber (2018) in their paper *World Models* <sup>8</sup>. Their architecture consists of three components:
 
@@ -272,7 +272,7 @@ Ha and Schmidhuber, "World Models"
 ```
 
 
-#### Latent State Representation
+### Latent State Representation
 
 The VAE maps the observation $x_t$ to a latent Gaussian distribution $z_t \sim \mathcal{N}(\mu_t, \sigma_t)$. The memory model predicts the next latent state given the current state and action:
 
@@ -328,7 +328,7 @@ Reinforcement Learning"
 ```
 
 
-# Technical Deep Dive
+## Technical Deep Dive
 
 ## Recurrent State-Space Model (RSSM)
 
@@ -350,7 +350,7 @@ The key insight is the hybrid state: the deterministic path $h_t$ carries long-r
 
 ## DreamerV2 and V3
 
-#### DreamerV2
+### DreamerV2
 
 DreamerV2 <sup>11</sup> introduced several critical innovations:
 
@@ -378,7 +378,7 @@ $$
 
 where $\pi$ are the logits and $\text{sg}$ denotes stop-gradient.
 
-#### DreamerV3
+### DreamerV3
 
 DreamerV3 <sup>12</sup> further generalized the approach to work across hundreds of environments with a single set of hyperparameters --- a major milestone in robust world model learning. Key additions include:
 
@@ -395,7 +395,7 @@ Models"
 
 -   **Normalized predictions**: reward and value heads predict distributions normalized by running statistics, enabling cross-domain transfer.
 
-# Transformer-Based World Models
+## Transformer-Based World Models
 
 The success of transformers in sequence modeling has inspired a new generation of world model architectures that replace recurrent dynamics with attention mechanisms.
 
@@ -409,7 +409,7 @@ Micheli et al., "Transformers are Sample Efficient World Models"
 ```
 
 
-![](/notes/world-models/figures/fig3.svg)
+![Agent architecture with a learned latent state, dynamics model, and planning loop](/notes/world-models/figures/fig3.svg)
 
 The observation $o_t$ is first tokenized by a VQ-VAE into discrete codes $z_t$. These are fed into an autoregressive transformer that predicts the next token sequence:
 
@@ -427,7 +427,7 @@ This approach achieves sample efficiency competitive with model-free methods whi
 
 Beyond RL, world models appear in unsupervised video prediction. Models like **VideoGPT**, **Phenaki**, and **CogVideo** learn spatiotemporal transformers that predict future video frames conditioned on past context. The core challenge is scaling to high-resolution, long-horizon video while maintaining temporal coherence.
 
-#### Objective Function
+### Objective Function
 
 Video world models are typically trained by minimizing a combination of reconstruction and KL-divergence losses:
 
@@ -440,7 +440,7 @@ $$
 
 
 
-# Applications
+## Applications
 
 ## Robotics
 
@@ -464,7 +464,7 @@ The primary application remains model-based RL, where the world model enables:
 
 -   **Uncertainty-aware planning**: ensembles of world models provide uncertainty estimates over future states, guiding exploration.
 
-# Evaluation Metrics
+## Evaluation Metrics
 
 Evaluating world models requires metrics beyond task reward:
 
@@ -478,13 +478,13 @@ Evaluating world models requires metrics beyond task reward:
 
   : Common evaluation metrics for world models
 
-# Implications and Open Problems
+## Implications and Open Problems
 
-#### Compositionality
+### Compositionality
 
 A key open question is how to build world models that compose known concepts to generalize to novel scenarios, rather than memorizing transitions. Current models struggle with out-of-distribution composition --- combining learned primitives in unseen ways requires a modular, disentangled latent structure.
 
-#### Long-Horizon Prediction
+### Long-Horizon Prediction
 
 World models degrade over long prediction horizons due to compounding error. Even with accurate single-step predictions, small errors accumulate quadratically. Solutions under exploration include:
 
@@ -494,21 +494,21 @@ World models degrade over long prediction horizons due to compounding error. Eve
 
 -   Hierarchical timescale separation
 
-#### Scalability
+### Scalability
 
 Current world models are mostly demonstrated in controlled environments (e.g., ViZDoom, CarRacing). Scaling them to open-ended, real-world settings with high-dimensional observations, long episodes, and sparse rewards remains a fundamental challenge.
 
-#### Grounding
+### Grounding
 
 The "symbol grounding problem" reappears: how do latent representations maintain consistent meaning across different tasks and embodiments? Without explicit grounding, world models can develop brittle representations that fail under distribution shift.
 
-#### Causality
+### Causality
 
 The most promising direction may be integrating causal reasoning into world models. Rather than learning statistical correlations, causal world models would distinguish intervention from observation, enabling genuine counterfactual reasoning --- the ability to ask "what if?" questions about unseen scenarios.
 
-![](/notes/world-models/figures/fig4.svg)
+![Technical relationships among prediction, planning, and learned representations](/notes/world-models/figures/fig4.svg)
 
-# Conclusion
+## Conclusion
 
 World models represent a convergence of cognitive science, control theory, and deep learning, offering a principled way to build agents that understand their environment through internal simulation. The trajectory from Ha and Schmidhuber's three-component architecture to Hafner's Dreamer family and transformer-based token prediction shows steady progress toward more capable, general, and sample-efficient agents.
 
@@ -520,4 +520,4 @@ World models represent a convergence of cognitive science, control theory, and d
 
 Key challenges remain in compositionality, long-horizon prediction, scalability, and causal grounding. However, the convergence of ideas from neuroscience (predictive coding, free energy), deep learning (VAEs, transformers), and control theory (model-based RL) suggests that world models will play a central role in the next generation of intelligent systems.
 
-# References {#bibliography .unnumbered}
+## References

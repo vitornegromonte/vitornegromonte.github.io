@@ -1,8 +1,7 @@
 ---
-title: "Parkinson Diagnosis using Computer Vision: Campus Party'24 Keynote"
+title: "Spiral-drawing-based Parkinson Diagnosis"
 keyword: "Parkinson"
-# TODO(verify): "≈ 10%" improvement and "95% accuracy" — confirm benchmark split and baselines (see Results section).
-summary: "Created a CNN model for Parkinson's disease detection using spiral‐drawing images. Outperformed state‐of‐the‐art methods by ≈ 10%, achieving 95% accuracy on the benchmark dataset."
+summary: "Created a CNN model for exploratory Parkinson's disease screening using spiral-drawing images from a public benchmark. Campus Party 2024 Keynote"
 role: "ML Researcher — Computer Vision"
 date: 2024-11-01
 tags: ['Python', 'PyTorch', 'OpenCV', 'Optuna']
@@ -11,16 +10,16 @@ repo: "https://github.com/vitornegromonte/CPNE2024"
 featured: false
 draft: false
 category: "Computer Vision"
-abstract: "Created a CNN model for Parkinson's disease detection using spiral‐drawing images. Outperformed state‐of‐the‐art methods by ≈ 10%, achieving 95% accuracy on the benchmark dataset."
+abstract: "Created a CNN model for exploratory Parkinson's disease screening using spiral-drawing images from a public benchmark. Campus Party 2024 Keynote"
 ---
 
-This project develops a CNN-based diagnostic system for Parkinson's disease using computer vision analysis of spiral-drawing images. The model achieves 95% accuracy on a public benchmark, outperforming prior state-of-the-art methods by approximately 10 percentage points. Presented as a keynote at Campus Party 2024.
+This project explores a CNN-based screening system for Parkinson's disease using computer vision analysis of spiral-drawing images. The work was presented as a keynote at Campus Party 2024.
 
 Parkinson's disease affects millions worldwide, and early diagnosis remains challenging. This project explores a non-invasive diagnostic approach using computer vision to analyze hand-drawn spirals — a standard clinical test for motor impairment.
 
 ## Overview
 
-Patients with Parkinson's disease often exhibit characteristic tremors and motor dysfunctions that manifest in drawing tasks. By analyzing spiral drawings captured from digitizing tablets, we developed a CNN-based system capable of distinguishing Parkinson's patients from healthy controls with high accuracy.
+Patients with Parkinson's disease often exhibit characteristic tremors and motor dysfunctions that manifest in drawing tasks. By analyzing spiral drawings, this project explores whether a CNN can distinguish between Parkinson's and healthy controls in a controlled benchmark setting.
 
 ## Dataset
 
@@ -28,6 +27,4 @@ The model was trained and evaluated on a public benchmark dataset of spiral draw
 
 ## Results
 
-<!-- TODO(verify): "95% accuracy" and "approximately 10 percentage points" over state of the art — which benchmark split, which baselines? Also repeated in the frontmatter summary. -->
-
-Our approach achieved 95% accuracy on the benchmark dataset, outperforming existing state-of-the-art methods by approximately 10 percentage points. The model was presented as a keynote at Campus Party 2024, demonstrating the potential of computer vision as a low-cost screening tool for Parkinson's disease.
+The benchmark experiment compares CNN configurations with evaluation data held out from training. The result is presented as a research prototype, not a clinical diagnostic system.

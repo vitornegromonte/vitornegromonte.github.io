@@ -27,14 +27,13 @@ const notes = (await getCollection('notes')).sort((a, b) =>
 const topNotes = notes.slice(0, 3);
 
 const [leadWork, ...moreWork] = selected;
-const leadPoster = leadWork ? (leadWork.data.hero ?? `/images/projects/${leadWork.id}.jpg`) : '';
 const leadYear = leadWork?.data.date.getUTCFullYear();
 ---
 
 <BaseLayout title={SITE.name}>
   <section class="mx-auto max-w-3xl px-6 pt-16 pb-20 sm:pt-24">
-    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.08] font-medium text-balance sm:text-5xl">
-      {SITE.tagline}
+    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.08] text-balance sm:text-5xl">
+      Vitor Negromonte
     </h1>
 
     <p class="text-ink-soft mt-6 max-w-xl text-xl leading-relaxed">
@@ -54,8 +53,8 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
   <section id="work" class="mx-auto max-w-3xl px-6 pb-20">
     <SectionHeading eyebrow="Selected work" />
     {leadWork && (
-      <a href={`/${leadWork.id}`} class="group mb-4 grid gap-6 transition-colors sm:grid-cols-[1.2fr_1fr]">
-        <span class="min-w-0 order-2 flex flex-col sm:order-1">
+      <a href={`/${leadWork.id}`} class="group mb-4 flex flex-col transition-colors">
+        <span class="min-w-0">
           <span class="text-ink-muted block text-sm">
             {leadWork.data.featured ? 'Featured · ' : ''}{leadYear}{leadWork.data.category ? ` · ${leadWork.data.category}` : ''}
           </span>
@@ -63,20 +62,9 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
             {leadWork.data.title}
           </span>
           <span class="text-ink-soft mt-2 block text-sm leading-relaxed line-clamp-3">{leadWork.data.summary}</span>
-          <span class="text-signal-ink mt-3 inline-block text-sm group-hover:underline group-hover:underline-offset-4 sm:mt-auto sm:pt-4">
+          <span class="text-signal-ink mt-3 inline-block text-sm group-hover:underline group-hover:underline-offset-4">
             Open project →
           </span>
-        </span>
-        <span class="order-1 sm:order-2">
-          <img
-            src={leadPoster}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            width="960"
-            height="600"
-            class="border-line aspect-[16/10] w-full rounded-[6px] border object-cover"
-          />
         </span>
       </a>
     )}
@@ -86,13 +74,13 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
     <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
       <a
         href="/projects"
-        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
+        class="text-ink-soft inline-flex min-h-11 items-center text-sm transition-colors hover:text-signal-ink"
       >
         View all projects →
       </a>
       <a
         href="/notes"
-        class="text-signal-ink text-sm hover:underline hover:underline-offset-4"
+        class="text-signal-ink inline-flex min-h-11 items-center text-sm hover:underline hover:underline-offset-4"
       >
         Read the field notes →
       </a>
@@ -107,7 +95,7 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
     <div class="mt-6">
       <a
         href="/publications"
-        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
+        class="text-ink-soft inline-flex min-h-11 items-center text-sm transition-colors hover:text-signal-ink"
       >
         All publications →
       </a>
@@ -124,7 +112,7 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
     <div class="mt-6">
       <a
         href="/notes"
-        class="text-ink-soft hover:text-signal-ink text-sm transition-colors"
+        class="text-ink-soft inline-flex min-h-11 items-center text-sm transition-colors hover:text-signal-ink"
       >
         All notes →
       </a>
@@ -134,10 +122,9 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
   <section id="about" class="mx-auto max-w-3xl px-6 pb-20">
     <SectionHeading eyebrow="About" />
     <p class="text-ink-soft max-w-xl leading-relaxed">
-      I build continuous architectures that reason, adapt and act in digital and physical
-      environments — work that sits at the intersection of recursive and self-referential systems.
+      Building some cool things with reasoning, efficient AI and mech interp.
     </p>
-    <a href="/about" class="text-signal-ink mt-4 inline-block text-sm hover:underline hover:underline-offset-4">
+    <a href="/about" class="text-signal-ink mt-4 inline-flex min-h-11 items-center text-sm hover:underline hover:underline-offset-4">
       More about me →
     </a>
   </section>
@@ -149,7 +136,7 @@ const leadYear = leadWork?.data.date.getUTCFullYear();
     </p>
     <a
       href={`mailto:${SITE.email}`}
-      class="text-signal-ink mt-4 inline-flex items-center gap-2 hover:underline"
+      class="text-signal-ink mt-4 inline-flex min-h-11 items-center gap-2 hover:underline"
     >
       {SITE.email}
     </a>

@@ -3,10 +3,10 @@ title: "Introduction to Neural Networks"
 keyword: "Neural Nets"
 topic: "Neural Networks"
 lang: "EN"
-summary: "TODO: one-line summary — write after reviewing the note body."
+summary: "The fundamentals of modeling, artificial neurons, multilayer networks, activation functions, and loss functions."
 ---
 
-# The Concept of Modeling
+## The Concept of Modeling
 
 Before diving into neurons and weights, we must understand what it means to \textit{model} something. In the physical sciences, a model is a simplified representation of a complex reality. A map is a model of a city; it discards irrelevant details (the color of individual houses) to highlight essential structures (streets and distances). 
 
@@ -27,7 +27,7 @@ To "learn" means to find the specific parameters $\theta^*$ that make the model'
 
 Remark 0.1 (Inductive Bias)  No model can learn without assumptions. If we assume the relationship between $\mathbf{x}$ and $y$ is linear, our hypothesis space is small and easy to optimize, but it will fail if the true relationship is complex. If we use a highly flexible model (like a deep neural network), our hypothesis space is vast, but we need vast amounts of data to find the correct parameters without merely memorizing the training set. The assumptions we embed into the model's architecture are called its *inductive bias*.
 
-# The Biological Inspiration
+## The Biological Inspiration
 
 To understand why artificial neural networks are structured the way they are, we must first look at their biological counterpart: the human brain. The brain is the most powerful learning machine known, capable of recognizing patterns, understanding language, and making complex decisions, all while consuming roughly 20 watts of power.
 
@@ -51,7 +51,7 @@ When the aggregated electrical potential inside the cell reaches a specific *thr
 
 Furthermore, the strength of the connections (synapses) is not fixed. Biological synapses exhibit **plasticity**. If two neurons fire together frequently, the synaptic connection between them strengthens. This is known as Hebbian theory: "Neurons that fire together, wire together." This biological adaptation of connection strengths is the direct inspiration for how artificial neural networks "learn" by adjusting weights.
 
-# From Biology to Mathematics: The Artificial Neuron
+## From Biology to Mathematics: The Artificial Neuron
 
 In the 1940s and 1950s, researchers like Warren McCulloch and Walter Pitts sought to abstract the biological neuron into a mathematical model. They recognized that the structural components of a biological neuron could be translated into algebraic operations.
 
@@ -143,7 +143,7 @@ class MLP:
         return x
 ```
 
-# Measuring the Error: Loss Functions
+## Measuring the Error: Loss Functions
 Once the network produces an output $\hat{\mathbf{y}} = \mathbf{o}^{(L)}$, we need a mechanism to measure how far it is from the target $\mathbf{t}$. This is the role of the **Loss Function** $\mathcal{L}(\hat{\mathbf{y}}, \mathbf{t})$. The choice of loss function dictates how the network penalizes mistakes.
 
 ## Mean Squared Error

@@ -3,15 +3,21 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   entry: CollectionEntry<'publications'>;
+  showYear?: boolean;
 }
 
-const { entry } = Astro.props;
+const { entry, showYear = true } = Astro.props;
 const { title, year, venue, venueDetails, pdfUrl, codeUrl, summary } = entry.data;
 const isAward = /award|best|honorable|prize|distinction/i.test(venueDetails ?? '');
 ---
 
-<div class="group grid grid-cols-1 items-start gap-1 py-5 sm:grid-cols-[4rem_1fr_auto] sm:gap-6">
-  <span class="text-ink-muted text-sm tabular-nums">{year}</span>
+<div
+  class:list={[
+    'group grid grid-cols-1 items-start gap-1 py-5 sm:gap-6',
+    showYear ? 'sm:grid-cols-[4rem_1fr_auto]' : 'sm:grid-cols-[1fr_auto]',
+  ]}
+>
+  {showYear && <span class="text-ink-muted text-sm tabular-nums">{year}</span>}
 
   <span class="min-w-0">
     <span class="font-display text-ink block text-lg leading-snug text-pretty transition-colors">{title}</span>
@@ -24,9 +30,9 @@ const isAward = /award|best|honorable|prize|distinction/i.test(venueDetails ?? '
 
   <span class="flex items-center gap-4">
     <span class="flex gap-3 text-sm">
-      {pdfUrl && <a href={pdfUrl.toString()} class="text-ink-soft hover:text-signal-ink transition-colors hover:underline hover:underline-offset-4">PDF</a>}
+      {pdfUrl && <a href={pdfUrl.toString()} class="text-ink-soft inline-flex min-h-11 items-center transition-colors hover:text-signal-ink hover:underline hover:underline-offset-4">PDF</a>}
       {codeUrl && codeUrl.toString() !== '#' && (
-        <a href={codeUrl.toString()} class="text-ink-soft hover:text-signal-ink transition-colors hover:underline hover:underline-offset-4">Code</a>
+        <a href={codeUrl.toString()} class="text-ink-soft inline-flex min-h-11 items-center transition-colors hover:text-signal-ink hover:underline hover:underline-offset-4">Code</a>
       )}
     </span>
   </span>

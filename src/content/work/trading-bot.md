@@ -13,12 +13,7 @@ category: "College Project"
 abstract: "C++ trading bot for automated cryptocurrency and stock market transactions."
 ---
 
-<!-- TODO(copy): the two introductory paragraphs below repeat the same "high-performance C++ trading bot" sentence — merge into one. -->
-<!-- TODO(verify): "sub-millisecond order execution latency" — measured how, on what hardware/feed? Repeated in the Performance section. -->
-
-We implemented a high-performance automated trading bot in C++ supporting cryptocurrency and stock markets. The system features an event-driven architecture with WebSocket-based market data ingestion, configurable strategy engine, risk management, and sub-millisecond order execution latency.
-
-Automated trading systems enable rapid execution of complex trading strategies without human intervention. This project implements a high-performance trading bot in C++ for cryptocurrency and stock markets.
+We implemented an automated trading bot in C++ supporting cryptocurrency and stock markets. The system features an event-driven architecture with WebSocket-based market data ingestion, a configurable strategy engine, risk management, and asynchronous order execution.
 
 ## Overview
 
@@ -30,6 +25,4 @@ The system is built with a modular event-driven architecture. A data ingestion m
 
 ## Performance
 
-<!-- TODO(verify): "consistent profitability" in backtesting and "sub-millisecond order execution latency" — add the backtest setup and measurement details, or soften the claims. -->
-
-Backtesting on historical data across multiple market conditions demonstrated consistent profitability for the implemented strategies. The C++ implementation provides sub-millisecond order execution latency, critical for high-frequency trading scenarios. The project includes comprehensive logging and performance monitoring tools.
+The project includes historical-data backtesting, strategy logging, and performance-monitoring tools. Results vary by market conditions and require fees, slippage, and benchmark assumptions before they can be compared reliably.

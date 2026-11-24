@@ -3,10 +3,10 @@ title: "Generalization and Regularization"
 keyword: "Generalization"
 topic: "Bias-Variance, Double Descent, L2, Dropout, BatchNorm, Early Stopping"
 lang: "EN"
-summary: "TODO: one-line summary — write after reviewing the note body."
+summary: "An introduction to generalization, bias-variance tradeoffs, double descent, and the regularization methods used in modern machine learning."
 ---
 
-# Optimization vs. Generalization
+## Optimization vs. Generalization
 
 In machine learning, there is a strict distinction between the training set and the test set. The model's ability to perform well on data it has never seen before is called **generalization**.
 
@@ -54,7 +54,7 @@ Classical statistics suggests that as model capacity increases past the sweet sp
 
 This phenomenon is known as **Double Descent** (Figure 2). Neural networks don't just memorize; they search for the *simplest* function that interpolates the data. This modern finding explains why we can train LLMs with billions of parameters without catastrophic overfitting. However, explicit regularization is still required to stabilize training and guide the model toward these well-behaved solutions.
 
-# Regularization Techniques
+## Regularization Techniques
 
 **Regularization** encompasses any technique designed to reduce generalization error, often at the cost of increased training error. We constrain the hypothesis space.
 

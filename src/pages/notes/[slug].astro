@@ -18,12 +18,12 @@ const { title, topic, lang } = note.data;
 const minutes = Math.max(1, Math.round(((note.body ?? '').trim().split(/\s+/).filter(Boolean).length) / 200));
 ---
 
-<NotesLayout title={title} description={`${title} — ${topic}`}>
+<NotesLayout title={title} description={`${title} — ${topic}`} lang={lang === 'PT' ? 'PT' : 'EN'}>
   <header class="pb-8 mb-8">
-    <a href="/notes" class="text-ink-soft hover:text-signal-ink text-sm transition-colors">
+    <a href="/notes" class="text-ink-soft inline-flex min-h-11 items-center text-sm transition-colors hover:text-signal-ink">
       ← All notes
     </a>
-    <h1 class="font-display text-ink mt-6 text-3xl font-medium leading-[1.08] text-balance sm:text-4xl">{title}</h1>
+    <h1 class="font-display text-ink mt-6 text-3xl leading-[1.08] text-balance sm:text-4xl">{title}</h1>
     <p class="text-ink-muted mt-3 text-sm">
       {topic} · {lang} · {minutes} min
     </p>
@@ -60,7 +60,7 @@ const minutes = Math.max(1, Math.round(((note.body ?? '').trim().split(/\s+/).fi
   const mobileList = document.querySelector('[data-toc-mobile-list]');
   const toggle = document.querySelector<HTMLButtonElement>('[data-toc-toggle]');
   if (page && toc && list) {
-    const headings = Array.from(page.querySelectorAll('h2[id], h3[id]')).slice(0, 12);
+    const headings = Array.from(page.querySelectorAll('h2[id], h3[id]'));
     if (headings.length > 1) {
       const links = new Map<string, HTMLAnchorElement[]>();
       const addLink = (h: Element, ul: Element | null, mobileLink: boolean) => {
