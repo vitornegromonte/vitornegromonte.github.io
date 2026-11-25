@@ -15,8 +15,8 @@
   --ink: #141413; /* primary text */
   --ink-soft: #3d3d3a; /* secondary text */
   --ink-muted: #6d6a62; /* meta text — still 4.5:1 on paper */
-  --signal: #cc785c; /* the one accent color — fills, dots, rules */
-  --signal-ink: #9c4a28; /* the same accent as text: 5.7:1 on paper */
+  --signal: #8ba4b0; /* the one accent color — fills, dots, rules (Meissen Blue, Porsche 5703/Z54) */
+  --signal-ink: #4c6570; /* the same accent as text: 5.7:1 on paper */
   --line: #e5dfd2; /* borders, rules */
   --surface: #f0ebe1; /* cards, raised panels */
 }
